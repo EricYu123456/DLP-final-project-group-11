@@ -1,0 +1,28 @@
+# Local data, environments, and runtime state
+tmp/
+.runtime/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.coverage
+data/raw/
+data/processed/
+data/cache/
+checkpoints/
+outputs/
+*.pth
+*.pt
+*.npz
+*.npy
+*.parquet
+*.log
+.env
+.env.*
+!.env.example
+# Existing course/reference materials are local inputs, not our work.
+/*.pdf
+/doc/
+artifacts/
+

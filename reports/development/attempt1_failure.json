@@ -1,0 +1,9 @@
+{
+  "status": "development_attempt_failed_before_test",
+  "artifacts_preserved": "artifacts/development",
+  "completed_neural_fits": ["h32_lr0.001_l20.0001/structured8/11", "h32_lr0.001_l20.0001/rank0/11", "h32_lr0.001_l20.0001/neural_lowrank/11"],
+  "failure": "KNN float32 weight summation could produce probabilities slightly above one for unanimous correct neighbors with zero prior weight; metric validation rejected them.",
+  "correction": "Accumulate weights in float64, validate prior probabilities, and clip convex means to the closed probability interval. An all-correct/all-incorrect regression test passes.",
+  "restart_policy": "Retrain all grid configurations from their deterministic initialization in artifacts/development_v2 so checkpoint source hashes match.",
+  "test_labels_used": false
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T19:55:10.127328+00:00",
+  "source_repository": "RZ412/EmbedLLM",
+  "source_revision": "266ae3e180ccb533c86afc9cfb2f5db99d171aea",
+  "source_sha256": {
+    "model_order.csv": "bf7015fa775c1aed8955f1a7a1190f0e4c12f9ac2bdfdc896a051a090be4ad93",
+    "question_order.csv": "024a43fd073dda8d37c9dae0590fc42faf5f5538f3d5efb11aa5657afc96d1f2",
+    "question_embeddings.pth": "47c35522dc323d3f3bfcc77643965882f61021cf0b949cf86de6a4853acba556",
+    "train.csv": "4ac81ebe312d2ca0290c78774ddc5f5852acb66cd10d28738efcb2a0dbd8e247",
+    "val.csv": "802f312809e7c7086233510b3c1e12619ab72051e06664ebb8bff24cf0f67fce",
+    "test.csv": "385e701c97e65285e6c687164a8ebd63e0afa3ea70b28cca0092d601c3d9d72a",
+    "train_y.pth": "96c9b3b0345587b6a6a3c6847f0435bc1bb58f0f012dbae72b9e446151361324",
+    "val_y.pth": "0ad3892c03a4f858af0b587b7676233b8ef1bebd49febbc79f1123875aa99eac",
+    "test_y.pth": "fee1000428a9df833fc15f333d9afe25a9cd0d2a666050b23533b2786c2c5bb3"
+  },
+  "prepared_sha256": "d75cd5dffdbec2d9ceb62d3e3fd0b3f5a0627fe1f06037cbcb43d811aaf31ba2",
+  "raw_audit_complete": true,
+  "models": 112,
+  "prompt_ids": 35673,
+  "raw_rows": 4586288,
+  "model_prompt_cells": 3995376,
+  "raw_missing_cells": 0,
+  "duplicate_cells": 553616,
+  "conflicting_cells": 77581,
+  "condition_audit": {
+    "unique_model_prompt_category_groups": 4028304,
+    "same_category_conflicting_groups": 75904,
+    "condition_label_bits": "1=only0; 2=only1; 3=both0and1",
+    "file": "conditions.npz",
+    "sha256": "7e6b17ca3d98fb337318ccdd49dc75642099b0ee966bea205dfb56a64cc9f35d"
+  },
+  "published_equals_raw_max_on_all_cells": true,
+  "published_raw_max_mismatch_cells": 0,
+  "splits": {
+    "train": {
+      "rows": 3814272,
+      "prompt_ids": 29673,
+      "model_name_mismatch": 0,
+      "prompt_text_mismatch": 0
+    },
+    "val": {
+      "rows": 383488,
+      "prompt_ids": 3000,
+      "model_name_mismatch": 0,
+      "prompt_text_mismatch": 0
+    },
+    "test": {
+      "rows": 388528,
+      "prompt_ids": 3000,
+      "model_name_mismatch": 0,
+      "prompt_text_mismatch": 0
+    }
+  },
+  "grouping": {
+    "version": 2,
+    "groups": 30407,
+    "rules": [
+      "asdiv_context_and_question_v1",
+      "gpqa_last_question_sorted_complete_choices_v1",
+      "gsm8k_last_question_no_released_choices_v1",
+      "logiqa_stem_sorted_complete_choices_v1",
+      "mathqa_last_question_no_released_choices_v1",
+      "medmcqa_stem_sorted_complete_choices_v1",
+      "mmlu_stem_sorted_complete_choices_v1",
+      "normalised_exact_prompt_v1",
+      "piqa_last_question_no_released_choices_v1",
+      "socialiqa_last_question_no_released_choices_v1",
+      "truthfulqa_last_question_v1"
+    ],
+    "union_rule": "global union of exact normalised full prompts, extracted full stem+sorted complete choices, and identical extracted complete stems",
+    "conservative_same_stem_different_content_groups": 51,
+    "multi_benchmark_groups": 1,
+    "groups_crossing_original_splits": 489,
+    "limitation": "Candidate grouping from released prompts, not official source item IDs; semantic paraphrases or unrecognised templates may remain unmatched. Identical generic complete stems with different choices can be conservatively overgrouped."
+  },
+  "strict_five": {
+    "benchmarks": [
+      "MMLU",
+      "MedMCQA",
+      "MathQA",
+      "TruthfulQA",
+      "LogiQA"
+    ],
+    "audited_models": 88,
+    "total_prompt_ids_before_structure": 22651,
+    "singleton_common_all112": 22624,
+    "singleton_common_audited_models": 22624,
+    "singleton_pattern_identical_all112": true,
+    "questions_with_model_varying_singleton_pattern": 0,
+    "raw_conflicting_cells_before_structure": 2,
+    "representative_questions": 22475,
+    "representative_removed": 149,
+    "representative_removed_by_benchmark": {
+      "MMLU": 147,
+      "MedMCQA": 1,
+      "LogiQA": 1
+    },
+    "dataset_fingerprint": "d37f4c6eeb850831f0e6ceb439377ad4b434d943b3df51174af0cfa515fad9ba",
+    "selection_is_value_independent": "Raw row counts, task categories, declared source/family inclusion and question text only; never correctness values or method performance."
+  },
+  "target_definitions": {
+    "published": "Authors' released binary tensor; aggregation/missing-query semantics unresolved.",
+    "strict": "Exactly one raw row per selected model/prompt and exactly one task category for the prompt; complete-case intersection is structural, not conditioned on labels.",
+    "unambiguous": "Sensitivity only: agreeing raw labels within one category; exclusion depends on label values."
+  },
+  "limitations": [
+    "No raw model responses, evaluator revision, scoring-filter identifiers or generation status are published.",
+    "Singleton records are an auditable proxy; they do not recover upstream scoring correctness.",
+    "Published zero labels are not evidence that a missing query was answered incorrectly.",
+    "Retrospective structural inclusion is known for all released models; future model collection must enforce the same recording protocol.",
+    "Full raw support does not recover generation failure logs, metric/filter identity, or official upstream correctness.",
+    "Identical generic stems can be overgrouped; representative selection changes the target to a candidate-base-item representative subset."
+  ]
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "configuration": "h32_lr0.001_l20.0001",
+    "hidden_dim": 32,
+    "learning_rate": 0.001,
+    "latent_l2": 0.0001,
+    "shared_validation_macro_mae": 0.05476103220759379,
+    "variant_scores": {
+      "structured8": 0.055448920037445615,
+      "rank0": 0.056831928355369286,
+      "neural_lowrank": 0.05200224822996646
+    },
+    "config_sha256": "60e4b2ff913e9afa17ae787c1439bffbef9c178803a34aeb152752ba19d97b1d",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.001_l20.0001"
+  },
+  {
+    "configuration": "h32_lr0.001_l20.002",
+    "hidden_dim": 32,
+    "learning_rate": 0.001,
+    "latent_l2": 0.002,
+    "shared_validation_macro_mae": 0.054135302028019035,
+    "variant_scores": {
+      "structured8": 0.05484881447538231,
+      "rank0": 0.05541778357792478,
+      "neural_lowrank": 0.05213930803075
+    },
+    "config_sha256": "6eb282f17e08ac30638216eb0cc28b4b95237508946c3048a26454cb714664f7",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.001_l20.002"
+  },
+  {
+    "configuration": "h32_lr0.002_l20.0001",
+    "hidden_dim": 32,
+    "learning_rate": 0.002,
+    "latent_l2": 0.0001,
+    "shared_validation_macro_mae": 0.054507680831485085,
+    "variant_scores": {
+      "structured8": 0.05527722502970021,
+      "rank0": 0.056582351077898364,
+      "neural_lowrank": 0.051663466386856684
+    },
+    "config_sha256": "18875b5011669b1b4bade207f54c8bfc6b9e3d82c3c572e44ebf062d3b55024c",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.002_l20.0001"
+  },
+  {
+    "configuration": "h32_lr0.002_l20.002",
+    "hidden_dim": 32,
+    "learning_rate": 0.002,
+    "latent_l2": 0.002,
+    "shared_validation_macro_mae": 0.053385587967874425,
+    "variant_scores": {
+      "structured8": 0.0538233328895231,
+      "rank0": 0.05564371342719171,
+      "neural_lowrank": 0.05068971758690847
+    },
+    "config_sha256": "96c6f8097f8c8e91dd7f0b69d43e29f59fc82a1aa5782a6fb87e7d3f52547e1f",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.002_l20.002"
+  },
+  {
+    "configuration": "h128_lr0.001_l20.0001",
+    "hidden_dim": 128,
+    "learning_rate": 0.001,
+    "latent_l2": 0.0001,
+    "shared_validation_macro_mae": 0.05224100019369158,
+    "variant_scores": {
+      "structured8": 0.05474014517404082,
+      "rank0": 0.053249115754432086,
+      "neural_lowrank": 0.04873373965260184
+    },
+    "config_sha256": "82da26bee59cb365a262b4ac8fc664cd2290dfa98c395e8bbcb1f891581dbb72",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.001_l20.0001"
+  },
+  {
+    "configuration": "h128_lr0.001_l20.002",
+    "hidden_dim": 128,
+    "learning_rate": 0.001,
+    "latent_l2": 0.002,
+    "shared_validation_macro_mae": 0.051362489936536165,
+    "variant_scores": {
+      "structured8": 0.053389959546879806,
+      "rank0": 0.05151072865001672,
+      "neural_lowrank": 0.04918678161271198
+    },
+    "config_sha256": "c7b2e214148a34fab5cd946036c1cdcaeb10d6084b455af376affbe0149cfb20",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.001_l20.002"
+  },
+  {
+    "configuration": "h128_lr0.002_l20.0001",
+    "hidden_dim": 128,
+    "learning_rate": 0.002,
+    "latent_l2": 0.0001,
+    "shared_validation_macro_mae": 0.053311205659643306,
+    "variant_scores": {
+      "structured8": 0.05658956128107453,
+      "rank0": 0.05478343076750856,
+      "neural_lowrank": 0.04856062493034682
+    },
+    "config_sha256": "fc943bf4d8d961a88d2dfb91052a392ade8a2d7c2c9fe7fe8b9cf97ffd5889db",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.002_l20.0001"
+  },
+  {
+    "configuration": "h128_lr0.002_l20.002",
+    "hidden_dim": 128,
+    "learning_rate": 0.002,
+    "latent_l2": 0.002,
+    "shared_validation_macro_mae": 0.05258968899921803,
+    "variant_scores": {
+      "structured8": 0.05686980903918929,
+      "rank0": 0.05368013947935235,
+      "neural_lowrank": 0.04721911847911245
+    },
+    "config_sha256": "648272f76bb5553dd5bf01f0e7dbc307805aa9cbf0603482daebec9b4b2c8099",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.002_l20.002"
+  }
+]

@@ -1,0 +1,13 @@
+# Numerical dependencies used in the 2026-10-28 local run.
+# PyTorch was 2.10.0.dev20251209+cu128 on an RTX 5070 Ti.
+# Install a hardware-compatible PyTorch build separately; see README.
+numpy==1.24.3
+pandas==2.3.3
+scipy==1.15.3
+scikit-learn==1.7.2
+matplotlib==3.10.6
+requests==2.34.2
+psutil==7.2.2
+threadpoolctl==3.6.0
+pytest==8.4.2
+

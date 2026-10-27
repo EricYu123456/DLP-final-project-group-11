@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "repository": "RZ412/EmbedLLM",
+  "revision": "266ae3e180ccb533c86afc9cfb2f5db99d171aea",
+  "url": "https://huggingface.co/datasets/RZ412/EmbedLLM/tree/266ae3e180ccb533c86afc9cfb2f5db99d171aea",
+  "files": {
+    "model_order.csv": {
+      "size": 3925,
+      "sha256": "bf7015fa775c1aed8955f1a7a1190f0e4c12f9ac2bdfdc896a051a090be4ad93"
+    },
+    "question_order.csv": {
+      "size": 19777711,
+      "sha256": "024a43fd073dda8d37c9dae0590fc42faf5f5538f3d5efb11aa5657afc96d1f2"
+    },
+    "question_embeddings.pth": {
+      "size": 109588706,
+      "sha256": "47c35522dc323d3f3bfcc77643965882f61021cf0b949cf86de6a4853acba556"
+    },
+    "train_y.pth": {
+      "size": 26588016,
+      "sha256": "96c9b3b0345587b6a6a3c6847f0435bc1bb58f0f012dbae72b9e446151361324"
+    },
+    "val_y.pth": {
+      "size": 2689000,
+      "sha256": "0ad3892c03a4f858af0b587b7676233b8ef1bebd49febbc79f1123875aa99eac"
+    },
+    "test_y.pth": {
+      "size": 2689004,
+      "sha256": "fee1000428a9df833fc15f333d9afe25a9cd0d2a666050b23533b2786c2c5bb3"
+    },
+    "train.csv": {
+      "size": 2701750720,
+      "sha256": "4ac81ebe312d2ca0290c78774ddc5f5852acb66cd10d28738efcb2a0dbd8e247"
+    },
+    "val.csv": {
+      "size": 273417680,
+      "sha256": "802f312809e7c7086233510b3c1e12619ab72051e06664ebb8bff24cf0f67fce"
+    },
+    "test.csv": {
+      "size": 282192406,
+      "sha256": "385e701c97e65285e6c687164a8ebd63e0afa3ea70b28cca0092d601c3d9d72a"
+    }
+  },
+  "redistribution_note": "Repository stores source checksums, IDs and aggregate audit counts; downloaded prompt text and labels remain local."
+}

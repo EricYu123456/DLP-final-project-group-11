@@ -1,0 +1,11 @@
+benchmark,prompts,base_group_candidates,raw_rows,missing_cells,duplicate_cells,conflicting_cells,singleton_common_all_models,eligible_primary_source,singleton_common_audited_models,singleton_pattern_varies_across_models_questions,primary_before_group_representative,primary_representatives,representative_dropped
+ASDiv,2304,2304,258160,0,112,0,2303,False,2303,0,0,0,0
+GPQA,5666,549,1068032,0,397040,71517,2121,False,2121,0,0,0,0
+GSM8K,1319,1319,295456,0,147728,4403,0,False,0,0,0,0,0
+LogiQA,651,650,72912,0,0,0,651,True,651,0,651,650,1
+MMLU,14015,13868,1572704,0,3024,2,13988,True,13988,0,13988,13841,147
+MathQA,2985,2985,334320,0,0,0,2985,True,2985,0,2985,2985,0
+MedMCQA,4183,4183,468496,0,0,0,4183,True,4183,0,4183,4182,1
+PIQA,1803,1803,205856,0,3024,1243,1776,False,1776,0,0,0,0
+SocialIQA,1930,1930,218848,0,2688,416,1906,False,1906,0,0,0,0
+TruthfulQA,817,817,91504,0,0,0,817,True,817,0,817,817,0

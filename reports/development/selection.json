@@ -1,0 +1,195 @@
+{
+  "selected": {
+    "configuration": "h128_lr0.001_l20.002",
+    "hidden_dim": 128,
+    "learning_rate": 0.001,
+    "latent_l2": 0.002,
+    "shared_validation_macro_mae": 0.051362489936536165,
+    "variant_scores": {
+      "structured8": 0.053389959546879806,
+      "rank0": 0.05151072865001672,
+      "neural_lowrank": 0.04918678161271198
+    },
+    "config_sha256": "c7b2e214148a34fab5cd946036c1cdcaeb10d6084b455af376affbe0149cfb20",
+    "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.001_l20.002"
+  },
+  "ranked": [
+    {
+      "configuration": "h128_lr0.001_l20.002",
+      "hidden_dim": 128,
+      "learning_rate": 0.001,
+      "latent_l2": 0.002,
+      "shared_validation_macro_mae": 0.051362489936536165,
+      "variant_scores": {
+        "structured8": 0.053389959546879806,
+        "rank0": 0.05151072865001672,
+        "neural_lowrank": 0.04918678161271198
+      },
+      "config_sha256": "c7b2e214148a34fab5cd946036c1cdcaeb10d6084b455af376affbe0149cfb20",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.001_l20.002"
+    },
+    {
+      "configuration": "h128_lr0.001_l20.0001",
+      "hidden_dim": 128,
+      "learning_rate": 0.001,
+      "latent_l2": 0.0001,
+      "shared_validation_macro_mae": 0.05224100019369158,
+      "variant_scores": {
+        "structured8": 0.05474014517404082,
+        "rank0": 0.053249115754432086,
+        "neural_lowrank": 0.04873373965260184
+      },
+      "config_sha256": "82da26bee59cb365a262b4ac8fc664cd2290dfa98c395e8bbcb1f891581dbb72",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.001_l20.0001"
+    },
+    {
+      "configuration": "h128_lr0.002_l20.002",
+      "hidden_dim": 128,
+      "learning_rate": 0.002,
+      "latent_l2": 0.002,
+      "shared_validation_macro_mae": 0.05258968899921803,
+      "variant_scores": {
+        "structured8": 0.05686980903918929,
+        "rank0": 0.05368013947935235,
+        "neural_lowrank": 0.04721911847911245
+      },
+      "config_sha256": "648272f76bb5553dd5bf01f0e7dbc307805aa9cbf0603482daebec9b4b2c8099",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.002_l20.002"
+    },
+    {
+      "configuration": "h128_lr0.002_l20.0001",
+      "hidden_dim": 128,
+      "learning_rate": 0.002,
+      "latent_l2": 0.0001,
+      "shared_validation_macro_mae": 0.053311205659643306,
+      "variant_scores": {
+        "structured8": 0.05658956128107453,
+        "rank0": 0.05478343076750856,
+        "neural_lowrank": 0.04856062493034682
+      },
+      "config_sha256": "fc943bf4d8d961a88d2dfb91052a392ade8a2d7c2c9fe7fe8b9cf97ffd5889db",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h128_lr0.002_l20.0001"
+    },
+    {
+      "configuration": "h32_lr0.002_l20.002",
+      "hidden_dim": 32,
+      "learning_rate": 0.002,
+      "latent_l2": 0.002,
+      "shared_validation_macro_mae": 0.053385587967874425,
+      "variant_scores": {
+        "structured8": 0.0538233328895231,
+        "rank0": 0.05564371342719171,
+        "neural_lowrank": 0.05068971758690847
+      },
+      "config_sha256": "96c6f8097f8c8e91dd7f0b69d43e29f59fc82a1aa5782a6fb87e7d3f52547e1f",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.002_l20.002"
+    },
+    {
+      "configuration": "h32_lr0.001_l20.002",
+      "hidden_dim": 32,
+      "learning_rate": 0.001,
+      "latent_l2": 0.002,
+      "shared_validation_macro_mae": 0.054135302028019035,
+      "variant_scores": {
+        "structured8": 0.05484881447538231,
+        "rank0": 0.05541778357792478,
+        "neural_lowrank": 0.05213930803075
+      },
+      "config_sha256": "6eb282f17e08ac30638216eb0cc28b4b95237508946c3048a26454cb714664f7",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.001_l20.002"
+    },
+    {
+      "configuration": "h32_lr0.002_l20.0001",
+      "hidden_dim": 32,
+      "learning_rate": 0.002,
+      "latent_l2": 0.0001,
+      "shared_validation_macro_mae": 0.054507680831485085,
+      "variant_scores": {
+        "structured8": 0.05527722502970021,
+        "rank0": 0.056582351077898364,
+        "neural_lowrank": 0.051663466386856684
+      },
+      "config_sha256": "18875b5011669b1b4bade207f54c8bfc6b9e3d82c3c572e44ebf062d3b55024c",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.002_l20.0001"
+    },
+    {
+      "configuration": "h32_lr0.001_l20.0001",
+      "hidden_dim": 32,
+      "learning_rate": 0.001,
+      "latent_l2": 0.0001,
+      "shared_validation_macro_mae": 0.05476103220759379,
+      "variant_scores": {
+        "structured8": 0.055448920037445615,
+        "rank0": 0.056831928355369286,
+        "neural_lowrank": 0.05200224822996646
+      },
+      "config_sha256": "60e4b2ff913e9afa17ae787c1439bffbef9c178803a34aeb152752ba19d97b1d",
+      "artifacts": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\development_v2\\h32_lr0.001_l20.0001"
+    }
+  ],
+  "per_variant_sensitivity": {
+    "structured8": {
+      "configuration": "h128_lr0.001_l20.002",
+      "variant": "structured8",
+      "hidden_dim": 128,
+      "learning_rate": 0.001,
+      "latent_l2": 0.002,
+      "seed": 11,
+      "validation_macro_mae": 0.053389959546879806,
+      "selected_prior_strength": 1.0,
+      "best_epoch": 36,
+      "best_selection_value": 0.0550369065863866,
+      "best_validation_bce": 0.6633059985145099,
+      "checkpoint_sha256": "2aadfbe483202da83fc1f283689d285947181d8d0ccf3f81766a2cc3ee6165b8",
+      "config_sha256": "c7b2e214148a34fab5cd946036c1cdcaeb10d6084b455af376affbe0149cfb20"
+    },
+    "rank0": {
+      "configuration": "h128_lr0.001_l20.002",
+      "variant": "rank0",
+      "hidden_dim": 128,
+      "learning_rate": 0.001,
+      "latent_l2": 0.002,
+      "seed": 11,
+      "validation_macro_mae": 0.05151072865001672,
+      "selected_prior_strength": 1.0,
+      "best_epoch": 58,
+      "best_selection_value": 0.05250777013415554,
+      "best_validation_bce": 0.6587047002502822,
+      "checkpoint_sha256": "e577e358accfe7c84a532b93030b5bd47e7a7aa8faa8a08b7310dfd6ca025834",
+      "config_sha256": "c7b2e214148a34fab5cd946036c1cdcaeb10d6084b455af376affbe0149cfb20"
+    },
+    "neural_lowrank": {
+      "configuration": "h128_lr0.002_l20.002",
+      "variant": "neural_lowrank",
+      "hidden_dim": 128,
+      "learning_rate": 0.002,
+      "latent_l2": 0.002,
+      "seed": 11,
+      "validation_macro_mae": 0.04721911847911245,
+      "selected_prior_strength": 0.3,
+      "best_epoch": 60,
+      "best_selection_value": 0.04618824596663596,
+      "best_validation_bce": 0.6700909928075255,
+      "checkpoint_sha256": "2efb052f62ee5ab65f95395ed9abd37beb95dae481c85ae8b6c865697c56f2c3",
+      "config_sha256": "648272f76bb5553dd5bf01f0e7dbc307805aa9cbf0603482daebec9b4b2c8099"
+    }
+  },
+  "selection_rule": "mean validation macro MAE across all three variants and budgets50/100/200, after each variant's prior tuning",
+  "test_labels_used": false,
+  "elapsed_seconds": 114.74543320015073,
+  "finished_at": "2026-10-27T20:05:14.389622+00:00",
+  "dataset_fingerprint": "d37f4c6eeb850831f0e6ceb439377ad4b434d943b3df51174af0cfa515fad9ba",
+  "source_sha256": {
+    "src/coldstart/__init__.py": "d3d20f9f52880897b67dc2ca4abf161a7f2ec0494e1ba402b73f2b425d55db2e",
+    "src/coldstart/acquisition.py": "8933359f7aab3cfa4387930bedfcb3ef2e0de2d58adaa963a83c455f6e7393ba",
+    "src/coldstart/adaptation.py": "257d56f7daa7b03fd54594cf2c8f8f6bd99fd4059036b5cec056a271d6889b85",
+    "src/coldstart/data.py": "33103a6fe832de4a1f0d0f0e1688da7e137eb0217d702e4df1a25dc614dda19c",
+    "src/coldstart/diagnostics.py": "725b183400394ee93dc5b5490e9db437ab3c09ce49305b7a8b118f8c14b02327",
+    "src/coldstart/metrics.py": "2fda66bc9d61906300cee4fe267f1542553d3696152c48248fb92ac7d81f72a0",
+    "src/coldstart/models.py": "e3f59eb9e549d3fd670f8e9b580894f26cb5795a453b38c0fa47fc8a13c466ca",
+    "src/coldstart/probes.py": "d7299d68b6062a65ff6bd520bd169e6b1e6bf6e702e6eb69c298145a02b6231d",
+    "src/coldstart/runtime.py": "78f1fb083a7331058115fe3017649bc8bfe0ad486c604322626f5e482c3b96fb",
+    "src/coldstart/splits.py": "ccaa9952da6eddb7b2d9d2e6fe106d8381f3325bc490b19bbe1a64d225ede713",
+    "scripts/run_experiment.py": "2edef702b9fea3a6948984bc1fe2a30322d49efddcc141dc6edafe28022bd181"
+  }
+}
