@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "latent_dimension": 8,
+  "max_abs_latent_delta_cpu_vs_cuda": 1.8060209394654692e-07,
+  "max_abs_covariance_delta_cpu_vs_cuda": 2.6761049987111818e-08,
+  "source_model_id": 5,
+  "budget": 100,
+  "checkpoint_digest_matches": true,
+  "final_target_labels_evaluated": false
+}

@@ -1,0 +1,25 @@
+{
+  "python": "3.10.6 (tags/v3.10.6:9c7b4bd, Aug  1 2022, 21:53:49) [MSC v.1932 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "numpy": "1.24.3",
+  "torch": "2.10.0.dev20251209+cu128",
+  "cuda": "12.8",
+  "device": "NVIDIA GeForce RTX 5070 Ti",
+  "command": [
+    "scripts\\run_experiment.py",
+    "--config",
+    "configs\\protocol.json",
+    "--output",
+    "artifacts\\main_v2",
+    "--phase",
+    "test",
+    "--save-predictions",
+    "--cpu-threads",
+    "1",
+    "--device",
+    "cuda",
+    "--deadline",
+    "2026-10-28T11:45:00+08:00"
+  ],
+  "dataset_fingerprint": "d37f4c6eeb850831f0e6ceb439377ad4b434d943b3df51174af0cfa515fad9ba"
+}

@@ -1,0 +1,9 @@
+{
+  "source_run": "artifacts\\family_study_v4",
+  "source_sha256": {
+    "family_per_model_metrics.csv": "4d1e72c8fdb56e79b7b3378ddf319e621a090911f1f10c049dfd87bc71866655"
+  },
+  "study_sha256": "2a946109ea13c91edcd3843857f824544c66191eb613c0c5b48cc032886afc7c",
+  "estimand": "paired excluded minus related-allowed score error; same target models",
+  "intervals": "not reported for individual lineage cases"
+}

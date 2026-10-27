@@ -1,0 +1,17 @@
+predictor,strategy,budget,macro_mae_gap,brier_gap,aggregation
+coldstart_rank0,balanced_random,50,0.006807247629495801,0.0008269008489179925,equal weight per family case; descriptive across three cases
+coldstart_rank0,balanced_random,100,0.003950305789806601,0.00034900764336108346,equal weight per family case; descriptive across three cases
+coldstart_rank0,balanced_random,200,0.0011733594622673888,-0.0004004674247649253,equal weight per family case; descriptive across three cases
+coldstart_structured8,balanced_random,50,0.004662343634987608,-0.0021093236222970006,equal weight per family case; descriptive across three cases
+coldstart_structured8,balanced_random,100,0.003953027857262541,-0.002955713859031206,equal weight per family case; descriptive across three cases
+coldstart_structured8,balanced_random,200,0.0030132244876775577,-0.00395127159933219,equal weight per family case; descriptive across three cases
+domain_probe_mean,balanced_random,50,0.0029139800977698318,0.0009486026680237961,equal weight per family case; descriptive across three cases
+domain_probe_mean,balanced_random,100,0.0013078659822787898,0.00047858235941607776,equal weight per family case; descriptive across three cases
+domain_probe_mean,balanced_random,200,0.0004519948318564126,-5.448062708271538e-06,equal weight per family case; descriptive across three cases
+global_probe_mean,balanced_random,50,8.029573493530987e-06,3.1890735005258386e-05,equal weight per family case; descriptive across three cases
+global_probe_mean,balanced_random,100,-7.451546412928193e-06,1.4743257442746323e-05,equal weight per family case; descriptive across three cases
+global_probe_mean,balanced_random,200,-6.708254416789729e-06,6.2916106093917145e-06,equal weight per family case; descriptive across three cases
+question_knn,balanced_random,50,0.002773188702186719,0.001204589388447512,equal weight per family case; descriptive across three cases
+question_knn,balanced_random,100,0.0025551783423811243,0.0009551678498351017,equal weight per family case; descriptive across three cases
+question_knn,balanced_random,200,0.0014815840423159177,0.0006932444390637229,equal weight per family case; descriptive across three cases
+training_domain_mean,zero_probe,0,0.005793589987141876,0.002185034540663677,equal weight per family case; descriptive across three cases

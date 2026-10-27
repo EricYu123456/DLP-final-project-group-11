@@ -1,0 +1,9 @@
+{
+  "study_sha256": "5e44563bbe60aeaaea1dfacbf5c9d46e8d2c079e99c7ed44efdf8036f4f6bbd9",
+  "secondary_exploratory": true,
+  "finished_at": "2026-10-27T20:56:25.431513+00:00",
+  "metric_rows": 306,
+  "domain_rows": 1530,
+  "baseline_rows_pooled": false,
+  "probes_match_original_control": true
+}

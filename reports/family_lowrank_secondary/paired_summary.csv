@@ -1,0 +1,10 @@
+family_case,predictor,strategy,budget,macro_mae_gap,brier_gap,models_with_positive_gap,n_models,n_seeds,direction,confidence_interval
+Llama,coldstart_neural_lowrank,balanced_random,50,-0.004927017799207209,-0.0011480443810501172,2,8,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Llama,coldstart_neural_lowrank,balanced_random,100,-0.003021631697236521,-0.0011270316692566693,2,8,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Llama,coldstart_neural_lowrank,balanced_random,200,-0.004381013866785342,-0.00022366595476939685,1,8,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Mistral,coldstart_neural_lowrank,balanced_random,50,0.011741399521000956,-0.0040285423716169945,6,6,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Mistral,coldstart_neural_lowrank,balanced_random,100,0.008130622816397167,-0.0046744670391564635,5,6,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Mistral,coldstart_neural_lowrank,balanced_random,200,0.004534012395109944,-0.0035349918488335984,4,6,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Yi,coldstart_neural_lowrank,balanced_random,50,0.030238011411163123,0.003588784181448753,3,3,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Yi,coldstart_neural_lowrank,balanced_random,100,0.02829327260585292,0.003476779311770888,3,3,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case
+Yi,coldstart_neural_lowrank,balanced_random,200,0.02224895049554881,-0.00010656825210217689,3,3,3,excluded minus related_allowed; positive means relatives helped,suppressed: one lineage block per case

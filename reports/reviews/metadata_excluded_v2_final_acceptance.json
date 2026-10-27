@@ -1,0 +1,163 @@
+{
+  "reviewed_at_utc": "2026-10-27T21:25:02.332207+00:00",
+  "reviewer": "architecture_eval",
+  "status": "PASS_FINAL_METADATA_EXCLUDED_COHORT",
+  "manifest_sha256": "65b60b7f79de28086a0d18f3c48fc9db02d0dd998f440454f0be1f508b30a12b",
+  "same_pre_score_manifest_and_all_inputs_main_lock_and9weights": true,
+  "run": "artifacts/metadata_excluded_cohort_v2",
+  "all24_predeclared_ids_retained": true,
+  "unique_model_metric_rows": 1584,
+  "benchmark_metric_rows": 7920,
+  "predictors": [
+    "coldstart_structured8",
+    "coldstart_rank0",
+    "coldstart_neural_lowrank",
+    "domain_probe_mean",
+    "global_probe_mean",
+    "question_knn",
+    "scalar_logit_shift"
+  ],
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "budgets": [
+    50,
+    100,
+    200
+  ],
+  "all_five_target_benchmarks_complete": true,
+  "missing_probe_labels": 0,
+  "models_dropped": 0,
+  "no_shared_training_or_tuning": true,
+  "neural_new_model_MAP_fits": 648,
+  "all_neural_maps_converged": true,
+  "maximum_neural_gradient_norm": 1.9119345306961577e-07,
+  "all27_exported_embedding_priors_equal_main": true,
+  "all_exported_covariances_positive_definite": true,
+  "all66_prediction_files_independently_rescored": true,
+  "maximum_saved_vs_recomputed_metric_error": 9.8879238130678e-17,
+  "all72_static_probe_records_equal_pre_score_plan": true,
+  "report_source_hashes_and_point_aggregation_match": true,
+  "inferential_confidence_intervals_absent": true,
+  "point_estimates": [
+    {
+      "predictor": "coldstart_neural_lowrank",
+      "budget": 50,
+      "macro_mae": 0.06592824470389001
+    },
+    {
+      "predictor": "coldstart_neural_lowrank",
+      "budget": 100,
+      "macro_mae": 0.055742010274053254
+    },
+    {
+      "predictor": "coldstart_neural_lowrank",
+      "budget": 200,
+      "macro_mae": 0.04735188195297995
+    },
+    {
+      "predictor": "coldstart_rank0",
+      "budget": 50,
+      "macro_mae": 0.07133361009453706
+    },
+    {
+      "predictor": "coldstart_rank0",
+      "budget": 100,
+      "macro_mae": 0.06325322422276769
+    },
+    {
+      "predictor": "coldstart_rank0",
+      "budget": 200,
+      "macro_mae": 0.051688425338127904
+    },
+    {
+      "predictor": "coldstart_structured8",
+      "budget": 50,
+      "macro_mae": 0.0688357424092037
+    },
+    {
+      "predictor": "coldstart_structured8",
+      "budget": 100,
+      "macro_mae": 0.059856874903799984
+    },
+    {
+      "predictor": "coldstart_structured8",
+      "budget": 200,
+      "macro_mae": 0.04796901524148737
+    },
+    {
+      "predictor": "domain_probe_mean",
+      "budget": 50,
+      "macro_mae": 0.07152143220384446
+    },
+    {
+      "predictor": "domain_probe_mean",
+      "budget": 100,
+      "macro_mae": 0.06804088218657765
+    },
+    {
+      "predictor": "domain_probe_mean",
+      "budget": 200,
+      "macro_mae": 0.055967720564332135
+    },
+    {
+      "predictor": "global_probe_mean",
+      "budget": 50,
+      "macro_mae": 0.10816994666631885
+    },
+    {
+      "predictor": "global_probe_mean",
+      "budget": 100,
+      "macro_mae": 0.09927575317231184
+    },
+    {
+      "predictor": "global_probe_mean",
+      "budget": 200,
+      "macro_mae": 0.0968573650915495
+    },
+    {
+      "predictor": "question_knn",
+      "budget": 50,
+      "macro_mae": 0.06785265639653422
+    },
+    {
+      "predictor": "question_knn",
+      "budget": 100,
+      "macro_mae": 0.06384495210171699
+    },
+    {
+      "predictor": "question_knn",
+      "budget": 200,
+      "macro_mae": 0.05313762463485076
+    },
+    {
+      "predictor": "scalar_logit_shift",
+      "budget": 50,
+      "macro_mae": 0.06967034423630891
+    },
+    {
+      "predictor": "scalar_logit_shift",
+      "budget": 100,
+      "macro_mae": 0.06391829032915511
+    },
+    {
+      "predictor": "scalar_logit_shift",
+      "budget": 200,
+      "macro_mae": 0.06320293301280192
+    },
+    {
+      "predictor": "training_domain_mean",
+      "budget": 0,
+      "macro_mae": 0.08976673764763127
+    }
+  ],
+  "scope": [
+    "Secondary descriptive same-release held-out model-ID cohort.",
+    "No claims about independent families, external data, live LLMs, or population-wide dimensionality advantage.",
+    "The original models, training priors, seven predictors, selected hyperparameters, and target item IDs remained frozen.",
+    "No evidence-gated or constant-blend model was added to the cohort evaluation.",
+    "Observed point differences are conditional on these24 metadata-excluded IDs; dependence and ancestry remain unresolved."
+  ]
+}

@@ -42,7 +42,7 @@ GPQA 有跨 category 的相同 prompt，也有同 category、同 prompt 的 0/1 
 3. 每種方法都使用相同的 grouped split、同一批保留模型及 benchmark 題目。保存 ID、分組結果、缺失與排除原因，並報告選入比例。讀取 row existence 本身也會影響目標分布，因此應公開此選取規則與各模型覆蓋率。
 4. 暫不將 GPQA 和 GSM8K 放入主子集：前者存在大量提示及 category 變體，後者評分 filter 來源尚不可核對。它們可以作為清楚標示目標定義的敏感度分析；不能把不同條件的 label 平均或合併成單次作答真值。
 
-模型 0 的 prompt 文本與 category 索引提供了具體洩漏例子：移除 MMLU 科目標頭後，以完整題幹及排序選項比對，14,015 個 MMLU prompt 形成 79 個重複候選組，其中 24 組跨越公開 train/validation/test。例如 prompt 3538（train，college medicine）與 20614（test，clinical knowledge）的題幹及選項相同。僅比對題幹也可找出 prompt 12185（train）與 12293（test），兩者選項僅差句尾標點；因此精確選項鍵仍會漏掉它們。MMLU、MedMCQA、LogiQA 有 51 個同題幹但選項字串不同的候選組，其中 20 組跨越公開 split；部分同題幹只是通用問句，不能全部當成確認的重複題。探索性解析器在取最後四個選項標記後可解析所有 14,015 筆 MMLU prompt；但字串規則仍需抽查，也無法排除改寫或相同來源題的其他未匹配版本。參考記錄：`tmp/research/audit_main5_item_keys.py`。
+模型 0 的 prompt 文本與 category 索引提供了具體洩漏例子：移除 MMLU 科目標頭後，以完整題幹及排序選項比對，14,015 個 MMLU prompt 形成 79 個重複候選組，其中 24 組跨越公開 train/validation/test。例如 prompt 3538（train，college medicine）與 20614（test，clinical knowledge）的題幹及選項相同。僅比對題幹也可找出 prompt 12185（train）與 12293（test），兩者選項僅差句尾標點；因此精確選項鍵仍會漏掉它們。MMLU、MedMCQA、LogiQA 有 51 個同題幹但選項字串不同的候選組，其中 20 組跨越公開 split；部分同題幹只是通用問句，不能全部當成確認的重複題。探索性解析器在取最後四個選項標記後可解析所有 14,015 筆 MMLU prompt；但字串規則仍需抽查，也無法排除改寫或相同來源題的其他未匹配版本。探索記錄保留於本機；可重現的正式分組實作見 [data.py](../../src/coldstart/data.py)。
 
 額外的來源對齊顯示，公開版本的 4,183 個 MedMCQA prompt，按正規化題幹與四個選項比對，都能唯一對上 [MedMCQA validation split](https://huggingface.co/datasets/openlifescienceai/medmcqa/tree/91c6572c454088bf71b679ad90aa8dffcd0d5868) 的 4,183 個 item；並非單靠題數相等推論。映射與來源版本在 [`medmcqa_source_ids.csv`](../../data/metadata/medmcqa_source_ids.csv)，不包含題目文字。論文對所有 benchmark 一般性描述為 test sets；這項特定公開版本的觀察應另外報告，不推斷其他來源的 split。
 

@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.0",
+  "experiment": {
+    "name": "embedllm_paired_family_ancestry_shift",
+    "regime": "strict_unseen_item",
+    "primary_task": "benchmark_score_prediction",
+    "secondary_task": null,
+    "status": "predeclared_family_before_main_grid_selection",
+    "test_lock_required": true,
+    "fixed_bank_results_separate": true,
+    "variants": [
+      "structured8",
+      "rank0"
+    ]
+  },
+  "data": {
+    "prepared_path": "data/processed",
+    "metadata_path": "data/processed/embedllm.json",
+    "primary_selection_manifest": "reports/data_audit/primary_selection.json",
+    "source_repository": "RZ412/EmbedLLM",
+    "source_revision": "266ae3e180ccb533c86afc9cfb2f5db99d171aea",
+    "label_policy": "strict",
+    "label_rule": "global_structural_singleton",
+    "candidate_benchmarks": [
+      "MMLU",
+      "MedMCQA",
+      "MathQA",
+      "TruthfulQA",
+      "LogiQA"
+    ],
+    "require_full_raw_audit": true,
+    "model_scope": "audited_lineage_included_only",
+    "family_table": "data/metadata/model_families.csv",
+    "model_scope_applies_before_singleton_filter": true,
+    "deduplicate_groups": true,
+    "require_one_record_per_model_prompt": true,
+    "require_one_category_per_prompt": true,
+    "missing_label_policy": "mask",
+    "minimum_train_items_per_benchmark": 100,
+    "minimum_val_items_per_benchmark": 30,
+    "minimum_test_items_per_benchmark": 30,
+    "public_tensor_sensitivity_separate": true,
+    "grouping": {
+      "key": "group_ids",
+      "version": 2,
+      "priority": [
+        "source_item_id",
+        "reviewed_underlying_question",
+        "normalized_content"
+      ],
+      "group_prompt_and_option_variants": true,
+      "union_identical_complete_stems": true,
+      "report_possible_overgrouping": true,
+      "report_rule_and_audit_limitations": true,
+      "representative_policy": "global_lowest_source_prompt_id",
+      "representative_selection_pool": "structural_singleton_audited_scope_five_sources",
+      "one_representative_per_group": true,
+      "probe_budget_counts_distinct_groups": true
+    }
+  },
+  "split": {
+    "item_seed": 1729,
+    "model_seed": 2718,
+    "item_ratios": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "model_ratios": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "item_stratification": "benchmark",
+    "item_group_key": "group_ids",
+    "primary_model_split": "paired_family_shift",
+    "save_positional_indices_and_source_ids": true,
+    "family_stress": {
+      "enabled": true,
+      "requires_audited_lineage": true,
+      "exclude_unknown_and_cross_family_merges": true,
+      "validation_family_disjoint": true,
+      "match_training_model_count_for_gap_comparison": true,
+      "design": "paired_ancestry_composition_shift",
+      "validation_family": "Qwen",
+      "training_models": 40,
+      "target_cases": [
+        {
+          "family": "Llama",
+          "target_models": 8,
+          "related_training_models": 8
+        },
+        {
+          "family": "Mistral",
+          "target_models": 6,
+          "related_training_models": 8
+        },
+        {
+          "family": "Yi",
+          "target_models": 3,
+          "related_training_models": 6
+        }
+      ],
+      "conditions": [
+        "excluded",
+        "related_allowed"
+      ],
+      "shared_static_probe_ids": true,
+      "core_comparison_policy": "balanced_random",
+      "shared_hyperparameters_across_conditions": true,
+      "fixed_dataset_and_item_split_across_conditions": true,
+      "condition_labels": {
+        "excluded": "family excluded",
+        "related_allowed": "relatives allowed"
+      },
+      "fixed_target_source_ids": {
+        "Llama": [
+          10,
+          16,
+          20,
+          34,
+          41,
+          61,
+          74,
+          106
+        ],
+        "Mistral": [
+          6,
+          12,
+          44,
+          47,
+          56,
+          90
+        ],
+        "Yi": [
+          1,
+          31,
+          98
+        ]
+      }
+    }
+  },
+  "budgets": [
+    50,
+    100,
+    200
+  ],
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "probe_strategies": [
+    "balanced_random"
+  ],
+  "probes": {
+    "pool": "train_items",
+    "selection_reference_pool": "train_items",
+    "allow_target_features_for_selection": false,
+    "allow_unselected_new_model_labels": false,
+    "same_probe_ids_across_predictors": true,
+    "without_replacement": true,
+    "balanced_quota": "round_robin_fixed_domain_order",
+    "diversity_distance": "cosine",
+    "nested_budgets": true,
+    "save_source_prompt_ids": true,
+    "fisher": {
+      "warmup": 10,
+      "reference_items_per_benchmark": 64,
+      "reference_pool": "train_items",
+      "reference_sampling": "fixed_seed_random_without_replacement",
+      "reference_weighting": "equal_benchmark",
+      "allow_final_target_features": false,
+      "refit_after_each_revealed_response": true
+    }
+  },
+  "model": {
+    "mode": "structured",
+    "rank": 8,
+    "ablation_ranks": [
+      0
+    ],
+    "hidden_dim": 128,
+    "dropout": 0.1,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0001,
+    "latent_l2": 0.002,
+    "epochs": 100,
+    "batch_questions": 1024,
+    "patience": 10,
+    "min_delta": 0.0001,
+    "warmup_epochs": 0,
+    "prior_scale_floor": 0.2,
+    "prior_variance_shrinkage": 0.2,
+    "initialization": "train_models_only",
+    "pretrained_model_embeddings_allowed": false,
+    "feature_transform_fit_pool": "train_items",
+    "selection_metric": "coldstart_macro_mae",
+    "selection_interval": 2,
+    "selection_budget": 100,
+    "selection_prior_strengths": [
+      0.3,
+      1.0,
+      3.0
+    ]
+  },
+  "adaptation": {
+    "prior_type": "diagonal_empirical",
+    "prior_strengths": [
+      0.3,
+      1.0,
+      3.0
+    ],
+    "selected_strength": null,
+    "max_iterations": 25,
+    "tolerance": 1e-07,
+    "freeze_shared_decoder": true,
+    "update_new_model_latent_only": true
+  },
+  "baselines": {
+    "mean_smoothing_grid": [
+      0.5,
+      2.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "knn_neighbors_grid": [
+      5,
+      10,
+      20
+    ],
+    "knn_prior_weight_grid": [
+      0.0,
+      1.0,
+      3.0
+    ],
+    "knn_temperature": 0.1,
+    "tune_on_same_validation_models_and_budgets": true,
+    "scalar_logit_shift": {
+      "enabled": false
+    }
+  },
+  "tuning": {
+    "encoder_stopping_models": "val_models",
+    "encoder_stopping_items": "val_items",
+    "encoder_stopping_metric": "coldstart_macro_mae",
+    "coldstart_selection_models": "val_models",
+    "coldstart_selection_items": "val_items",
+    "coldstart_selection_metric": "macro_mae",
+    "reference_strategy": "balanced_random",
+    "reference_budgets": [
+      50,
+      100,
+      200
+    ],
+    "average_over_budgets_and_seeds": true,
+    "one_strength_shared_across_policies": true,
+    "family_strength_selection": "mean_validation_over_both_paired_conditions",
+    "test_models_or_items_for_tuning": false,
+    "tie_break": "stronger_regularization_then_simpler_model",
+    "checkpoint_probe_strategy": "balanced_random",
+    "checkpoint_probe_budget": 100,
+    "checkpoint_prior_strengths": [
+      0.3,
+      1.0,
+      3.0
+    ],
+    "provisional_checkpoint_prior": true,
+    "family_baseline_selection": "mean_validation_over_both_paired_conditions",
+    "architecture_search_enabled": false
+  },
+  "evaluation": {
+    "primary_metric": "macro_mae",
+    "secondary_metrics": [
+      "worst_domain_mae",
+      "worst_overestimate",
+      "micro_score_mae",
+      "weighted_domain_mae",
+      "brier",
+      "macro_brier",
+      "nll"
+    ],
+    "score_scale": "proportion",
+    "require_all_benchmarks_per_model": true,
+    "report_benchmark_item_counts": true,
+    "report_per_model_and_benchmark": true,
+    "aggregate_seeds_within_model_before_inference": true,
+    "paired_comparisons": [],
+    "bootstrap": {
+      "iterations": 10000,
+      "confidence": 0.95,
+      "seed": 8675309,
+      "unit": "model",
+      "use_audited_lineage_clusters_when_available": true,
+      "minimum_independent_groups_for_interval": 2
+    },
+    "routing": {
+      "enabled": false,
+      "candidate_pool_frozen_before_test": true,
+      "require_common_observed_items": true,
+      "report_total_probe_budget_across_candidates": true,
+      "use_validation_selected_fixed_reference": true,
+      "cost_claims_allowed": false
+    },
+    "test_lock_manifest": "artifacts/test_lock.json",
+    "ancestry_comparisons": [
+      [
+        "excluded",
+        "related_allowed"
+      ]
+    ],
+    "ancestry_direction": "excluded_minus_related_allowed; positive error difference favors relatives allowed",
+    "compare_absolute_gap_to_primary_grid_run": false
+  },
+  "diagnostics": {
+    "within_benchmark_response_permutation": {
+      "enabled": false,
+      "policy": "balanced_random",
+      "predictor": "structured",
+      "slice_to_budget_before_permutation": true,
+      "preserve_probe_ids": true,
+      "preserve_missing_mask": true,
+      "preserve_benchmark_counts_and_successes": true,
+      "rerun_acquisition": false,
+      "use_for_model_selection": false
+    }
+  },
+  "family_hyperparameter_origin": {
+    "values": "original protocol defaults before the primary development grid",
+    "hyperparameter_values_fixed_before_main_grid": true,
+    "main_grid_results_used_for_family_choice": false,
+    "dedicated_config_created_while_main_grid_running": true,
+    "created_at_utc": "2026-10-27T20:05:28.505069+00:00",
+    "fixed_values": {
+      "hidden_dim": 128,
+      "learning_rate": 0.002,
+      "latent_l2": 0.002,
+      "rank": 8
+    },
+    "general_amendment": "warmup zero and held-out-model score checkpointing correct training/task alignment; family checkpoint and prior choices use Qwen validation only",
+    "family_target_responses_used_for_family_selection": false
+  }
+}

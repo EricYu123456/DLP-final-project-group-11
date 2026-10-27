@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "study_sha256": "2a946109ea13c91edcd3843857f824544c66191eb613c0c5b48cc032886afc7c",
+  "finished_at": "2026-10-27T20:34:54.564529+00:00",
+  "families": [
+    "Llama",
+    "Mistral",
+    "Yi"
+  ],
+  "model_metric_rows": 1632,
+  "domain_metric_rows": 8160,
+  "static_probe_ids_matched_within_pairs": true
+}

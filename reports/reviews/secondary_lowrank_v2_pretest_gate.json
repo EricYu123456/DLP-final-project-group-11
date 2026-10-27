@@ -1,0 +1,119 @@
+{
+  "reviewed_at_utc": "2026-10-27T20:54:53.781295+00:00",
+  "reviewer": "architecture_eval",
+  "status": "PASS_FOR_EXPLORATORY_SECONDARY_FINAL_TEST",
+  "run": "artifacts/family_lowrank_secondary_v2",
+  "study_sha256": "5e44563bbe60aeaaea1dfacbf5c9d46e8d2c079e99c7ed44efdf8036f4f6bbd9",
+  "current_supplement_wrapper_core_main_control_config_data_and18weights_hashes_checked": true,
+  "new_prior_grid_cells_checked": 162,
+  "qwen_only_joint_selection_and_same_parameters_within_pairs": true,
+  "scope_timestamp_utc": "2026-10-27T20:49:19.534804+00:00",
+  "scope_explicitly_after_main_inspection": true,
+  "variant_choice_not_fully_family_blind": true,
+  "main_partition_overlap_with_targets": {
+    "train": [
+      6,
+      12,
+      16,
+      31,
+      34,
+      41,
+      56,
+      61,
+      74,
+      90,
+      98,
+      106
+    ],
+    "val": [
+      44,
+      47
+    ],
+    "test": [
+      1,
+      10,
+      20
+    ]
+  },
+  "inherited_numeric_origin_clearly_separate": true,
+  "baseline_choices_reused_by_hash_and_not_pooled": true,
+  "final_test_completions_absent_at_review": true,
+  "expected_pooled_neural_rows": 306,
+  "expected_pooled_neural_benchmark_rows": 1530,
+  "cases": {
+    "Llama": {
+      "target_source_ids": [
+        10,
+        16,
+        20,
+        34,
+        41,
+        61,
+        74,
+        106
+      ],
+      "validation_source_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ],
+      "training_models_per_arm": 40,
+      "complete_new_prior_cells": 54,
+      "shared_lowrank_strength": 0.3,
+      "baseline_choices_reused_by_hash": true,
+      "split_bytes_identical_to_original": true
+    },
+    "Mistral": {
+      "target_source_ids": [
+        6,
+        12,
+        44,
+        47,
+        56,
+        90
+      ],
+      "validation_source_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ],
+      "training_models_per_arm": 40,
+      "complete_new_prior_cells": 54,
+      "shared_lowrank_strength": 0.3,
+      "baseline_choices_reused_by_hash": true,
+      "split_bytes_identical_to_original": true
+    },
+    "Yi": {
+      "target_source_ids": [
+        1,
+        31,
+        98
+      ],
+      "validation_source_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ],
+      "training_models_per_arm": 40,
+      "complete_new_prior_cells": 54,
+      "shared_lowrank_strength": 0.3,
+      "baseline_choices_reused_by_hash": true,
+      "split_bytes_identical_to_original": true
+    }
+  },
+  "limitations": [
+    "Exploratory secondary coverage was frozen after main final-table inspection.",
+    "Variant choice used primary validation, which includes two family targets; other target IDs also appear in main training/test partitions.",
+    "Fresh weights and Qwen-only prior selection do not make the algorithm-selection history fully family-blind.",
+    "No new population or causal ancestry guarantee is supported."
+  ]
+}

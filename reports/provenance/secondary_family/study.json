@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T20:49:19.599631+00:00",
+  "secondary_exploratory": true,
+  "output_root": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\family_lowrank_secondary_v2",
+  "config_file_sha256": "b44ed19a5b0522eced18dc0bd7265f22ac4f0b1412cd7f50951d815c084cbf11",
+  "orchestrator_source_path": "C:\\nycu\\M1_1st\\DLP\\final_project\\scripts\\run_secondary_lowrank_family.py",
+  "orchestrator_source_sha256": "828552f1146459f5f2bcec34981014a13d0705935d1f76c25a36b6feab5f7c78",
+  "scientific_source_sha256": {
+    "src/coldstart/__init__.py": "d3d20f9f52880897b67dc2ca4abf161a7f2ec0494e1ba402b73f2b425d55db2e",
+    "src/coldstart/acquisition.py": "8933359f7aab3cfa4387930bedfcb3ef2e0de2d58adaa963a83c455f6e7393ba",
+    "src/coldstart/adaptation.py": "257d56f7daa7b03fd54594cf2c8f8f6bd99fd4059036b5cec056a271d6889b85",
+    "src/coldstart/data.py": "33103a6fe832de4a1f0d0f0e1688da7e137eb0217d702e4df1a25dc614dda19c",
+    "src/coldstart/diagnostics.py": "725b183400394ee93dc5b5490e9db437ab3c09ce49305b7a8b118f8c14b02327",
+    "src/coldstart/metrics.py": "2fda66bc9d61906300cee4fe267f1542553d3696152c48248fb92ac7d81f72a0",
+    "src/coldstart/models.py": "70fa84e7215a4409f9a6070b36f63137b61691d5bbe6f9bf13cec9340af9da3b",
+    "src/coldstart/probes.py": "d7299d68b6062a65ff6bd520bd169e6b1e6bf6e702e6eb69c298145a02b6231d",
+    "src/coldstart/runtime.py": "b2ef90b7aca819d7993c8965d154d6b63109d25dd121e5472e519d58b1b44b3b",
+    "src/coldstart/splits.py": "ccaa9952da6eddb7b2d9d2e6fe106d8381f3325bc490b19bbe1a64d225ede713",
+    "scripts/run_experiment.py": "a35763a200472bab05f610143584af25858d04448a2570b9cfc0e58c35d95589"
+  },
+  "source_hash_policy": "utf8_lf",
+  "control_output": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\family_study_v4",
+  "control_study_sha256": "2a946109ea13c91edcd3843857f824544c66191eb613c0c5b48cc032886afc7c",
+  "control_manifest_file_sha256": "8a408782f4b53c35aa0546a07274e3027a695a94453991cca054c187c463ffce",
+  "control_test_marker_sha256": "d003fc306df996e98d66687c7f66f3f395746b772d7559915005463ffa5e4636",
+  "main_output": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\main_v2",
+  "main_lock_sha256": "f25f65f8498eea548f496f4ea0e2903ae3ff585d0f3d8bf2c0f6b918a5ce83ab",
+  "main_split_sha256": "98ac635f5f41e74df45a7cb1f2967b4f8a5882fa781ae8a676a347b8aadc7930",
+  "main_test_marker_sha256": "65c19d73f2ab3bbbfeb80e2a7d8a9aef74ca37de5fc5e73ca741115cfa0b6337",
+  "dataset_fingerprint": "d37f4c6eeb850831f0e6ceb439377ad4b434d943b3df51174af0cfa515fad9ba",
+  "prepared_data_sha256": "d75cd5dffdbec2d9ceb62d3e3fd0b3f5a0627fe1f06037cbcb43d811aaf31ba2",
+  "device": "cuda",
+  "cpu_threads": 1,
+  "variant": "neural_lowrank",
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "budgets": [
+    50,
+    100,
+    200
+  ],
+  "strengths": [
+    0.3,
+    1.0,
+    3.0
+  ],
+  "paired_prior_cells_per_case": 54,
+  "baseline_rows_in_pooled_outputs": false,
+  "scope": {
+    "created_at_utc": "2026-10-27T20:49:19.534804+00:00",
+    "scope_finalized_after_main_final_table_inspection": true,
+    "timing_note": "Coverage was proposed before main-table inspection; full scope was frozen after the root inspected the main final table around 04:33 Taipei.",
+    "variant_choice_used_main_validation": true,
+    "main_partition_overlap_with_family_targets": {
+      "train": [
+        6,
+        12,
+        16,
+        31,
+        34,
+        41,
+        56,
+        61,
+        74,
+        90,
+        98,
+        106
+      ],
+      "val": [
+        44,
+        47
+      ],
+      "test": [
+        1,
+        10,
+        20
+      ]
+    },
+    "variant_selection_is_not_fully_family_target_blind": true,
+    "architecture_and_checkpoint_rule": "Original fixed family settings, no new architecture search",
+    "new_prior_selection": "Qwen validation only; one strength shared across each paired condition",
+    "baseline_choices": "Reused unchanged from the original completed family joint validation, bound by hash",
+    "pooled_outputs": "Only coldstart_neural_lowrank; baseline rows are not duplicated",
+    "interpretation": "Secondary exploratory coverage; separate from the original confirmatory tables."
+  },
+  "cases": {
+    "Llama": {
+      "target_models": 8,
+      "training_models": 40,
+      "related_training_models": 8,
+      "validation_family": "Qwen",
+      "arms": {
+        "excluded": {
+          "split_path": "splits/Llama_excluded.json",
+          "manifest_sha256": "f6ab84c6fb32e70267ea3354806e628bfabcfa1cd53fab04b9235d51231186fd",
+          "split_file_sha256": "e8c883a24e1069362643567bde718eca475ef57d17f072f06598b93f29e7d5a4",
+          "run_path": "Llama/excluded"
+        },
+        "related_allowed": {
+          "split_path": "splits/Llama_related_allowed.json",
+          "manifest_sha256": "ad13a7875cbdb46cfcae889d3b4893bd0ec86e7347d4e4f19bd2f638079d8b5c",
+          "split_file_sha256": "120929950bc6f222b5188aef6f854ce1c3d74f595a0487e016dd4f57ded6305c",
+          "run_path": "Llama/related_allowed"
+        }
+      },
+      "test_model_ids": [
+        10,
+        16,
+        20,
+        34,
+        41,
+        61,
+        74,
+        106
+      ],
+      "validation_model_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ],
+      "baseline_selection_path": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\family_study_v4\\Llama\\joint_selection.json",
+      "baseline_selection_sha256": "548158066fba8ca35c549cd167333e563129f4b3499c966cb25d73621d91927f"
+    },
+    "Mistral": {
+      "target_models": 6,
+      "training_models": 40,
+      "related_training_models": 8,
+      "validation_family": "Qwen",
+      "arms": {
+        "excluded": {
+          "split_path": "splits/Mistral_excluded.json",
+          "manifest_sha256": "56185ce4406628f7515d026c7eac92db20fc9725532d40720081c5cc465ee70c",
+          "split_file_sha256": "2afcddb61cb5109c8505264ffbeba54a0fe46b60c663d7782dd0b927773e39a7",
+          "run_path": "Mistral/excluded"
+        },
+        "related_allowed": {
+          "split_path": "splits/Mistral_related_allowed.json",
+          "manifest_sha256": "f969f9cdcf4ff7450128ea59e8da1c2548fa3aba7f5e3bc53791dd88b53a3eab",
+          "split_file_sha256": "0300e09d6cd66259b80be2a7aa276afb266b6b6f9d7bab6dcc12c6f3342642b8",
+          "run_path": "Mistral/related_allowed"
+        }
+      },
+      "test_model_ids": [
+        6,
+        12,
+        44,
+        47,
+        56,
+        90
+      ],
+      "validation_model_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ],
+      "baseline_selection_path": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\family_study_v4\\Mistral\\joint_selection.json",
+      "baseline_selection_sha256": "3579f8d057089670fd57239c4ffa0e2959a16d25945a5c37083c4ccc4fb9f894"
+    },
+    "Yi": {
+      "target_models": 3,
+      "training_models": 40,
+      "related_training_models": 6,
+      "validation_family": "Qwen",
+      "arms": {
+        "excluded": {
+          "split_path": "splits/Yi_excluded.json",
+          "manifest_sha256": "d8e3b50706871508e7d62286a4c69ca5f75d35964f7459c868c5cda62f080695",
+          "split_file_sha256": "d894f04d04eea910a64e5adbc15a4449c54427432436f60fbf9fbe5177096bb5",
+          "run_path": "Yi/excluded"
+        },
+        "related_allowed": {
+          "split_path": "splits/Yi_related_allowed.json",
+          "manifest_sha256": "f6a7dd3d7811a5b2e152bbe36dc4dbb3bf8cf4c568c52f6aab44f88cdf6e4fe6",
+          "split_file_sha256": "64cfa7351eea3d54cf06f9d1c27aef4ce69a2c339c127cb2e62fc6610c200b78",
+          "run_path": "Yi/related_allowed"
+        }
+      },
+      "test_model_ids": [
+        1,
+        31,
+        98
+      ],
+      "validation_model_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ],
+      "baseline_selection_path": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\family_study_v4\\Yi\\joint_selection.json",
+      "baseline_selection_sha256": "4f417cbc892ad5c015fa9bb2b498b89dc7caa6ff946299f16087efa8cae6602b"
+    }
+  },
+  "study_sha256": "5e44563bbe60aeaaea1dfacbf5c9d46e8d2c079e99c7ed44efdf8036f4f6bbd9"
+}

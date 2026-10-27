@@ -1,0 +1,19 @@
+comparison_type,predictor_a,strategy_a,predictor_b,strategy_b,budget,direction,n_paired_seeds,n_paired_cells,mean,n_models,n_groups,ci_low,ci_high,interval_unit
+representation,coldstart_neural_lowrank,balanced_random,coldstart_rank0,balanced_random,50,a_minus_b; negative favors a,3,72,-0.005405365390647056,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,coldstart_rank0,balanced_random,100,a_minus_b; negative favors a,3,72,-0.007511213948714442,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,coldstart_rank0,balanced_random,200,a_minus_b; negative favors a,3,72,-0.0043365433851479595,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,coldstart_structured8,balanced_random,50,a_minus_b; negative favors a,3,72,-0.002907497705313704,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,coldstart_structured8,balanced_random,100,a_minus_b; negative favors a,3,72,-0.004114864629746739,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,coldstart_structured8,balanced_random,200,a_minus_b; negative favors a,3,72,-0.0006171332885074234,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,domain_probe_mean,balanced_random,50,a_minus_b; negative favors a,3,72,-0.005593187499954464,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,domain_probe_mean,balanced_random,100,a_minus_b; negative favors a,3,72,-0.012298871912524415,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,domain_probe_mean,balanced_random,200,a_minus_b; negative favors a,3,72,-0.008615838611352192,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,global_probe_mean,balanced_random,50,a_minus_b; negative favors a,3,72,-0.04224170196242885,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,global_probe_mean,balanced_random,100,a_minus_b; negative favors a,3,72,-0.043533742898258586,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,global_probe_mean,balanced_random,200,a_minus_b; negative favors a,3,72,-0.04950548313856954,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,question_knn,balanced_random,50,a_minus_b; negative favors a,3,72,-0.0019244116926442174,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,question_knn,balanced_random,100,a_minus_b; negative favors a,3,72,-0.00810294182766375,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,question_knn,balanced_random,200,a_minus_b; negative favors a,3,72,-0.005785742681870807,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,scalar_logit_shift,balanced_random,50,a_minus_b; negative favors a,3,72,-0.003742099532418905,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,scalar_logit_shift,balanced_random,100,a_minus_b; negative favors a,3,72,-0.008176280055101865,24,,,,suppressed: unresolved lineage correlations
+representation,coldstart_neural_lowrank,balanced_random,scalar_logit_shift,balanced_random,200,a_minus_b; negative favors a,3,72,-0.01585105105982196,24,,,,suppressed: unresolved lineage correlations

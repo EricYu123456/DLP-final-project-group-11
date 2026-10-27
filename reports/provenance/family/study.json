@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T20:22:44.041275+00:00",
+  "output_root": "C:\\nycu\\M1_1st\\DLP\\final_project\\artifacts\\family_study_v4",
+  "orchestrator_source_path": "C:\\nycu\\M1_1st\\DLP\\final_project\\scripts\\run_family_study.py",
+  "orchestrator_source_sha256": "b04a17d12e1bfd2e78b14aaa13733addd7ff695063dddbec976d78245189de9c",
+  "orchestrator_source_hash_policy": "utf8_lf",
+  "source_config_path": "C:\\nycu\\M1_1st\\DLP\\final_project\\configs\\family_protocol.json",
+  "source_config_sha256": "29158358f7558559175b1b0c45342efceb3457cf8608237e88b9456098f324a8",
+  "source_config_file_sha256": "11a431a09e9fed50cb88480121c57403abc5e1c69ff51c2de16796a2a284a4c8",
+  "family_config_path": "config.json",
+  "family_config_sha256": "29158358f7558559175b1b0c45342efceb3457cf8608237e88b9456098f324a8",
+  "family_config_file_sha256": "11a431a09e9fed50cb88480121c57403abc5e1c69ff51c2de16796a2a284a4c8",
+  "family_table_path": "C:\\nycu\\M1_1st\\DLP\\final_project\\data\\metadata\\model_families.csv",
+  "family_table_sha256": "712fbbc522b8711e1248c494ad5fefbf6a18a68832fa098c071f174a7f86e924",
+  "dataset_fingerprint": "d37f4c6eeb850831f0e6ceb439377ad4b434d943b3df51174af0cfa515fad9ba",
+  "prepared_data_sha256": "d75cd5dffdbec2d9ceb62d3e3fd0b3f5a0627fe1f06037cbcb43d811aaf31ba2",
+  "variants": [
+    "structured8",
+    "rank0"
+  ],
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "budgets": [
+    50,
+    100,
+    200
+  ],
+  "strategy": "balanced_random",
+  "device": "cuda",
+  "cpu_threads": 1,
+  "fixed_training_hyperparameters": {
+    "hidden_dim": 128,
+    "learning_rate": 0.002,
+    "latent_l2": 0.002,
+    "warmup_epochs": 0,
+    "selection_metric": "coldstart_macro_mae"
+  },
+  "hyperparameter_origin": "Original protocol values; family configuration is not selected using the primary development grid.",
+  "joint_selection_unit": "equal average across both arms, seeds and budgets, using Qwen validation models only",
+  "test_stage": "Separate explicit invocation after joint-selection review; validate never tests.",
+  "cases": {
+    "Llama": {
+      "target_models": 8,
+      "training_models": 40,
+      "related_training_models": 8,
+      "validation_family": "Qwen",
+      "arms": {
+        "excluded": {
+          "split_path": "splits/Llama_excluded.json",
+          "manifest_sha256": "f6ab84c6fb32e70267ea3354806e628bfabcfa1cd53fab04b9235d51231186fd",
+          "split_file_sha256": "e8c883a24e1069362643567bde718eca475ef57d17f072f06598b93f29e7d5a4",
+          "run_path": "Llama/excluded"
+        },
+        "related_allowed": {
+          "split_path": "splits/Llama_related_allowed.json",
+          "manifest_sha256": "ad13a7875cbdb46cfcae889d3b4893bd0ec86e7347d4e4f19bd2f638079d8b5c",
+          "split_file_sha256": "120929950bc6f222b5188aef6f854ce1c3d74f595a0487e016dd4f57ded6305c",
+          "run_path": "Llama/related_allowed"
+        }
+      },
+      "test_model_ids": [
+        10,
+        16,
+        20,
+        34,
+        41,
+        61,
+        74,
+        106
+      ],
+      "validation_model_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ]
+    },
+    "Mistral": {
+      "target_models": 6,
+      "training_models": 40,
+      "related_training_models": 8,
+      "validation_family": "Qwen",
+      "arms": {
+        "excluded": {
+          "split_path": "splits/Mistral_excluded.json",
+          "manifest_sha256": "56185ce4406628f7515d026c7eac92db20fc9725532d40720081c5cc465ee70c",
+          "split_file_sha256": "2afcddb61cb5109c8505264ffbeba54a0fe46b60c663d7782dd0b927773e39a7",
+          "run_path": "Mistral/excluded"
+        },
+        "related_allowed": {
+          "split_path": "splits/Mistral_related_allowed.json",
+          "manifest_sha256": "f969f9cdcf4ff7450128ea59e8da1c2548fa3aba7f5e3bc53791dd88b53a3eab",
+          "split_file_sha256": "0300e09d6cd66259b80be2a7aa276afb266b6b6f9d7bab6dcc12c6f3342642b8",
+          "run_path": "Mistral/related_allowed"
+        }
+      },
+      "test_model_ids": [
+        6,
+        12,
+        44,
+        47,
+        56,
+        90
+      ],
+      "validation_model_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ]
+    },
+    "Yi": {
+      "target_models": 3,
+      "training_models": 40,
+      "related_training_models": 6,
+      "validation_family": "Qwen",
+      "arms": {
+        "excluded": {
+          "split_path": "splits/Yi_excluded.json",
+          "manifest_sha256": "d8e3b50706871508e7d62286a4c69ca5f75d35964f7459c868c5cda62f080695",
+          "split_file_sha256": "d894f04d04eea910a64e5adbc15a4449c54427432436f60fbf9fbe5177096bb5",
+          "run_path": "Yi/excluded"
+        },
+        "related_allowed": {
+          "split_path": "splits/Yi_related_allowed.json",
+          "manifest_sha256": "f6a7dd3d7811a5b2e152bbe36dc4dbb3bf8cf4c568c52f6aab44f88cdf6e4fe6",
+          "split_file_sha256": "64cfa7351eea3d54cf06f9d1c27aef4ce69a2c339c127cb2e62fc6610c200b78",
+          "run_path": "Yi/related_allowed"
+        }
+      },
+      "test_model_ids": [
+        1,
+        31,
+        98
+      ],
+      "validation_model_ids": [
+        0,
+        18,
+        30,
+        54,
+        101,
+        104
+      ]
+    }
+  },
+  "study_sha256": "2a946109ea13c91edcd3843857f824544c66191eb613c0c5b48cc032886afc7c"
+}

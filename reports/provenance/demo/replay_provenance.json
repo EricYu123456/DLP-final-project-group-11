@@ -1,0 +1,12 @@
+{
+  "mode": "OFFLINE_VALIDATION_MODEL_REPLAY",
+  "source_model_id": 5,
+  "source_model_name": "ConvexAI__Luminex-34B-v0.2",
+  "source_model_partition": "val_models",
+  "revealed_label_pool": "train_items",
+  "budget": 100,
+  "variant": "neural_lowrank",
+  "seed": 11,
+  "final_target_labels_evaluated": false,
+  "limitation": "Existing public correctness proxy labels simulate a new arrival; no external LLM was queried."
+}

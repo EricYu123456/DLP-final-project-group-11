@@ -1,0 +1,12 @@
+{
+  "phase": "test",
+  "source_run": "artifacts\\main_v2",
+  "source_sha256": {
+    "per_model_metrics.csv": "ccab4d10da3a1627e06b12feb4c3c7046d652fab314f08360987fa2b2ff913bb",
+    "per_domain_metrics.csv": "531aba32d9622266961fdccfa864290a74184c3dc98145e0b279ef5fd5f2153c"
+  },
+  "score_unit": "proportion; figures use percentage points",
+  "aggregation": "average seeds within each model, then average models",
+  "interval": "95% percentile bootstrap of reviewed lineage groups; descriptive with few groups",
+  "primary_predictor": "coldstart_neural_lowrank"
+}

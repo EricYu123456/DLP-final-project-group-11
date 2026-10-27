@@ -1,0 +1,12 @@
+{
+  "phase": "test",
+  "source_run": "artifacts\\metadata_excluded_cohort_v2",
+  "source_sha256": {
+    "per_model_metrics.csv": "0776957c67d2e13388c74576e14ad232a868bca2ef390f3fddf3adac8196fec6",
+    "per_domain_metrics.csv": "7891e7dd2251d16999366958c1fef13ad8d64dd23b7c38d176bb7d5bfea9a18a"
+  },
+  "score_unit": "proportion; figures use percentage points",
+  "aggregation": "average seeds within each model, then average models",
+  "interval": "Not estimated: unresolved lineage dependence",
+  "primary_predictor": "coldstart_neural_lowrank"
+}

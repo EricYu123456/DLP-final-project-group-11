@@ -1,0 +1,4 @@
+predictor,strategy,budget,macro_mae_gap,brier_gap,aggregation
+coldstart_neural_lowrank,balanced_random,50,0.012350797710985623,-0.0005292675237394531,equal weight per family case; descriptive across three cases
+coldstart_neural_lowrank,balanced_random,100,0.011134087908337855,-0.0007749064655474151,equal weight per family case; descriptive across three cases
+coldstart_neural_lowrank,balanced_random,200,0.0074673163412911385,-0.0012884086852350573,equal weight per family case; descriptive across three cases

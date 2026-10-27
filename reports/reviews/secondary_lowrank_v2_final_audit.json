@@ -1,0 +1,96 @@
+{
+  "reviewed_at_utc": "2026-10-27T21:00:12.310137+00:00",
+  "reviewer": "architecture_eval",
+  "status": "EXPLORATORY_SECONDARY_RESULTS_ACCEPTED",
+  "run": "artifacts/family_lowrank_secondary_v2",
+  "study_sha256": "5e44563bbe60aeaaea1dfacbf5c9d46e8d2c079e99c7ed44efdf8036f4f6bbd9",
+  "same_pretest_locks_and_current_sources": true,
+  "pooled_neural_metric_rows": 306,
+  "pooled_neural_benchmark_rows": 1530,
+  "no_duplicate_baseline_rows_pooled": true,
+  "baseline_raw_metrics_identical_to_original_control": true,
+  "maximum_baseline_metric_difference": 0,
+  "actual_probe_ids_equal_original_study": true,
+  "all306_maps_converged": true,
+  "maximum_gradient_norm": 1.1470850208583629e-07,
+  "case_point_estimates": [
+    {
+      "family": "Llama",
+      "budget": 50,
+      "excluded_mae": 0.06154272400316699,
+      "related_allowed_mae": 0.0664697418023742,
+      "excluded_minus_related": -0.004927017799207208,
+      "target_models": 8
+    },
+    {
+      "family": "Llama",
+      "budget": 100,
+      "excluded_mae": 0.051325947490683435,
+      "related_allowed_mae": 0.054347579187919964,
+      "excluded_minus_related": -0.0030216316972365223,
+      "target_models": 8
+    },
+    {
+      "family": "Llama",
+      "budget": 200,
+      "excluded_mae": 0.044996658825550526,
+      "related_allowed_mae": 0.04937767269233587,
+      "excluded_minus_related": -0.004381013866785342,
+      "target_models": 8
+    },
+    {
+      "family": "Mistral",
+      "budget": 50,
+      "excluded_mae": 0.060717376203278474,
+      "related_allowed_mae": 0.048975976682277524,
+      "excluded_minus_related": 0.011741399521000956,
+      "target_models": 6
+    },
+    {
+      "family": "Mistral",
+      "budget": 100,
+      "excluded_mae": 0.05168541621379271,
+      "related_allowed_mae": 0.043554793397395535,
+      "excluded_minus_related": 0.008130622816397167,
+      "target_models": 6
+    },
+    {
+      "family": "Mistral",
+      "budget": 200,
+      "excluded_mae": 0.04298989303233187,
+      "related_allowed_mae": 0.03845588063722192,
+      "excluded_minus_related": 0.0045340123951099435,
+      "target_models": 6
+    },
+    {
+      "family": "Yi",
+      "budget": 50,
+      "excluded_mae": 0.10950515305807895,
+      "related_allowed_mae": 0.07926714164691583,
+      "excluded_minus_related": 0.030238011411163123,
+      "target_models": 3
+    },
+    {
+      "family": "Yi",
+      "budget": 100,
+      "excluded_mae": 0.09379887945730053,
+      "related_allowed_mae": 0.06550560685144761,
+      "excluded_minus_related": 0.02829327260585292,
+      "target_models": 3
+    },
+    {
+      "family": "Yi",
+      "budget": 200,
+      "excluded_mae": 0.06944056205186794,
+      "related_allowed_mae": 0.04719161155631913,
+      "excluded_minus_related": 0.022248950495548803,
+      "target_models": 3
+    }
+  ],
+  "scope": [
+    "Secondary exploratory study defined after main result inspection.",
+    "Variant selection is not fully family-model blind; all original main/control/config bindings remain recorded.",
+    "Original numerical family defaults and Qwen-only shared prior tuning are preserved.",
+    "Ancestry-composition effects are conditional on three fixed blocks and training swaps; no causal or population guarantee."
+  ]
+}

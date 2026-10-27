@@ -1,0 +1,16 @@
+{
+  "recorded_at_utc": "2026-10-27T21:27:40.050358+00:00",
+  "reviewer": "architecture_eval",
+  "type": "provenance_timing_correction",
+  "immutable_source": "configs/family_protocol.json",
+  "field": "family_hyperparameter_origin.dedicated_config_created_while_main_grid_running",
+  "recorded_value": true,
+  "actual_value": false,
+  "primary_grid_finished_at_utc": "2026-10-27T20:05:14.389622+00:00",
+  "family_file_created_at_utc": "2026-10-27T20:05:28.505069+00:00",
+  "file_created_seconds_after_grid_completion": 14.115447,
+  "explanation": "The family numerical defaults already existed before the grid; the dedicated configuration file was created after the process finished. The earlier wording relied on a stale progress update. The completed grid winner was not used to choose the fixed family numerical defaults.",
+  "preserve_locked_original_config_and_hashes": true,
+  "model_hyperparameters_changed": false,
+  "numerical_results_affected": false
+}

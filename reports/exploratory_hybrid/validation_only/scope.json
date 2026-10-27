@@ -1,0 +1,20 @@
+{
+  "status": "validation_only_candidate_probe",
+  "created_at_utc": "2026-10-27T21:07:06.083138+00:00",
+  "idea_generated_after_main_and_original_and_secondary_family_test_inspection": true,
+  "validation_data_only": true,
+  "metadata_excluded24_performance_unseen_at_decision": true,
+  "definition": "logE=-MAPobjective+.5*(logdetpriorprecision+logdetposteriorcovariance);w=sigmoid(E8-E0);p=w*p8+(1-w)*p0",
+  "temperature": 1,
+  "prior_model_weight": 0.5,
+  "constant_grid": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "no_core_or_parent_weight_changes": true,
+  "no_new_network_training": true,
+  "decision": "rejected: evidence gate did not outperform the best constant blend; no extra tuning or cohort predictor added"
+}

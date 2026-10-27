@@ -45,18 +45,22 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def estimate(values: pd.Series, model_ids: pd.Series, families: dict[int, str]) -> dict:
+def estimate(values: pd.Series, model_ids: pd.Series, families: dict[int, str],
+             suppress_intervals: bool = False) -> dict:
     groups = np.array([families.get(int(model), f"model_{model}") for model in model_ids])
     result = {"mean": float(values.mean()), "n_models": len(values),
               "n_groups": len(np.unique(groups)), "ci_low": None, "ci_high": None,
               "interval_unit": "lineage group"}
+    if suppress_intervals:
+        result.update(n_groups=None, interval_unit="suppressed: unresolved lineage correlations")
+        return result
     if len(np.unique(groups)) >= 2:
         interval = paired_bootstrap(values.to_numpy(), groups=groups, n_bootstrap=10000, seed=8675309)
         result.update(ci_low=interval["ci_low"], ci_high=interval["ci_high"])
     return result
 
 
-def aggregate(rows: pd.DataFrame, families: dict[int, str]) -> pd.DataFrame:
+def aggregate(rows: pd.DataFrame, families: dict[int, str], suppress_intervals: bool = False) -> pd.DataFrame:
     metrics = [column for column in ("macro_mae", "worst_domain_mae", "brier", "macro_brier", "nll")
                if column in rows]
     keys = ["predictor", "strategy", "budget"]
@@ -66,7 +70,7 @@ def aggregate(rows: pd.DataFrame, families: dict[int, str]) -> pd.DataFrame:
         for metric in metrics:
             record = dict(zip(keys, key))
             record.update(metric=metric, n_seeds=int(group.seed.nunique()))
-            record.update(estimate(per_model[metric], per_model.model_id, families))
+            record.update(estimate(per_model[metric], per_model.model_id, families, suppress_intervals))
             records.append(record)
     return pd.DataFrame(records)
 
@@ -81,13 +85,13 @@ def plot_curves(summary: pd.DataFrame, out: Path, phase: str, predictor: str) ->
     selected = summary[(summary.metric == "macro_mae") & (summary.strategy == "balanced_random")]
     selected = selected[~selected.predictor.str.endswith("_permuted") & (selected.predictor != "global_probe_mean")]
     if not selected.empty:
-        fig, ax = plt.subplots(figsize=(8.2, 4.8))
+        fig, ax = plt.subplots(figsize=(8.4, 4.8))
         for color, (method, group) in zip(cycle(COLORS), selected.groupby("predictor", sort=True)):
             group = group.sort_values("budget")
             x, y = group.budget.to_numpy(), group["mean"].to_numpy() * 100
             ax.plot(x, y, marker="o", color=color, label=label(method), linewidth=2)
             valid = group.ci_low.notna() & group.ci_high.notna()
-            if valid.all():
+            if valid.all() and method == predictor:
                 ax.fill_between(x, group.ci_low.to_numpy(dtype=float) * 100,
                                 group.ci_high.to_numpy(dtype=float) * 100, alpha=.1, color=color)
         zero = summary[(summary.metric == "macro_mae") & (summary.strategy == "zero_probe")]
@@ -98,7 +102,12 @@ def plot_curves(summary: pd.DataFrame, out: Path, phase: str, predictor: str) ->
                title=f"Model representation comparison · {phase}\nIdentical balanced random probes")
         ax.set_xticks(sorted(selected.budget.unique()))
         ax.grid(axis="y", alpha=.2)
-        ax.legend(fontsize=9, loc="upper right")
+        ax.legend(fontsize=9, loc="upper center", bbox_to_anchor=(.5, -.2), ncol=2)
+        interval_note = ("Shading: 95% lineage-bootstrap interval for the primary candidate."
+                         if selected.ci_low.notna().any() else
+                         "Descriptive cohort means; intervals omitted because lineage dependence is unresolved.")
+        ax.text(0, -.14, interval_note,
+                transform=ax.transAxes, fontsize=8, color="#555555")
         save_figure(fig, out / "embedding_budget_curve")
     selected = summary[(summary.metric == "macro_mae") & (summary.predictor == predictor)]
     if not selected.empty:
@@ -111,8 +120,58 @@ def plot_curves(summary: pd.DataFrame, out: Path, phase: str, predictor: str) ->
                title=f"Probe policy comparison · {phase}\n{label(predictor)}")
         ax.set_xticks(sorted(selected.budget.unique()))
         ax.grid(axis="y", alpha=.2)
-        ax.legend(fontsize=9, loc="upper right")
+        ax.legend(fontsize=9, loc="upper center", bbox_to_anchor=(.5, -.2), ncol=2)
         save_figure(fig, out / "probe_policy_curve")
+
+
+def plot_paired_differences(comparisons: pd.DataFrame, out: Path, phase: str) -> None:
+    if comparisons.empty:
+        return
+    selected = comparisons[(comparisons.comparison_type == "representation")
+                           & ~comparisons.predictor_b.str.endswith("_permuted")
+                           & (comparisons.predictor_b != "global_probe_mean")].copy()
+    if selected.empty:
+        return
+    methods = sorted(selected.predictor_b.unique())
+    budgets = sorted(selected.budget.unique())
+    fig, axes = plt.subplots(1, len(budgets), figsize=(11.2, 4), sharey=True, squeeze=False)
+    for budget, ax in zip(budgets, axes[0]):
+        group = selected[selected.budget == budget].set_index("predictor_b").reindex(methods)
+        y = np.arange(len(methods))
+        mean = group["mean"].to_numpy() * 100
+        valid = group.ci_low.notna() & group.ci_high.notna()
+        for i in y:
+            color = "#0072B2" if mean[i] < 0 else "#D55E00"
+            if valid.iloc[i]:
+                ax.plot([group.ci_low.iloc[i] * 100, group.ci_high.iloc[i] * 100], [i, i], color=color)
+            ax.scatter(mean[i], i, color=color, s=26, zorder=3)
+        ax.axvline(0, color="#666666", linewidth=1, linestyle="--")
+        ax.set(title=f"{budget} responses", xlabel="MAE difference (pp)")
+        ax.grid(axis="x", alpha=.2)
+    axes[0, 0].set_yticks(np.arange(len(methods)), [label(name) for name in methods])
+    axes[0, 0].invert_yaxis()
+    fig.suptitle(f"Paired comparison · {phase}\nPrimary model minus each control; negative favors the primary", y=1.06)
+    fig.tight_layout()
+    save_figure(fig, out / "paired_representation_differences")
+
+
+def plot_response_alignment(summary: pd.DataFrame, out: Path, phase: str, predictor: str) -> None:
+    selected = summary[(summary.metric == "macro_mae") & (summary.strategy == "balanced_random")]
+    variants = [(predictor, "Original response alignment", "#0072B2", "-"),
+                (predictor + "_permuted", "Within-benchmark response permutation", "#D55E00", "--"),
+                ("coldstart_rank0", "6D benchmark-only control (permutation invariant)", "#009E73", ":")]
+    if predictor + "_permuted" not in set(selected.predictor):
+        return
+    fig, ax = plt.subplots(figsize=(8.4, 4.6))
+    for name, title, color, style in variants:
+        group = selected[selected.predictor == name].sort_values("budget")
+        ax.plot(group.budget, group["mean"] * 100, marker="o", color=color, linestyle=style, label=title)
+    ax.set(title=f"Does item-response alignment carry information? · {phase}",
+           xlabel="Responses observed per new model", ylabel="Macro benchmark MAE (percentage points)")
+    ax.set_xticks(sorted(selected.budget.unique()))
+    ax.grid(axis="y", alpha=.2)
+    ax.legend(fontsize=9, loc="upper center", bbox_to_anchor=(.5, -.2))
+    save_figure(fig, out / "response_alignment")
 
 
 def plot_domain_errors(rows: pd.DataFrame, out: Path, phase: str) -> None:
@@ -138,7 +197,8 @@ def plot_domain_errors(rows: pd.DataFrame, out: Path, phase: str) -> None:
 
 
 def paired_comparisons(rows: pd.DataFrame, families: dict[int, str], predictor: str,
-                       contrasts: list[list[str]] | None = None) -> pd.DataFrame:
+                       contrasts: list[list[str]] | None = None,
+                       suppress_intervals: bool = False) -> pd.DataFrame:
     comparisons = []
     if predictor in set(rows.predictor):
         contrasts = contrasts or [[policy, "balanced_random"] for policy in sorted(set(rows.strategy) - {"balanced_random", "zero_probe"})]
@@ -162,7 +222,7 @@ def paired_comparisons(rows: pd.DataFrame, families: dict[int, str], predictor: 
                       "predictor_b": b, "strategy_b": policy_b, "budget": int(budget),
                       "direction": "a_minus_b; negative favors a",
                       "n_paired_seeds": int(merged.seed.nunique()), "n_paired_cells": len(merged)}
-            record.update(estimate(per_model.difference, per_model.model_id, families))
+            record.update(estimate(per_model.difference, per_model.model_id, families, suppress_intervals))
             records.append(record)
     return pd.DataFrame(records)
 
@@ -188,6 +248,7 @@ def main() -> None:
     parser.add_argument("--phase", choices=["test", "validation"], default="test")
     parser.add_argument("--predictor", help="Primary predictor; defaults to the locked experiment config")
     parser.add_argument("--family-table", type=Path, default=ROOT / "data/metadata/model_families.csv")
+    parser.add_argument("--no-intervals", action="store_true", help="Describe means without assuming known independent lineage groups")
     args = parser.parse_args()
     effective_config_path = args.run / "effective_config.json"
     effective_config = json.loads(effective_config_path.read_text()) if effective_config_path.exists() else {}
@@ -202,8 +263,8 @@ def main() -> None:
         model_file = args.run / "per_model_metrics.csv"
         domain_file = args.run / "per_domain_metrics.csv"
     rows = pd.read_csv(model_file)
+    accepted = {"test"} if args.phase == "test" else {"validation", "validate", "val"}
     if "phase" in rows:
-        accepted = {"test"} if args.phase == "test" else {"validation", "validate", "val"}
         rows = rows[rows.phase.isin(accepted)].copy()
     if rows.empty:
         raise ValueError(f"No {args.phase} results in {model_file}")
@@ -224,9 +285,9 @@ def main() -> None:
         family_rows = pd.read_csv(args.family_table).fillna("")
         families = {int(row.model_id): str(row.family) or f"model_{row.model_id}"
                     for _, row in family_rows.iterrows()}
-    summary = aggregate(rows, families)
+    summary = aggregate(rows, families, args.no_intervals)
     contrasts = effective_config.get("evaluation", {}).get("paired_comparisons")
-    comparisons = paired_comparisons(rows, families, args.predictor, contrasts)
+    comparisons = paired_comparisons(rows, families, args.predictor, contrasts, args.no_intervals)
     summary.to_csv(args.output / "summary.csv", index=False)
     comparisons.to_csv(args.output / "paired_comparisons.csv", index=False)
     rows.to_csv(args.output / "per_model_metrics.csv", index=False)
@@ -234,6 +295,8 @@ def main() -> None:
                          "axes.spines.top": False, "axes.spines.right": False,
                          "svg.fonttype": "none"})
     plot_curves(summary, args.output, args.phase, args.predictor)
+    plot_paired_differences(comparisons, args.output, args.phase)
+    plot_response_alignment(summary, args.output, args.phase, args.predictor)
     sources = {"per_model_metrics.csv": sha256(model_file)}
     if domain_file.exists():
         domains = pd.read_csv(domain_file)
@@ -242,26 +305,33 @@ def main() -> None:
         plot_domain_errors(domains, args.output, args.phase)
         domains.to_csv(args.output / "per_domain_metrics.csv", index=False)
         sources["per_domain_metrics.csv"] = sha256(domain_file)
+    interval_description = ("Not estimated: unresolved lineage dependence" if args.no_intervals else
+                            "95% percentile bootstrap of reviewed lineage groups; descriptive with few groups")
     provenance = {"phase": args.phase, "source_run": str(args.run), "source_sha256": sources,
                   "score_unit": "proportion; figures use percentage points",
                   "aggregation": "average seeds within each model, then average models",
-                  "interval": "95% percentile bootstrap of reviewed lineage groups; descriptive with few groups",
+                  "interval": interval_description,
                   "primary_predictor": args.predictor}
     (args.output / "report_provenance.json").write_text(json.dumps(provenance, indent=2), encoding="utf-8")
     table = summary[(summary.metric == "macro_mae") & summary.strategy.isin(["balanced_random", "zero_probe"])].copy()
+    table = table[~table.predictor.str.endswith("_permuted")]
     for column in ["mean", "ci_low", "ci_high"]:
         table[column] = pd.to_numeric(table[column]) * 100
     lines = [f"# Benchmark prediction results ({args.phase})", "",
              "Errors below are percentage points. Each benchmark has equal weight.",
              "Seeds are averaged within each held-out model before averaging models.",
-             "Intervals resample reviewed lineage groups, and are descriptive when few groups remain.", "",
+             interval_description + ".", "",
              "## Balanced random probes", "",
-             markdown_table(table, ["predictor", "budget", "mean", "ci_low", "ci_high", "n_models", "n_seeds"]),
-             "![Representation comparison](embedding_budget_curve.png)", "",
-             "![Probe policies](probe_policy_curve.png)", "",
-             "![Benchmark errors](benchmark_errors.png)", "",
-             "See `paired_comparisons.csv` for paired differences. Negative values favor predictor/policy A.",
-             "The saved rows and source hashes allow the report to be regenerated.", ""]
+             markdown_table(table, ["predictor", "budget", "mean"] +
+                            ([] if args.no_intervals else ["ci_low", "ci_high"]) + ["n_models", "n_seeds"])]
+    for name, title in [("embedding_budget_curve", "Representation comparison"),
+                        ("probe_policy_curve", "Probe policies"), ("benchmark_errors", "Benchmark errors"),
+                        ("paired_representation_differences", "Paired representation differences"),
+                        ("response_alignment", "Response alignment diagnostic")]:
+        if (args.output / f"{name}.png").exists():
+            lines += [f"![{title}]({name}.png)", ""]
+    lines += ["See `paired_comparisons.csv` for paired differences. Negative values favor predictor/policy A.",
+              "The saved rows and source hashes allow the report to be regenerated.", ""]
     (args.output / "RESULTS.md").write_text("\n".join(lines), encoding="utf-8")
     print(f"Saved report to {args.output}")
 

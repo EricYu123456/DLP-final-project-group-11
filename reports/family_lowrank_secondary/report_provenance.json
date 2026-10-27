@@ -1,0 +1,10 @@
+{
+  "source_run": "artifacts\\family_lowrank_secondary_v2",
+  "source_sha256": {
+    "secondary_lowrank_per_model_metrics.csv": "58fb69edd3e5c65d02f807c57e10d735e47bb5ed67df0aaef5d7c537f3cff733"
+  },
+  "study_sha256": "5e44563bbe60aeaaea1dfacbf5c9d46e8d2c079e99c7ed44efdf8036f4f6bbd9",
+  "secondary_exploratory": true,
+  "estimand": "paired excluded minus related-allowed score error; same target models",
+  "intervals": "not reported for individual lineage cases"
+}

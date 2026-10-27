@@ -15,6 +15,7 @@ import pandas as pd
 
 
 LABELS = {"coldstart_structured8": "Structured embedding (14D)",
+          "coldstart_neural_lowrank": "Neural low-rank (8D)",
           "coldstart_rank0": "Global + benchmark (6D)",
           "training_domain_mean": "Training benchmark mean",
           "domain_probe_mean": "Smoothed benchmark mean", "question_knn": "Question KNN",
@@ -37,14 +38,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--secondary", action="store_true", help="Report the explicitly exploratory low-rank follow-up separately")
     args = parser.parse_args()
     completed_path = args.run / "test_completed.json"
     completed = json.loads(completed_path.read_text(encoding="utf-8"))
-    if not completed.get("static_probe_ids_matched_within_pairs"):
+    match_key = "probes_match_original_control" if args.secondary else "static_probe_ids_matched_within_pairs"
+    if not completed.get(match_key):
         raise ValueError("The experiment has not verified matched probe IDs")
-    if set(completed["families"]) != set(FAMILIES):
+    family_names = (json.loads((args.run / "study.json").read_text())["cases"].keys()
+                    if args.secondary else completed["families"])
+    if args.secondary and not completed.get("secondary_exploratory"):
+        raise ValueError("A secondary report requires explicit exploratory provenance")
+    if set(family_names) != set(FAMILIES):
         raise ValueError("Report the three predeclared family cases together")
-    source = args.run / "family_per_model_metrics.csv"
+    source = args.run / ("secondary_lowrank_per_model_metrics.csv" if args.secondary else "family_per_model_metrics.csv")
     rows = pd.read_csv(source)
     key = ["family_case", "condition", "predictor", "strategy", "budget", "seed", "model_id"]
     if rows.duplicated(key).any():
@@ -92,7 +99,8 @@ def main() -> None:
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10,
                          "axes.spines.top": False, "axes.spines.right": False,
                          "svg.fonttype": "none"})
-    colors = {"coldstart_structured8": "#0072B2", "coldstart_rank0": "#D55E00"}
+    colors = ({"coldstart_neural_lowrank": "#0072B2"} if args.secondary else
+              {"coldstart_structured8": "#0072B2", "coldstart_rank0": "#D55E00"})
     fig, axes = plt.subplots(1, 3, figsize=(12.4, 4.1), sharey=True)
     for family, ax in zip(FAMILIES, axes):
         subset = condition_summary[(condition_summary.family_case == family)
@@ -112,7 +120,8 @@ def main() -> None:
     handles += [Line2D([0], [0], color="#555555", linestyle=style, label=name)
                 for style, name in [("--", "Family excluded"), ("-", "Relatives allowed")]]
     fig.legend(handles=handles, loc="lower center", ncol=4, bbox_to_anchor=(.5, -.04), fontsize=9)
-    fig.suptitle("Matched family study: same targets, probes, and 40 training models", y=1.02)
+    fig.suptitle(("Exploratory low-rank family follow-up" if args.secondary else "Matched family study") +
+                 ": same targets, probes, and 40 training models", y=1.02)
     fig.tight_layout()
     save(fig, args.output / "matched_family_curves")
     max_budget = int(rows.budget.max())
@@ -120,9 +129,11 @@ def main() -> None:
                          & differences.predictor.isin(colors)]
     fig, ax = plt.subplots(figsize=(8, 4.4))
     x = np.arange(len(FAMILIES))
+    width = .64 / len(colors)
     for i, (predictor, color) in enumerate(colors.items()):
         selected = latest[latest.predictor == predictor].set_index("family_case").reindex(FAMILIES)
-        ax.bar(x + (i - .5) * .32, selected.macro_mae_gap * 100, width=.3, color=color,
+        ax.bar(x + (i - (len(colors) - 1) / 2) * width, selected.macro_mae_gap * 100,
+               width=width * .94, color=color,
                label=LABELS[predictor])
     ax.axhline(0, color="#444444", linewidth=.9)
     ax.set_xticks(x, FAMILIES)
@@ -133,7 +144,7 @@ def main() -> None:
     save(fig, args.output / "family_composition_gap")
     table = latest.copy()
     table["gap_pp"] = table.macro_mae_gap * 100
-    lines = ["# Matched family study", "",
+    lines = ["# Exploratory low-rank family follow-up" if args.secondary else "# Matched family study", "",
              "Both conditions use the same held-out models, Qwen validation models, question groups,",
              "probe IDs, and training-pool size (40). The treatment changes which historical models",
              "fill part of that pool. Positive gaps mean allowing relatives reduced MAE.", "",
@@ -144,6 +155,13 @@ def main() -> None:
              f"## Results at {max_budget} probes", "",
              "| Family | Predictor | MAE gap (pp) | Models | Seeds |",
              "| --- | --- | ---: | ---: | ---: |"]
+    if args.secondary:
+        lines[2:2] = ["**Secondary exploratory analysis.** Its dedicated configuration was created after",
+                       "the main test table had been inspected. The architecture was selected using",
+                       "main validation models that include two family targets (44 and 47). Original",
+                       "family numeric defaults and Qwen-only paired prior selection are retained,",
+                       "but variant selection is not fully family blind. This report does not extend",
+                       "the original two-variant study's confirmatory scope.", ""]
     for _, row in table.iterrows():
         lines.append(f"| {row.family_case} | {LABELS[row.predictor]} | {row.gap_pp:.3f} | {row.n_models} | {row.n_seeds} |")
     lines += ["", "Seeds are averaged within each target model. Single-family confidence intervals",
@@ -151,6 +169,7 @@ def main() -> None:
     (args.output / "RESULTS.md").write_text("\n".join(lines), encoding="utf-8")
     provenance = {"source_run": str(args.run), "source_sha256": {source.name: digest(source)},
                   "study_sha256": completed["study_sha256"],
+                  "secondary_exploratory": args.secondary,
                   "estimand": "paired excluded minus related-allowed score error; same target models",
                   "intervals": "not reported for individual lineage cases"}
     (args.output / "report_provenance.json").write_text(json.dumps(provenance, indent=2), encoding="utf-8")

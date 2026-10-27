@@ -12,9 +12,49 @@ score summaries. The implementation is written independently; it is not an
 exact reproduction of the original code or a claim to have invented few-shot
 model evaluation.
 
-**Status:** the data audit and implementation are complete enough for validation.
-Real-data experiments are being run; performance claims will be added only
-after the experiment configuration is frozen and test evaluation is complete.
+**Status:** implemented and evaluated on a frozen dataset of **88 models and
+22,475 representative questions**. The primary test holds out 13 models and
+3,370 questions, using three training/acquisition seeds. See the
+[final report](reports/FINAL_REPORT.md) for results, controls, and limitations.
+
+## Results
+
+Macro benchmark-score MAE, in **percentage points**, with identical balanced
+random probes for every predictor. Lower is better.
+
+| Predictor | 50 responses | 100 responses | 200 responses |
+| --- | ---: | ---: | ---: |
+| Neural model embedding, 8D | 6.26 | 5.10 | 4.27 |
+| Scalar calibrated ability, 1D | 6.20 | 5.61 | 4.78 |
+| Smoothed benchmark mean | 6.77 | 6.60 | 6.02 |
+| Question KNN | 6.57 | 6.46 | 5.41 |
+| Training benchmark mean, zero probes | 6.69 | 6.69 | 6.69 |
+
+![Model embedding results](reports/main/embedding_budget_curve.png)
+
+The neural predictor improves on smoothed benchmark means, and permuting
+item-response alignment reduces its performance. The scalar comparator remains
+competitive: paired intervals over five lineage groups do not establish an
+eight-dimensional advantage. The structured 14D extension also lacks a
+consistent benefit over its 6D control. All variants and negative results remain
+in the [main results](reports/main/RESULTS.md).
+
+Global score-aware Fisher probes improve on global random at 100 and 200
+responses; there is no universal policy winner. Balanced semantic diversity
+hurts at 200. The [matched family study](reports/family/RESULTS.md) finds mixed
+effects of allowing relatives into the training pool under its separate fixed
+configuration. These are historical released-label subset predictions, rather
+than official full benchmark scores or a guarantee for an arbitrary new LLM.
+
+The [exploratory 8D family follow-up](reports/family_lowrank_secondary/RESULTS.md)
+exposes a larger Yi transfer gap. It was added after the main test and retains
+that qualification; it does not extend the original study's confirmatory scope.
+
+An additional [24-model-ID coverage check](reports/metadata_excluded/README.md)
+applies the frozen main predictors to the lineage-uncertain models originally
+excluded from the curated cohort. Its 8D MAE is 6.59/5.57/4.74 points at
+50/100/200 responses, versus 6.97/6.39/6.32 for scalar calibration. These are
+same-release descriptive results, with no further fitting or confidence intervals.
 
 ## What the system learns
 
@@ -118,6 +158,10 @@ python scripts/download_data.py
 python scripts/prepare_data.py --no-split
 ```
 
+The current snapshot passes 81 local numerical, data-boundary, and integration
+tests. The [CI workflow](https://github.com/EricYu123456/DLP-final-project-group-11/actions/workflows/tests.yml)
+also checks Linux/Python 3.10 and Windows/Python 3.12 with CPU PyTorch.
+
 The downloader retrieves about 3.4 GB, verifies a pinned revision, and reuses
 verified files. Preparation scans the full raw CSV and writes compact arrays,
 audit records, and question-group metadata under `data/processed/`.
@@ -125,27 +169,31 @@ audit records, and question-group metadata under `data/processed/`.
 Train and choose hyperparameters without evaluating test targets:
 
 ```bash
-python scripts/run_experiment.py --phase train_validate --output artifacts/main --evaluate-validation
+python scripts/run_experiment.py --phase train_validate --output artifacts/reproduction --evaluate-validation
 ```
 
 Review the validation artifacts and frozen protocol, then evaluate and generate
 the report:
 
 ```bash
-python scripts/run_experiment.py --phase test --output artifacts/main --save-predictions
-python scripts/report_results.py --run artifacts/main --output reports/main
+python scripts/run_experiment.py --phase test --output artifacts/reproduction --save-predictions
+python scripts/report_results.py --run artifacts/reproduction --output reports/reproduction
 ```
 
 Use `--deadline` with a timezone-aware ISO timestamp to bound a run. Completed
 checkpoints can be reused with `--resume`; mismatched data, configuration, or
 splits are rejected. See each script's `--help` for development overrides.
+Choose an unused output directory for a new run. The completed local study is
+stored in `artifacts/main_v2`; checkpoints and raw data are excluded from Git.
+See [reproduction details](docs/REPRODUCIBILITY.md) for the family workflow and
+the distinction between historical development and the final protocol.
 
 ## Embed another model
 
 After training and validation, export a short question set:
 
 ```bash
-python scripts/embed_new_model.py plan --run artifacts/main --variant neural_lowrank --budget 50 --output artifacts/new_model/probes.csv
+python scripts/embed_new_model.py plan --run artifacts/reproduction --variant neural_lowrank --budget 50 --output artifacts/new_model/probes.csv
 ```
 
 Evaluate the new model on those prompts and fill the `response` column with
@@ -153,7 +201,7 @@ binary correctness (`0` or `1`). The script does not call an LLM API or grade
 free-form answers. Then infer its embedding:
 
 ```bash
-python scripts/embed_new_model.py infer --run artifacts/main --variant neural_lowrank --responses artifacts/new_model/probes.csv --model-name my_model --output artifacts/new_model/fit
+python scripts/embed_new_model.py infer --run artifacts/reproduction --variant neural_lowrank --responses artifacts/new_model/probes.csv --model-name my_model --output artifacts/new_model/fit
 ```
 
 The output contains a reusable `embedding.npz`, its decoder checksum, and
@@ -185,7 +233,8 @@ Relevant work includes [EmbedLLM](https://openreview.net/forum?id=Fs9EabmQrJ),
 [SkillEval](https://arxiv.org/abs/2610.28767).
 Cold-start profiles, empirical priors, adaptive testing, and family holdout all
 have prior art. Our contribution is an implemented, audited, controlled study
-on this dataset; improvements must be demonstrated experimentally.
+on this dataset, including the negative results and the limits of the measured
+improvements.
 
 See [related work](docs/research/related_work.md),
 [novelty assessment](docs/research/novelty_review.md), and
