@@ -1,26 +1,47 @@
-# Learning Model Embeddings from Few Responses
+# Efficient LLM Routing with Compact Model Embeddings
 
-Can a new language model's answers to **50, 100, or 200 questions** tell us how it
-will perform on other questions? This project learns a compact model embedding
-from those responses and uses it to predict benchmark scores.
+Can 50, 100, or 200 binary answers place a new language model inside a router without querying every candidate on future inputs? This NYCU Deep Learning Practice Group 11 project freezes a shared question decoder, infers an 8D vector for each newcomer, and selects one model per query, building on [EmbedLLM: Learning Compact Representations of Large Language Models, ICLR 2025](https://openreview.net/forum?id=Fs9EabmQrJ).
 
-This is Group 11's NYCU Deep Learning Practice final project. It extends the
-research question behind [EmbedLLM (ICLR 2025)](https://openreview.net/forum?id=Fs9EabmQrJ)
-with cold-start inference, audited data, controlled probe selection, and
-comparisons that test whether a learned embedding adds value beyond simple
-score summaries. The implementation is written independently; it is not an
-exact reproduction of the original code or a claim to have invented few-shot
-model evaluation.
+We independently implement EmbedLLM-style few-answer onboarding and test directly when query-level matches overcome an established incumbent. EmbedLLM already performs per-query routing, and prior work on cold-start onboarding includes [UniRoute](https://arxiv.org/abs/2502.08773) and [ZeroRouter](https://arxiv.org/abs/2601.06220).
 
-**Status:** implemented and evaluated on a frozen dataset of **88 models and
-22,475 representative questions**. The primary test holds out 13 models and
-3,370 questions, using three training/acquisition seeds. See the
-[final report](reports/FINAL_REPORT.md) for results, controls, and limitations.
+Offline replay spans 88 models and 22,475 representative questions across five benchmarks (`LogiQA`, `MMLU`, `MathQA`, `MedMCQA`, `TruthfulQA`). It uses 62 training models on 15,733 support items, 13 validation models on 3,372 queries, and 13 test candidates on 3,370 unseen queries across seeds 11, 23, and 37. Because this evaluation reuses test models and questions already scored in the benchmark study, it acts as an exploratory downstream reanalysis even though validation selects all margins and test labels never enter fitting. Efficiency covers probe label budget, 8D storage, and one intended model call per query, leaving live calls, deployment cost, and latency out of scope in [the final report](reports/FINAL_REPORT.md).
 
-## Results
+## Primary routing results
 
-Macro benchmark-score MAE, in **percentage points**, with identical balanced
-random probes for every predictor. Lower is better.
+### Simultaneous all-unseen pool
+
+All 13 held-out models compete on 3,370 unseen queries using 50, 100, or 200 nested balanced-random probes per candidate (650, 1,300, or 2,600 answers across the pool). Hindsight per-query oracle accuracy is 81.40%, expected uniform zero-probe accuracy is 36.23%, and full-support 15,733-probe embeddings reach 52.53%.
+
+| Router (macro accuracy, %) | 50 probes | 100 probes | 200 probes |
+| --- | ---: | ---: | ---: |
+| Compact embedding, 8D | 46.41 | 52.70 | 52.72 |
+| Fixed probe-best candidate | 50.30 | 54.62 | 54.62 |
+| Domain probe mean | 45.23 | 45.66 | 51.27 |
+| Question KNN | 41.73 | 43.15 | 46.43 |
+
+Compact 8D improves on question KNN and domain probe means, and at 200 probes it gains 0.78 percentage points descriptively over its same-usage within-benchmark shuffle. Yet it trails the probe-best fixed candidate by 1.90 percentage points at 200 probes (conditional 95% query-bootstrap interval [-2.96, -0.88] points). Lowest-ID zero-probe selection reaches 54.62% only because the held-out model with the highest test macro accuracy in this roster happens to carry the lowest source ID. Expanding support from 200 to 15,733 probes leaves macro accuracy nearly flat at 52.53%, as recorded in [the routing summary](reports/routing/test_summary.csv) and [the paired intervals](reports/routing/test_paired.csv).
+
+### Incumbent masking and add-one newcomer rescue or harm
+
+Validation selects `Meta-Llama-3-70B-Instruct` (ID 50, 58.60% test macro accuracy) as the fixed established incumbent facing each of the 13 held-out newcomers independently across 50, 100, or 200 probes per episode (650, 1,300, or 2,600 answers across trials). Across 3,370 queries, each newcomer creates 201.69 rescue opportunities on average.
+
+| Policy (macro accuracy, %) | 50 probes | 100 probes | 200 probes |
+| --- | ---: | ---: | ---: |
+| Incumbent only | 58.60 | 58.60 | 58.60 |
+| Compact embedding, gated | 58.51 | 58.56 | 58.62 |
+| Compact embedding, raw argmax | 54.73 | 55.16 | 56.51 |
+
+Raw argmax routes 18.55%, 16.23%, and 13.04% of queries to newcomers and captures 37.31, 32.90, and 26.03 rescues per trial, while inflicting 186.31, 158.85, and 104.54 harms per trial. Validation margins of 0.075, 0.1, and 0.15 suppress most harmful switches, cutting newcomer share to 0.66%, 0.14%, and 0.07% with 0.79, 0.38, and 0.38 rescues versus 5.87, 0.69, and 0.38 harms per trial. At 50 probes gated accuracy drops by 0.09 percentage points, at 200 probes the gated estimate is 0.02 percentage points above the incumbent, with the paired interval crossing zero, and full 15,733-probe gating reaches 58.59% (3.95 rescues vs. 6.28 harms) in [the per-candidate trials](reports/routing/test_add_one_by_candidate.csv) and [the pool selection log](reports/routing/test_pool_selections.csv).
+
+![Two-panel routing accuracy plot comparing 13-model pool routing on the left and validation-gated add-one gain over the incumbent on the right across 50, 100, and 200 probes.](reports/routing/routing_accuracy.png)
+
+*Macro routing accuracy across 50, 100, and 200 balanced-random probes per candidate. The left panel compares four pool routers across all 13 held-out models alongside the full 15,733-probe 8D reference line. The right panel plots add-one macro gain over the Meta-Llama-3-70B-Instruct incumbent under validation margins with 95% paired, conditional query-bootstrap intervals.*
+
+A separate validation-only pilot comparing balanced random, score-Fisher, D-optimal, and routing-aware expected improvement acquisition at budgets 50 and 100 also produced negative gains under the fixed 0.10 admission margin (-0.13 and -0.04 percentage points vs. balanced random) in [the acquisition pilot](scripts/pilot_routing_acquisition.py) and [the pilot summary](reports/routing/acquisition_pilot/summary.csv).
+
+## Secondary study on benchmark-score prediction
+
+Historical macro benchmark-score MAE (percentage points, lower is better) under identical balanced random probes preserves our October evaluation.
 
 | Predictor | 50 responses | 100 responses | 200 responses |
 | --- | ---: | ---: | ---: |
@@ -30,215 +51,41 @@ random probes for every predictor. Lower is better.
 | Question KNN | 6.57 | 6.46 | 5.41 |
 | Training benchmark mean, zero probes | 6.69 | 6.69 | 6.69 |
 
-![Model embedding results](reports/main/embedding_budget_curve.png)
+The 8D embedding beats smoothed means and degrades under within-benchmark response permutation, while 8D-minus-1D lineage intervals cross zero and semantic diversity hurts at 200 responses. Matched family shifts and an exploratory 8D check show mixed ancestry effects including a Yi gap. An excluded-ID check on 24 models reaches 6.59, 5.57, and 4.74 MAE vs. 6.97, 6.39, and 6.32 for scalar calibration in [the final report](reports/FINAL_REPORT.md).
 
-The neural predictor improves on smoothed benchmark means, and permuting
-item-response alignment reduces its performance. The scalar comparator remains
-competitive: paired intervals over five lineage groups do not establish an
-eight-dimensional advantage. The structured 14D extension also lacks a
-consistent benefit over its 6D control. All variants and negative results remain
-in the [main results](reports/main/RESULTS.md).
+## Quickstart and single-prompt routing
 
-Global score-aware Fisher probes improve on global random at 100 and 200
-responses; there is no universal policy winner. Balanced semantic diversity
-hurts at 200. The [matched family study](reports/family/RESULTS.md) finds mixed
-effects of allowing relatives into the training pool under its separate fixed
-configuration. These are historical released-label subset predictions, rather
-than official full benchmark scores or a guarantee for an arbitrary new LLM.
-
-The [exploratory 8D family follow-up](reports/family_lowrank_secondary/RESULTS.md)
-exposes a larger Yi transfer gap. It was added after the main test and retains
-that qualification; it does not extend the original study's confirmatory scope.
-
-An additional [24-model-ID coverage check](reports/metadata_excluded/README.md)
-applies the frozen main predictors to the lineage-uncertain models originally
-excluded from the curated cohort. Its 8D MAE is 6.59/5.57/4.74 points at
-50/100/200 responses, versus 6.97/6.39/6.32 for scalar calibration. These are
-same-release descriptive results, with no further fitting or confidence intervals.
-
-## What the system learns
-
-Training uses historical binary response records and the released question
-embeddings. A small neural network maps question text features to a difficulty
-term and an interaction vector. We compare an eight-dimensional neural
-embedding with a structured variant containing:
-
-- a global response tendency;
-- one residual for each benchmark;
-- eight learned interaction coordinates.
-
-For a new model, we freeze the shared network and fit only that model's vector
-with regularized logistic regression. The objective is convex in the new vector;
-a Newton solver returns the embedding and a local posterior covariance.
-Predicted item probabilities are averaged to estimate each benchmark score.
-Benchmark residuals are statistical coordinates, not established human skills.
-The neural eight-dimensional variant is the primary candidate selected on
-development validation data; the structured variant and its rank-zero ablation
-remain in every primary comparison.
-
-```mermaid
-flowchart LR
-  A[Historical model responses] --> C[Train shared question decoder]
-  B[Released question embeddings] --> C
-  C --> D[Freeze decoder]
-  E[50 / 100 / 200 new-model responses] --> F[Infer new model embedding]
-  D --> F
-  F --> G[Predict held-out item probabilities]
-  H[Held-out question features] --> G
-  G --> I[Predict benchmark scores]
-```
-
-## Research questions and controls
-
-1. Does the learned interaction vector improve on a global/benchmark-only
-   embedding, a scalar calibrated ability, smoothed response means, and
-   question-neighbor prediction?
-2. Do balanced probes or semantic diversity improve score prediction?
-3. Does choosing probes to reduce approximate benchmark-score variance help?
-4. Does removing a new model's relatives from the training pool change results
-   when target models and training-pool size stay fixed?
-
-The probe policies are random, benchmark-balanced random, semantic diversity,
-balanced diversity, score-aware Fisher selection, and balanced Fisher selection.
-All predictors evaluated under a policy receive the same revealed responses.
-The Fisher rule uses a reference bank drawn only from training/support questions.
-It is a local uncertainty approximation, not a guarantee of lower error.
-
-The scalar baseline shifts each training benchmark's log-odds by one fitted
-ability value. It retains known benchmark difficulty while sharing information
-across sources, providing a stronger control than a single raw response mean.
-
-A response-permutation diagnostic preserves each observed benchmark's score
-while breaking item-response alignment. It tests whether the residual embedding
-uses more information than those score totals. Permutation occurs **after**
-restricting responses to the declared budget.
-
-## Data and evaluation boundaries
-
-We pin [RZ412/EmbedLLM](https://huggingface.co/datasets/RZ412/EmbedLLM)
-at revision `266ae3e180ccb533c86afc9cfb2f5db99d171aea` and verify downloaded
-file sizes and SHA-256 hashes. The complete CSV audit covers 4,586,288 records
-for 112 models and 35,673 prompt IDs. It finds 553,616 duplicated model/prompt
-cells and 77,581 cells with conflicting labels. Every released tensor label
-equals the maximum of its raw records; this describes the release, not the
-correct scoring rule for the original model output.
-
-The primary analysis uses MMLU, MedMCQA, MathQA, TruthfulQA, and LogiQA, with
-exactly one raw record per retained model/prompt. We retain models with reviewed
-family evidence, group detected question variants, and choose a deterministic
-representative per group before splitting. The frozen cohort has **88 models and
-22,475 representative questions**. Raw prompts, responses, and large
-tensors are not included in this repository.
-
-Both model IDs and question groups are held out. **Final target-item labels are
-unavailable for every training model.** Only validation models and validation
-items select hyperparameters. Test execution requires a matching lock of the
-configuration, splits, data, implementation, and trained checkpoints.
-
-The primary metric is macro benchmark-score MAE. We also report per-benchmark
-error, worst-benchmark error, Brier score, and adaptation time. Seeds are averaged
-within models before uncertainty estimation; family-aware intervals remain
-descriptive when there are few independent groups.
-
-These are offline predictions on a retained prompt subset, not official complete
-benchmark scores. The common subset uses record-count metadata from held-out
-models, and original evaluator versions, generation conditions, and full source
-item IDs are unavailable. Detected-group separation cannot rule out every
-paraphrase or historical LLM training contamination.
-
-## Run locally
-
-Use Python 3.10 or later. Install a [PyTorch build compatible with your hardware](https://pytorch.org/get-started/locally/),
-then install this project:
+Install Python 3.10+ with PyTorch, prepare the pinned dataset, train and validate the decoder, and run validation before test routing. A fresh clone trains into `artifacts/reproduction`, while our published numbers come from a separate local `artifacts/main_v2` run outside Git in [the routing runner](scripts/run_routing.py).
 
 ```bash
 python -m pip install -e ".[dev]"
 python -m pytest -q
 python scripts/download_data.py
 python scripts/prepare_data.py --no-split
-```
-
-The current snapshot passes 81 local numerical, data-boundary, and integration
-tests. The [CI workflow](https://github.com/EricYu123456/DLP-final-project-group-11/actions/workflows/tests.yml)
-also checks Linux/Python 3.10 and Windows/Python 3.12 with CPU PyTorch.
-
-The downloader retrieves about 3.4 GB, verifies a pinned revision, and reuses
-verified files. Preparation scans the full raw CSV and writes compact arrays,
-audit records, and question-group metadata under `data/processed/`.
-
-Train and choose hyperparameters without evaluating test targets:
-
-```bash
 python scripts/run_experiment.py --phase train_validate --output artifacts/reproduction --evaluate-validation
+python scripts/run_routing.py --run artifacts/reproduction --phase validation --output artifacts/routing_reproduction
+python scripts/run_routing.py --run artifacts/reproduction --phase test --output artifacts/routing_reproduction
 ```
 
-Review the validation artifacts and frozen protocol, then evaluate and generate
-the report:
+To route a single prompt, first fit a newcomer embedding via `scripts/embed_new_model.py` (`plan` then `infer` with `--variant neural_lowrank` on the same run and seed), optionally install the text encoder packages, and run the query selector.
 
 ```bash
-python scripts/run_experiment.py --phase test --output artifacts/reproduction --save-predictions
-python scripts/report_results.py --run artifacts/reproduction --output reports/reproduction
+python -m pip install "sentence-transformers==5.1.2" "transformers==4.57.1"
+python scripts/route_query.py --run artifacts/reproduction --seed 11 --trained-model 50 --candidate-embedding artifacts/new_model/fit/embedding.npz --prompt "What causes the phases of the Moon?"
 ```
 
-Use `--deadline` with a timezone-aware ISO timestamp to bound a run. Completed
-checkpoints can be reused with `--resume`; mismatched data, configuration, or
-splits are rejected. See each script's `--help` for development overrides.
-Choose an unused output directory for a new run. The completed local study is
-stored in `artifacts/main_v2`; checkpoints and raw data are excluded from Git.
-See [reproduction details](docs/REPRODUCIBILITY.md) for the family workflow and
-the distinction between historical development and the final protocol.
+Pass `--question-vector path.npy` to supply a precomputed `all-mpnet-base-v2` vector as an alternative to raw text. Pure low-rank ranking omits `--benchmark` because shared question offsets cancel, while passing `--benchmark` adds probability scores and `--minimum-gain` two-candidate gating. The CLI prints JSON naming one candidate for downstream dispatch, and a validation-prompt check on a 50-probe fit matched the released vector within `5.25e-7` maximum score error and picked the same model in [the query router](scripts/route_query.py).
 
-## Embed another model
+## Repository guide and related work
 
-After training and validation, export a short question set:
-
-```bash
-python scripts/embed_new_model.py plan --run artifacts/reproduction --variant neural_lowrank --budget 50 --output artifacts/new_model/probes.csv
-```
-
-Evaluate the new model on those prompts and fill the `response` column with
-binary correctness (`0` or `1`). The script does not call an LLM API or grade
-free-form answers. Then infer its embedding:
-
-```bash
-python scripts/embed_new_model.py infer --run artifacts/reproduction --variant neural_lowrank --responses artifacts/new_model/probes.csv --model-name my_model --output artifacts/new_model/fit
-```
-
-The output contains a reusable `embedding.npz`, its decoder checksum, and
-`prediction.json` with benchmark-subset predictions. An embedding belongs to
-its trained decoder; coordinates from separate checkpoints are not directly
-interchangeable. Compatibility with a new evaluation's scoring conditions
-must be assessed because the source release lacks full evaluator provenance.
-
-## Repository guide
-
-| Path | Purpose |
+| Path | Role |
 | --- | --- |
-| `src/coldstart/` | Data audit, splits, decoder, MAP inference, probe selection, metrics |
-| `scripts/` | Download, preparation, experiment execution, reporting, runtime control |
-| `configs/protocol.json` | Evaluation rules, model settings, budgets, and controls |
-| `data/metadata/` | Reviewed family assignments and pinned evidence |
-| `docs/design/` | Model mathematics and evaluation protocol |
-| `docs/research/` | Related work, novelty assessment, and data provenance |
-| `docs/reviews/` | Independent mathematical and implementation reviews |
-| `reports/` | Small, shareable result tables and figures |
-| `tests/` | Numerical, leakage-boundary, and integration checks |
+| `src/coldstart/` | Data audit, splits, decoder, Newton MAP adaptation, probes, metrics |
+| `scripts/` | Download, preparation, experiment, routing evaluation, single-prompt CLI |
+| `configs/` | Protocol locks and family stress configuration |
+| `reports/routing/` | Validation selection and test routing tables |
+| `reports/FINAL_REPORT.md` | Primary routing evidence and secondary benchmark-score study |
+| `docs/` | Model mathematics, prior work, data provenance, independent reviews |
+| `tests/` | Numerical, data-boundary, and integration tests |
 
-## Related work and attribution
-
-Relevant work includes [EmbedLLM](https://openreview.net/forum?id=Fs9EabmQrJ),
-[tinyBenchmarks](https://proceedings.mlr.press/v235/maia-polo24a.html),
-[Active Evaluation Acquisition](https://proceedings.mlr.press/v267/li25bp.html),
-[ATLAS](https://proceedings.mlr.press/v306/li26fx.html), and
-[SkillEval](https://arxiv.org/abs/2610.28767).
-Cold-start profiles, empirical priors, adaptive testing, and family holdout all
-have prior art. Our contribution is an implemented, audited, controlled study
-on this dataset, including the negative results and the limits of the measured
-improvements.
-
-See [related work](docs/research/related_work.md),
-[novelty assessment](docs/research/novelty_review.md), and
-[data sources](docs/research/data_sources.md) for source-specific comparisons.
-The dataset card's Apache-2.0 declaration does not establish that every upstream
-benchmark prompt or the separate original code has the same license.
-
+Related methods include [tinyBenchmarks](https://proceedings.mlr.press/v235/maia-polo24a.html), [Active Evaluation Acquisition](https://proceedings.mlr.press/v267/li25bp.html), [ATLAS](https://proceedings.mlr.press/v306/li26fx.html), and [SkillEval](https://arxiv.org/abs/2610.28767). Dataset card Apache-2.0 metadata does not establish upstream prompt licenses, and detailed source comparisons live in [related work](docs/research/related_work.md), [novelty review](docs/research/novelty_review.md), and [data sources](docs/research/data_sources.md).
