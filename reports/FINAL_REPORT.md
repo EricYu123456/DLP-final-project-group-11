@@ -205,6 +205,23 @@ Macro gains against the same-budget default are +0.44, +2.51, and +0.77 percenta
 python scripts/pilot_anchored_routing.py --run artifacts/main_v2 --output reports/routing/anchored_pilot
 ```
 
+### Validation-only implicit MAP differentiation pilot
+
+Drawing on [iMAML](https://arxiv.org/abs/1909.04630) and [RouteFM](https://arxiv.org/abs/2609.37362) as context with zero general novelty claim, we tested whether optimizing through real support MAP profiles improves validation routing beyond exercising them during training. From identical `B` checkpoints (seeds `11`, `23`, and `37`), matched arms `M0` (`M0_detached_map`) and `M1` (`M1_implicit_map`) freeze the shared encoder, training latents, and empirical Gaussian prior (`prior_strength = 0.3`) and update the difficulty head, interaction head, and benchmark intercepts under identical `1,000`-step schedules (`lr = 1e-4`, outer BCE plus softmax regret with `lambda = tau = 1.0`). Episodes sample `13` source training candidate IDs, alternate `100` and `200` balanced support probes, and score `250` disjoint outer items strictly from the `62` training models and `15,733` support items, selecting checkpoints every `50` steps by `200`-probe validation routing macro accuracy (`13` validation models, `3,372` queries). Arm `M0` stops the gradient at each exact `8D` MAP fit, and `M1` uses implicit differentiation (`8×8` inverse posterior Hessian matrix solve) matching an exact MAP re-solve finite difference within `1.71e-7` absolute error on seed `11` update `1` in [the implicit MAP pilot script](../scripts/pilot_implicit_map.py) and [the gradient check](routing/implicit_map/gradient_check.json).
+
+| Policy | 100-probe macro (%) | 200-probe macro (%) | 200-probe MAE (pp) | `M1` gain at 200 (pp, conditional 95% CI) | Positive seeds |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `M1_implicit_map` | 53.7525 | 55.1999 | 4.9309 | — | — |
+| `M0_detached_map` | 53.9184 | 55.2181 | 5.2711 | -0.0182 ([-0.3350, +0.2954]) | 0/3 |
+| `B` (`prior_strength = 0.3`) | 53.9417 | 55.1553 | 5.9131 | +0.0446 ([-0.2350, +0.3316]) | 1/3 |
+| `support_best_fixed` | 49.3696 | 52.9225 | — | +2.2774 ([+0.5470, +3.9921]) | 3/3 |
+
+On the validation prior grid (`0.3`, `1.0`, `3.0`) at `200` probes, `B` scored `55.1553%`, `53.9396%`, and `53.5899%`, retaining `0.3`. At `k = 200`, `M1` reaches `55.1999%` macro accuracy and `4.9309` pp benchmark score MAE (`55.2181%` and `5.2711` for `M0`, `55.1553%` and `5.9131` for `B`, and `52.9225%` for the tied strongest fixed baselines `support_best_fixed` and `embedding_mean_fixed`), giving `M1 - M0` of `-0.0182` pp (`[-0.3350, +0.2954]`, `0/3` seeds) and `M1 - B` of `+0.0446` pp (`[-0.2350, +0.3316]`, `1/3` seeds). Both arms changed the chosen checkpoint only on seed `11` (updates `150` and `1,000`) and kept initial `B` on seeds `23` and `37`. Because `M1` misses the predefined evidence gate requiring at least `+1.0` pp (`0.01`) macro gain and `2/3` positive seeds over both the strongest routed comparator (`M0`) and the strongest fixed comparator (`support_best_fixed`), this pilot records zero test score in [the implicit MAP selection record](routing/implicit_map/selection.json), [the validation summary](routing/implicit_map/validation_summary.csv), [the validation paired intervals](routing/implicit_map/validation_paired.csv), [the per-seed breakdown](routing/implicit_map/validation_by_seed.csv), and [the prior grid check](routing/implicit_map/validation_baseline_prior_grid.csv).
+
+```bash
+python scripts/pilot_implicit_map.py --run artifacts/main_v2 --checkpoints artifacts/routing_learning/checkpoints --learning-selection reports/routing/learning/selection.json --checkpoint-output artifacts/implicit_map --output reports/routing/implicit_map
+```
+
 ## Secondary study on historical benchmark-score estimates (2026-10-28)
 
 Our original October study audited the pinned `RZ412/EmbedLLM` release (`266ae3e180ccb533c86afc9cfb2f5db99d171aea`) across all 4,586,288 CSV rows of the 112-model by 35,673-prompt matrix, finding 553,616 duplicate model/prompt cells, 77,581 conflicting cells, and released tensor labels equal to raw cell maxima. Structural-singleton filtering over reviewed-lineage models yielded 88 models (62 train, 13 validation, 13 test) and 22,475 representative question groups (15,733 support, 3,372 validation, 3,370 test items, 975,446 training response cells), while MedMCQA matched its upstream validation split and conservative stem grouping carried minor over-grouping or paraphrase risk in [the data audit](data_audit/summary.json) and [the source review](../docs/research/data_sources.md).

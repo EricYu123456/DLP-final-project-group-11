@@ -1,0 +1,6 @@
+{
+  "epsilon": 0.003,
+  "implicit_gradient": -0.012750644236803055,
+  "finite_difference": -0.012750815480651786,
+  "absolute_error": 1.712438487313367e-07
+}
