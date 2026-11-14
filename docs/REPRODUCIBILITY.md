@@ -2,9 +2,12 @@
 
 The repository contains source, frozen configuration, evidence tables, small
 result files, and exported figures. Raw questions, downloaded tensors, prepared
-arrays, and local checkpoints are excluded from Git. The primary experiment is
-an offline simulation using released binary responses; it does not call an LLM
-API or measure current API prices.
+arrays, and local checkpoints are excluded from Git. The commands below
+reproduce the original benchmark-score prediction study, now secondary, which is
+an offline simulation using released binary responses and does not call an LLM
+API or measure current API prices. For primary routing, automatic onboarding,
+and the separate live integration example, see
+[the README quickstart](../README.md#quickstart-and-single-prompt-routing).
 
 ## Environment
 
@@ -149,15 +152,20 @@ of a newly queried LLM.
 
 ## Statistical interpretation
 
-Main tables average seeds inside each model, then models. Macro score error
-weights the five benchmarks equally. Confidence intervals resample five
-reviewed lineage groups and remain descriptive; there is no multiplicity
-correction. Family results are paired within fixed target cohorts, with
-per-family lineage intervals suppressed. Different family and main presets
+Original benchmark-score prediction tables average seeds inside each model, then
+models. Macro score error weights the five benchmarks equally. Their confidence
+intervals resample five reviewed lineage groups and remain descriptive, with no
+multiplicity correction. Family results are paired within fixed target cohorts,
+with per-family lineage intervals suppressed. Different family and main presets
 must not be pooled as a single generalization estimate.
 
-See `reports/FINAL_REPORT.md` and the independent review files for supported
-claims, failures, and the distinction between original and secondary analyses.
+Primary routing intervals instead resample paired queries within each benchmark,
+typically after averaging seeds, and remain conditional on fixed rosters and
+support or probe plans rather than establishing lineage-population confidence.
+
+See [the final report](../reports/FINAL_REPORT.md) and the independent review
+files for supported claims, failures, and the distinction between original and
+secondary analyses.
 
 ## Coverage of metadata-excluded IDs
 
