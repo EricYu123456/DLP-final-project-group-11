@@ -82,8 +82,10 @@ def select_probe(eligible, design, offsets, selected_design, selected_offsets, o
 
 
 def probe_steps(order, domains, design, offsets, reference, incumbent, prior, margin,
-                solver_options, shortlist_seed, tolerance):
+                solver_options, shortlist_seed, tolerance, *, selection="exact"):
     """Yield one selected probe and receive its response before selecting again."""
+    if selection not in ("exact", "random"):
+        raise ValueError("Probe selection must be exact or random.")
     rng = np.random.default_rng(shortlist_seed)
     reference_design, reference_offsets = reference
     selected = list(order[:WARMUP])
@@ -105,24 +107,31 @@ def probe_steps(order, domains, design, offsets, reference, incumbent, prior, ma
             else:
                 stop_reason = "sufficient_reference_evidence" if state[1].max() > 0 else "weak_on_reference"
             return np.array(latents), trace, selected, stop_reason
-        domain = domains[order[budget]]
-        eligible = np.flatnonzero(available & (domains == domain))
-        screened = rng.permutation(eligible)[:SCREENED_PER_STEP]
-        chosen, after = select_probe(screened, design, offsets, design[selected], offsets[selected],
-                                     observed, reference_design, reference_offsets, fit, prior, state, solver_options)
+        if selection == "exact":
+            domain = domains[order[budget]]
+            eligible = np.flatnonzero(available & (domains == domain))
+            screened = rng.permutation(eligible)[:SCREENED_PER_STEP]
+            chosen, after = select_probe(screened, design, offsets, design[selected], offsets[selected],
+                                         observed, reference_design, reference_offsets, fit, prior, state, solver_options)
+        else:
+            chosen = order[budget]
         actual = yield chosen
         selected.append(chosen)
         observed = np.r_[observed, actual]
         available[chosen] = False
         if np.isfinite(actual):
-            fit = after[int(actual)]
+            if selection == "exact":
+                fit = after[int(actual)]
+            else:
+                fit = adapt_map(design[selected], offsets[selected], observed, *prior,
+                                initial=fit.latent, **solver_options)
 
 
 def trajectory(order, domains, design, offsets, observe, reference, incumbent, prior, margin,
-               solver_options, shortlist_seed, tolerance):
+               solver_options, shortlist_seed, tolerance, *, selection="exact"):
     """Replay one arrival, invoking the response callback only for chosen probes."""
     steps = probe_steps(order, domains, design, offsets, reference, incumbent, prior, margin,
-                        solver_options, shortlist_seed, tolerance)
+                        solver_options, shortlist_seed, tolerance, selection=selection)
     try:
         candidate = next(steps)
         while True:

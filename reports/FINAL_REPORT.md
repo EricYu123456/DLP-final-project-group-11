@@ -10,6 +10,8 @@ In add-one trials where each of the 13 held-out newcomers challenges a validatio
 
 In an aligned 200-probe checkpoint-selection comparison across seeds 11, 23, and 37, choosing the 8D decoder checkpoint by validation routing accuracy (`B`) raised test macro accuracy by +3.53 and +3.48 percentage points over validation score-MAE selection (`A`) on the 13-model (53.83% vs. 50.29%) and expanded 37-model (57.09% vs. 53.61%) pools. Adding softmax expected routing regret (`C`) shifted 200-probe test macro accuracy by +0.06 and +0.12 percentage points relative to `B`, with conditional 95% intervals crossing zero. Both `B` (-0.80 on 13 models and +0.61 on 37 models) and `C` (-0.73 and +0.73 points) fell short of the planned +1.0-point margin over the fixed comparators with a positive paired interval, and the expanded 37-model pool remains a retrospective cohort with no lineage-blind evidence for its 24 excluded IDs.
 
+Across four chosen incumbents (`q50`, `q75`, `q90`, and `q100`), adaptive EVPI stopping saves substantial probes only at `q100` (45.4 vs. 189.1 mean probes), and across the three competitive anchors exact selection trails balanced-random stopping by -0.10 percentage points ([-0.18, -0.04]) with intervals crossing zero against keeping the incumbent (+0.42, [-0.09, +0.92]) and same-evidence fixed selection (-0.33, [-0.75, +0.07]).
+
 Our secondary study from 2026-10-28 remains valid within its original boundaries. Cold-start 8D embeddings lower macro benchmark-score MAE from 6.26 to 4.27 percentage points across 50 to 200 probes and rely on item-response alignment beyond score totals, while 8D-minus-1D lineage intervals cross zero. We independently implement few-answer onboarding and test incumbent masking directly without claiming originality for cold-start routing. Original EmbedLLM already performs per-query routing for learned model-ID vectors on unseen questions, and [UniRoute](https://arxiv.org/abs/2502.08773) and [ZeroRouter](https://arxiv.org/abs/2601.06220) study few-answer onboarding of unseen model IDs. Our variant targets onboarding unseen model IDs through a frozen decoder.
 
 ## Routing protocol and information boundaries
@@ -169,6 +171,32 @@ python scripts/run_sequential_routing.py --phase test --output artifacts/sequent
 ```
 
 For practical onboarding of a new model, [the onboarding CLI](../scripts/onboard_model.py) serves one `next_probe` prompt per step until stopping and writes paired newcomer and incumbent embeddings for gated per-prompt routing with [the query router](../scripts/route_query.py), as documented in [the README](../README.md).
+
+### Conditional adaptive onboarding across incumbent strengths
+
+To evaluate how sequential onboarding behaves across incumbent strengths, we selected four anchor incumbents at rounded support-accuracy ranks `q50`, `q75`, `q90`, and `q100` (ranks 32, 47, 56, and 62 of 62 training models) from equal-benchmark macro scores over the 15,733 support items. Those anchors are ID 3 (`deepseek-ai__deepseek-math-7b-instruct`, 37.62% support macro), ID 92 (`Intel__neural-chat-7b-v3-3`, 42.60%), ID 83 (`SUSTech__SUS-Chat-34B`, 51.31%), and ID 50 (`meta-llama__Meta-Llama-3-70B-Instruct`, 59.00%). All four primary arms share the frozen `B` checkpoints (seeds 11, 23, and 37), admission margin 0.025, heuristic EVPI tolerance 0.0003, full-support 8D MAP incumbent refits (`prior_strength = 0.3`), 10 warm-up probes per seed, and the same disjoint support banks (160 reference and 500 candidate prompts), crossing exact Laplace-screened expected-improvement selection or balanced-random ordering with EVPI stopping or the 200-probe cap. Each anchor faces the 13 test newcomers across 3 seeds (39 arrivals per anchor on 3,370 queries), reusing historical test labels strictly for offline replay scoring with within-benchmark paired query-bootstrap intervals (2,000 draws) conditional on the fixed candidate rosters, anchors, seeds, and support banks in [the competitive onboarding script](../scripts/pilot_competitive_onboarding.py) and [the validation selection record](routing/competitive_onboarding/validation_selection.json).
+
+Across `q50`, `q75`, and `q90` on the 13 validation newcomers (3,372 queries), selecting one shared fixed balanced-random probe count from `{10, 20, 50, 100, 200}` chose 200 (45.12% equal-anchor validation macro accuracy), matching the 200-probe random cap on test. Retrospective same-realized-`k` random fits balanced-random probes at the exact stopping arm's realized count `k` after the fact. Same-evidence fixed identity scores both newcomer and incumbent by equal-benchmark macro mean on the exact-selected probes and routes all queries to whichever leads, a deployable fixed baseline whenever incumbent support outcomes are already known.
+
+| Anchor | Exact probes (mean / total) | Random EVPI probes (mean / total) | Exact cap stops | Exact macro (%) | Random EVPI macro (%) | Incumbent macro (%) | Exact capture (%) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `q50`, ID 3 (`deepseek-ai__deepseek-math-7b-instruct`) | 198.90 / 7,757 | 196.92 / 7,680 | 37/39 | 39.3992 | 39.4809 | 37.7903 | 21.59 |
+| `q75`, ID 92 (`Intel__neural-chat-7b-v3-3`) | 196.46 / 7,662 | 195.26 / 7,615 | 37/39 | 44.1239 | 44.2170 | 43.8610 | 20.28 |
+| `q90`, ID 83 (`SUSTech__SUS-Chat-34B`) | 171.79 / 6,700 | 173.08 / 6,750 | 26/39 | 53.3909 | 53.5201 | 54.0054 | 3.25 |
+| `q100`, ID 50 (`meta-llama__Meta-Llama-3-70B-Instruct`) | 45.44 / 1,772 | 51.36 / 2,003 | 3/39 | 58.5352 | 58.5502 | 58.5998 | 0.97 |
+
+![Mean selected probe count and paired macro-accuracy differences by incumbent support-accuracy percentile](routing/competitive_onboarding/probe_accuracy_by_incumbent.png)
+
+Across these four chosen incumbents, lower probe counts associate with higher incumbent support accuracy. At `q100`, exact stopping reproduces the prior sequential run (1,772 exact probes, median 14, 36 early stops, and 3 cap stops). Across `q50`, `q75`, and `q90`, most exact arrivals hit the 200-probe cap (37/39, 37/39, and 26/39, median 200 on each), averaging 189.05 exact probes (22,119 vs. 23,400, 5.5% fewer than the cap) compared with 188.42 (22,045) for balanced-random EVPI stopping.
+
+On the three-anchor competitive average, exact selection trails balanced-random EVPI stopping by -0.10 pp (conditional 95% interval [-0.18, -0.04], 0/3 seeds positive) and retrospective same-`k` random by -0.10 pp ([-0.17, -0.04]). Exact EVPI stopping differs from exact 200-cap selection by +0.006 pp ([-0.004, +0.020]) and trails deployable same-evidence fixed identity by -0.33 pp ([-0.75, +0.07]). Against keeping the incumbent, exact EVPI stopping averages +0.42 pp ([-0.09, +0.92]), gaining +1.61 pp ([+0.59, +2.60]) at `q50` while its intervals cross zero at `q75` (+0.26 pp, [-0.46, +0.94]) and `q90` (-0.61 pp, [-1.43, +0.10]). Selection plus MAP CPU runtime averages 0.67s per arrival for exact selection versus 0.044s for balanced-random EVPI stopping across the competitive anchors, with zero live LLM requests made in [the competitive test summary](routing/competitive_onboarding/test_summary.csv), [the competitive paired intervals](routing/competitive_onboarding/test_paired.csv), and [the competitive arrival log](routing/competitive_onboarding/test_by_arrival.csv).
+
+Reproducing the competitive-anchor comparison runs validation before test using the default frozen checkpoints and sequential thresholds (or custom `--output` and `--trace-output` paths to preserve checked-in files) in [the competitive onboarding script](../scripts/pilot_competitive_onboarding.py).
+
+```bash
+python scripts/pilot_competitive_onboarding.py --phase validation
+python scripts/pilot_competitive_onboarding.py --phase test
+```
 
 ### Validation-only routing-aware probe pilot
 
