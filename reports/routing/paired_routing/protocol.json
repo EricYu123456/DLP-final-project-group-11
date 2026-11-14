@@ -1,0 +1,69 @@
+{
+  "phase": "validation_only",
+  "anchors": [
+    {
+      "quantile": 0.5,
+      "rank_of_training_models": 32,
+      "model_id": 3,
+      "model_name": "deepseek-ai__deepseek-math-7b-instruct",
+      "support_macro_accuracy": 0.3762379531093979,
+      "used_in_descriptive_competitive_average": true
+    },
+    {
+      "quantile": 0.75,
+      "rank_of_training_models": 47,
+      "model_id": 92,
+      "model_name": "Intel__neural-chat-7b-v3-3",
+      "support_macro_accuracy": 0.4259790283757158,
+      "used_in_descriptive_competitive_average": true
+    },
+    {
+      "quantile": 0.9,
+      "rank_of_training_models": 56,
+      "model_id": 83,
+      "model_name": "SUSTech__SUS-Chat-34B",
+      "support_macro_accuracy": 0.5131376140716946,
+      "used_in_descriptive_competitive_average": true
+    },
+    {
+      "quantile": 1.0,
+      "rank_of_training_models": 62,
+      "model_id": 50,
+      "model_name": "meta-llama__Meta-Llama-3-70B-Instruct",
+      "support_macro_accuracy": 0.5899572583877625,
+      "used_in_descriptive_competitive_average": false
+    }
+  ],
+  "frozen_b_checkpoint": "B_bce_routing_selection",
+  "frozen_b_seeds": [
+    11,
+    23,
+    37
+  ],
+  "supervised_map": "one deterministic fit",
+  "fit": "Newcomer correctness minus incumbent correctness. Ridge on seven support-centered and standardized axes with an unpenalized intercept.",
+  "frozen_b_axes": "First seven principal axes of B's interaction features on the paired support bank.",
+  "supervised_axes": "Cholesky-whitened, weighted reduced-rank ridge on historical model-by-question responses and MPNet features. Features are standardized and divided by sqrt(input dimension). Responses are double-centered.",
+  "historical_map_ridge": 0.01,
+  "historical_train_models": 62,
+  "historical_train_questions": 15733,
+  "fit_ridge_sum_loss": 50.0,
+  "admission_margin": 0.025,
+  "paired_support_questions": 500,
+  "unlabeled_reference_questions": 160,
+  "validation_newcomers": 13,
+  "validation_questions": 3372,
+  "partition_source": "competitive_onboarding/validation_selection.json",
+  "static": "Choose one model from equal-benchmark mean reference predictions or observed support advantage at the same admission margin.",
+  "per_benchmark_static": "Uses the incoming benchmark label and selects one model per prompt. All prompts in a benchmark use the same model, determined by paired support advantage and the admission margin.",
+  "hindsight": "Best fixed validation macro identity per pair. The query oracle takes the maximum observed binary correctness for each query.",
+  "interval": "Conditional paired query bootstrap within benchmark after averaging newcomer trials and the three frozen B seeds. The supervised map is deterministic.",
+  "gate": {
+    "maximizing_fixed": "per_benchmark_support_fixed",
+    "positive_anchors_vs_all_fixed": 0,
+    "required_gain": 0.005,
+    "required_lower_bound": 0,
+    "required_positive_anchors": 2,
+    "met": false
+  }
+}
