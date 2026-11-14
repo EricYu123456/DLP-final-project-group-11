@@ -40,6 +40,16 @@ def interaction_scores(latents: np.ndarray, query_design: np.ndarray) -> np.ndar
     return np.asarray(latents, dtype=np.float64) @ np.asarray(query_design, dtype=np.float64).T
 
 
+def routing_features(decoder, vectors: np.ndarray, benchmark: int | None = None):
+    """Use the mean learned benchmark bias when a prompt has no benchmark label."""
+    domains = np.full(len(vectors), 0 if benchmark is None else benchmark, dtype=np.int64)
+    offsets, design = decoder.export_features(vectors, domains)
+    if benchmark is None:
+        bias = decoder.benchmark_bias.detach().cpu().numpy().astype(np.float64)
+        offsets = offsets.astype(np.float64) + (bias.mean() - bias[0])
+    return offsets, design
+
+
 def add_run_options(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--run", type=Path, default=ROOT / "artifacts" / "main_v2")
     parser.add_argument("--seed", type=int, help="Legacy decoder seed (default: 11).")
@@ -137,14 +147,13 @@ def main(argv: list[str] | None = None) -> int:
     query.add_argument("--stdin", action="store_true", help="Read one prompt per nonempty line and print one JSON choice.")
     parser.add_argument("--benchmark", help="Known benchmark name, used to compute correctness probabilities.")
     parser.add_argument("--minimum-gain", type=float, default=0.0,
-                        help="Minimum probability gain required to replace the first candidate. Requires --benchmark.")
+                        help="Minimum probability gain required to replace the first candidate. Uses the mean learned "
+                             "benchmark bias when the prompt has no benchmark label.")
     args = parser.parse_args(argv)
     if not args.trained_model and not args.candidate_embedding:
         parser.error("Supply at least one trained model or candidate embedding.")
     if not 0 <= args.minimum_gain <= 1:
         parser.error("--minimum-gain must be between 0 and 1.")
-    if args.minimum_gain and args.benchmark is None:
-        parser.error("A positive --minimum-gain requires --benchmark.")
     if args.minimum_gain and len(args.trained_model) + len(args.candidate_embedding) != 2:
         parser.error("A positive --minimum-gain requires exactly two candidates.")
 
@@ -170,7 +179,7 @@ def main(argv: list[str] | None = None) -> int:
                 candidate_latents.append(fit["latent"])
                 candidates.append({"model_name": str(fit["model_name"].item())})
 
-    domain = 0
+    domain = None
     if args.benchmark is not None:
         if args.benchmark not in benchmarks:
             parser.error(f"Unknown benchmark {args.benchmark}. Available benchmarks are {', '.join(benchmarks)}.")
@@ -179,10 +188,10 @@ def main(argv: list[str] | None = None) -> int:
     def route(vector: np.ndarray) -> dict:
         if vector.shape != (decoder.config.input_dim,):
             parser.error(f"Supply one flat question vector with {decoder.config.input_dim} features.")
-        offset, design = decoder.export_features(vector[None, :], np.array([domain]))
+        offset, design = routing_features(decoder, vector[None, :], domain)
         scores = interaction_scores(candidate_latents, design[0])
         result_candidates = candidates
-        if args.benchmark is not None:
+        if domain is not None or args.minimum_gain:
             probabilities = sigmoid(scores + offset[0])
             result_candidates = [{**candidate, "predicted_correctness": float(probability)}
                                  for candidate, probability in zip(candidates, probabilities)]

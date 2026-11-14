@@ -1,0 +1,62 @@
+{
+  "phase": "validation only",
+  "anchors": [
+    {
+      "quantile": 0.5,
+      "rank_of_training_models": 32,
+      "model_id": 3,
+      "model_name": "deepseek-ai__deepseek-math-7b-instruct",
+      "support_macro_accuracy": 0.3762379531093979,
+      "used_in_descriptive_competitive_average": true
+    },
+    {
+      "quantile": 0.75,
+      "rank_of_training_models": 47,
+      "model_id": 92,
+      "model_name": "Intel__neural-chat-7b-v3-3",
+      "support_macro_accuracy": 0.4259790283757158,
+      "used_in_descriptive_competitive_average": true
+    },
+    {
+      "quantile": 0.9,
+      "rank_of_training_models": 56,
+      "model_id": 83,
+      "model_name": "SUSTech__SUS-Chat-34B",
+      "support_macro_accuracy": 0.5131376140716946,
+      "used_in_descriptive_competitive_average": true
+    },
+    {
+      "quantile": 1.0,
+      "rank_of_training_models": 62,
+      "model_id": 50,
+      "model_name": "meta-llama__Meta-Llama-3-70B-Instruct",
+      "support_macro_accuracy": 0.5899572583877625,
+      "used_in_descriptive_competitive_average": false
+    }
+  ],
+  "validation_queries": 3372,
+  "margin": 0.025,
+  "frozen_evpi_tolerance": 0.0003,
+  "fixed_budgets": [
+    20,
+    50,
+    100,
+    200
+  ],
+  "tolerance_grid": [
+    0.0003,
+    0.0006,
+    0.001,
+    0.002,
+    0.004
+  ],
+  "development_detail_evpi_tolerance": 0.002,
+  "shortlist": 48,
+  "comparison_fixed_count": 200,
+  "minimum_probe_saving": 0.1,
+  "maximum_macro_loss": 0.001,
+  "maximum_one_anchor_loss": 0.0025,
+  "gate_scope": "development only; unweighted q50/q75/q90 mean",
+  "paired_query_interval": "conditional on arrivals, seeds and shared validation episodes",
+  "rescue_opportunities": "incumbent wrong, newcomer correct on held-out validation query"
+}

@@ -13,7 +13,7 @@ import unicodedata
 import numpy as np
 from threadpoolctl import threadpool_limits
 
-from route_query import ROOT, choose_models, interaction_scores
+from route_query import ROOT, choose_models, interaction_scores, routing_features
 from coldstart.adaptation import sigmoid
 from coldstart.models import MeanBaselines, load_decoder, question_knn
 from coldstart.probes import select_probe_order
@@ -201,9 +201,7 @@ def prepare(args, audit):
 
 
 def shared_offsets(decoder, vectors):
-    offsets, design = decoder.export_features(vectors, np.zeros(len(vectors), dtype=np.int64))
-    bias = decoder.benchmark_bias.detach().cpu().numpy().astype(np.float64)
-    return offsets.astype(np.float64) + (bias.mean() - bias[0]), design
+    return routing_features(decoder, vectors)
 
 
 def paired_queries(left, right, domains):
