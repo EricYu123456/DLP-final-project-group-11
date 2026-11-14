@@ -8,6 +8,8 @@ Selecting the 8D decoder checkpoint by validation routing accuracy gained +3.53 
 
 On an external LLMRouterBench cohort of 20 models and 1,330 overlap-filtered queries across MMLU-Pro, BBH, and KORBench, frozen routing-selected checkpoints (`B`) reach 72.60% macro accuracy at 200 probes and gain +2.00 pp (conditional 95% interval [+1.08, +2.93], 2/3 seeds positive) over score-MAE checkpoints (`A`), while trailing the 74.18% support-best fixed comparator by -1.58 pp ([-2.44, -0.74]) in [the final report](reports/FINAL_REPORT.md) and [the external transfer summary](reports/routing/external_transfer/summary.csv).
 
+In sequential add-one onboarding across all three `B` seeds against re-fit incumbent ID 50 (39 test arrivals, 3,370 queries), joint question selection and EVPI stopping cut requests by 77.3% from 7,800 to 1,772 (mean 45.44) at 58.54% macro accuracy. This edges past the 200-probe selector (+0.03 pp), leaves the same-budget random interval crossing zero, and trails the 58.60% incumbent (-0.06 pp) with 0.47% newcomer share in [the final report](reports/FINAL_REPORT.md), [the sequential test summary](reports/routing/sequential/test_summary.csv), and [the sequential paired intervals](reports/routing/sequential/test_paired.csv).
+
 Offline replay spans 88 models and 22,475 representative questions across five benchmarks (`LogiQA`, `MMLU`, `MathQA`, `MedMCQA`, `TruthfulQA`). It uses 62 training models on 15,733 support items, 13 validation models on 3,372 queries, and 13 test candidates on 3,370 unseen queries across seeds 11, 23, and 37. Because this evaluation reuses test models and questions already scored in the benchmark study, it acts as an exploratory downstream reanalysis even though validation selects all margins and test labels never enter fitting. Efficiency covers probe label budget, 8D storage, and one intended model call per query, leaving live calls, deployment cost, and latency out of scope in [the final report](reports/FINAL_REPORT.md).
 
 ## Primary routing results
@@ -96,6 +98,22 @@ python scripts/route_query.py --run artifacts/reproduction --checkpoint artifact
 ```
 
 As an alternative to `--prompt`, `--stdin` consumes one nonempty prompt per line and emits one independent JSON choice per line while reusing the decoder and text encoder, and optional `--question-vector` remains available for saved features. Optional `--learning-selection` supplies a custom `selection.json` for older routing-learning checkpoint metadata. These commands select which model should answer, with the caller handling generation separately.
+
+### Adaptive onboarding
+
+Start sequential onboarding for a newcomer to receive a `next_probe` JSON payload containing `prompt_id`, `prompt` text, and `benchmark`.
+
+```bash
+python scripts/onboard_model.py --model-name my_model --episode-id 42 --seed 11 --embedding artifacts/new_model/adaptive_embedding.npz
+```
+
+Obtain the model's answer externally, append its binary correctness under `prompt_id,response` in `artifacts/new_model/adaptive_responses.csv`, and rerun the exact first command with `--responses artifacts/new_model/adaptive_responses.csv` and the same episode ID and seed, repeating until stopping. A `stop` response writes the newcomer embedding alongside `adaptive_embedding.incumbent.npz` and reports the checkpoint, stop reason, and margin. Apply the gate to choose one model per prompt with `scripts/route_query.py`.
+
+```bash
+python scripts/route_query.py --run artifacts/main_v2 --checkpoint artifacts/routing_learning/checkpoints/B_bce_routing_selection_11.pt --candidate-embedding artifacts/new_model/adaptive_embedding.incumbent.npz --candidate-embedding artifacts/new_model/adaptive_embedding.npz --benchmark MMLU --minimum-gain 0.025 --prompt "What causes the phases of the Moon?"
+```
+
+Both steps reuse the same trained files or take fresh overrides via `--run`, `--checkpoints`, `--selection`, and `--learning-selection`, keeping the same decoder for both (`--checkpoint` in `scripts/route_query.py`). The CLI yields choices, and the external caller submits model generation and scoring. Without a known benchmark, omitting `--benchmark` and `--minimum-gain` lets raw `argmax` rank the candidates without the gate.
 
 ## Repository guide and related work
 
