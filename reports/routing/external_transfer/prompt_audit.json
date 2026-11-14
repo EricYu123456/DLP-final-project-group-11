@@ -1,0 +1,86 @@
+{
+  "encoder": "sentence-transformers/all-mpnet-base-v2",
+  "max_seq_length": 384,
+  "feature_input": {
+    "mmlupro": "released zero-shot prompt and choices",
+    "bbh": "original final question, which includes any answer choices",
+    "korbench": "final question first, followed by task instructions and rule; no worked examples"
+  },
+  "benchmark_counts": {
+    "mmlupro": {
+      "retained_prompts": 413,
+      "distinct_release_example_blocks": 0,
+      "retained_stems_mentioned_in_original_example_blocks": 0,
+      "released_prompt": {
+        "max_tokens": 1109,
+        "median_tokens": 219.0,
+        "above_encoder_token_limit": 45
+      },
+      "encoder_input": {
+        "max_tokens": 1109,
+        "median_tokens": 219.0,
+        "above_encoder_token_limit": 45
+      },
+      "final_question_alone": {
+        "max_tokens": 517,
+        "median_tokens": 56.0,
+        "above_encoder_token_limit": 2
+      },
+      "released_prefix_before_final_question": {
+        "max_tokens": 43,
+        "median_tokens": 42.0,
+        "above_encoder_token_limit": 0
+      }
+    },
+    "bbh": {
+      "retained_prompts": 1059,
+      "distinct_release_example_blocks": 27,
+      "retained_stems_mentioned_in_original_example_blocks": 5,
+      "released_prompt": {
+        "max_tokens": 1684,
+        "median_tokens": 405.0,
+        "above_encoder_token_limit": 559
+      },
+      "encoder_input": {
+        "max_tokens": 570,
+        "median_tokens": 87.0,
+        "above_encoder_token_limit": 9
+      },
+      "final_question_alone": {
+        "max_tokens": 570,
+        "median_tokens": 87.0,
+        "above_encoder_token_limit": 9
+      },
+      "released_prefix_before_final_question": {
+        "max_tokens": 1116,
+        "median_tokens": 314.0,
+        "above_encoder_token_limit": 440
+      }
+    },
+    "korbench": {
+      "retained_prompts": 1185,
+      "distinct_release_example_blocks": 125,
+      "retained_stems_mentioned_in_original_example_blocks": 24,
+      "released_prompt": {
+        "max_tokens": 2578,
+        "median_tokens": 932.0,
+        "above_encoder_token_limit": 1075
+      },
+      "encoder_input": {
+        "max_tokens": 2242,
+        "median_tokens": 583.0,
+        "above_encoder_token_limit": 755
+      },
+      "final_question_alone": {
+        "max_tokens": 733,
+        "median_tokens": 76.0,
+        "above_encoder_token_limit": 5
+      },
+      "released_prefix_before_final_question": {
+        "max_tokens": 2404,
+        "median_tokens": 852.0,
+        "above_encoder_token_limit": 980
+      }
+    }
+  }
+}

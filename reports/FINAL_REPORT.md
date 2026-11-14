@@ -114,6 +114,31 @@ python scripts/pilot_routing_learning.py --phase train_validate
 python scripts/pilot_routing_learning.py --phase test
 ```
 
+### External transfer evaluation on LLMRouterBench
+
+External transfer evaluates the official LLMRouterBench JSON-results archive (`NPULH/LLMRouterBench`, revision `b95870f9e60c589e82f7972c91ffa8de9ca89f85`) across all 20 performance-roster model IDs with complete original binary grades. These model IDs are absent from EmbedLLM by normalized literal alias, while weight-family overlap remains possible. Matching Unicode NFKC casefolded word and math-operator tokens against raw EmbedLLM prompts and extracted stems removes 588 of 1,001 MMLU-Pro stems and all 198 GPQA stems, so the evaluation uses predesignated KORBench alongside MMLU-Pro and BBH while undetected paraphrases may remain. Deduplicating 21 BBH and 65 KORBench stems leaves 2,657 question groups split into 1,327 support groups and 1,330 query groups (`207` MMLU-Pro, `530` BBH, and `593` KORBench) in [LLMRouterBench](https://github.com/ynulihao/LLMRouterBench), [Hugging Face](https://huggingface.co/datasets/NPULH/LLMRouterBench), [the external protocol](routing/external_transfer/protocol.json), and [the external routing script](../scripts/run_external_routing.py).
+
+Frozen `A` and `B` checkpoints across seeds `11`, `23`, and `37` transfer with zero external training or selection under `100` and `200` nested model-shared balanced-random probes per candidate (`2,000` and `4,000` responses per roster). Unknown benchmark offsets add the unweighted mean of all five historical benchmark biases to the frozen learned text difficulty head under the same MAP prior (`prior_strength = 0.3`), and each query scores all 20 fitted embeddings to pick one model before historical labels are scored against same-budget `support_best_fixed`, two arm `embedding_mean_fixed` comparators from a disjoint support reference (`60` prompts per source), `smoothed_domain`, `question_knn`, and hindsight `oracle` (`92.32%` macro). Historical generation prompts differ from encoder features on BBH (final question with choices) and KORBench (query first and task rule, with worked examples stripped). Under the `384`-token `all-mpnet-base-v2` cap, `755` of `1,185` extracted KORBench inputs exceed the cap (`5` long question stems alone), along with `45` MMLU-Pro and `9` BBH full feature inputs, so context loss may impact transfer while making no causal claim in [the prompt audit](routing/external_transfer/prompt_audit.json).
+
+| Policy | 100 probes macro / micro (%) | 200 probes macro / micro (%) |
+| --- | ---: | ---: |
+| `A` (`A_bce_score_selection`) | 69.78 / 67.29 | 70.60 / 68.77 |
+| `B` (`B_bce_routing_selection`) | 72.21 / 70.10 | 72.60 / 71.25 |
+| `A` `embedding_mean_fixed` | 72.94 / 71.55 | 73.47 / 72.33 |
+| `B` `embedding_mean_fixed` | 73.65 / 72.06 | 73.47 / 72.33 |
+| `support_best_fixed` | 74.35 / 72.56 | 74.18 / 72.83 |
+| Domain probe mean | 73.95 / 72.16 | 74.44 / 73.13 |
+| Question KNN | 73.62 / 72.61 | 74.08 / 72.86 |
+
+At 200 probes, `B` achieves `72.60%` macro (`71.25%` micro) accuracy versus `70.60%` macro (`68.77%` micro) for `A`, yielding a `B - A` gain of `+2.00` macro percentage points (conditional 95% paired interval `[+1.08, +2.93]`, `+2.48` micro points, `2` of `3` seeds positive), while at 100 probes `B - A` reaches `+2.42` macro points (`[+1.31, +3.52]`). At 200 probes, comparators reach `74.18%` macro for `support_best_fixed`, `73.47%` for `B` `embedding_mean_fixed`, `74.44%` for domain probe mean, `74.08%` for question KNN, and `92.32%` for the hindsight oracle, leaving `B - support_best_fixed` at `-1.58` macro points (`[-2.44, -0.74]`) and `B - B embedding_mean_fixed` at `-0.87` macro points (`[-1.56, -0.21]`). This external evidence supports the checkpoint-selection effect here and indicates that the router still trails simple fixed baselines, with zero current real API cost or latency measurements in [the external summary](routing/external_transfer/summary.csv), [the paired external intervals](routing/external_transfer/paired.csv), [the per-benchmark breakdown](routing/external_transfer/by_benchmark.csv), and [the per-seed breakdown](routing/external_transfer/by_seed.csv).
+
+Safe optional reproduction uses the pinned archive placed at `data/raw/llmrouterbench/bench-release.tar.gz` (`1,283,503,080` bytes) with the optional `sentence-transformers` packages already documented in [the README](../README.md). Omitting `--run`, `--checkpoints`, `--learning-selection`, `--audit`, and `--archive` reuses the same checkpoints and protocol (`artifacts/main_v2`, `artifacts/routing_learning/checkpoints`, `reports/routing/learning/selection.json`, and `reports/routing/external_transfer/protocol.json`), while `--output artifacts/llmrouterbench_reproduction` and `--features artifacts/llmrouterbench_reproduction/features.npz` keep checked-in files untouched and `--device cuda` (or `--device cpu` on CPU hosts, as the script passes `--device` directly to `SentenceTransformer`) encodes prompts in [the external routing script](../scripts/run_external_routing.py).
+
+```bash
+python scripts/run_external_routing.py --phase prepare --device cuda --features artifacts/llmrouterbench_reproduction/features.npz --output artifacts/llmrouterbench_reproduction
+python scripts/run_external_routing.py --phase score --features artifacts/llmrouterbench_reproduction/features.npz --output artifacts/llmrouterbench_reproduction
+```
+
 ### Validation-only routing-aware probe pilot
 
 We also ran a validation-only active acquisition pilot using the frozen seed-11 `neural_lowrank` decoder, 13 validation newcomers, and 3,372 validation queries. Disjoint support-only banks allocate 32 reference prompts and 100 probe candidates per benchmark (160 reference and 500 candidate prompts total). Every newcomer starts from a common set of 10 balanced warm-up probes and advances with identical round-robin benchmark quotas to budgets 50 and 100 across four arms (`balanced_random`, `score_fisher`, `d_optimal`, and `routing_expected_improvement`) in [the pilot script](../scripts/pilot_routing_acquisition.py).
