@@ -239,6 +239,10 @@ A post-test mechanism diagnostic examines `xRouteBench` official `train` alone, 
 
 With the `q50` incumbent (`gpt-oss-20b`), the actual mean newcomer-minus-incumbent gap is -8.21 pp with +7.41 pp oracle rescue opportunity, and asymmetric scoring predicts -27.72 pp with 0.53% admitted after 10 probes and -8.88 pp after 200. Matching support at 10 probes shifts the predicted gap to -1.03 pp and admission to 11.69%, giving +0.35 pp for the router over the incumbent and +0.38 pp for same-fit reference-static selection. At 500 probes for both, the router gains +1.27 pp versus +1.48 pp for same-fit static selection, making the +0.73 versus +0.43 pp pair at 200 matched probes an isolated point comparison alongside -0.04 to -0.46 pp matched routed gains across `q75`, `q90`, and `q100`. Budget asymmetry depresses early newcomer scores in this setting, matching support can overcorrect, and higher admission rates leave an uncertain contextual advantage. This diagnostic is exploratory, with no target rescore and no proof of causality for other settings.
 
+![Predicted and observed newcomer advantage by probe count, and matched-support routing compared with a fixed model](routing/xroute_onboarding/profile_budget_asymmetry.png)
+
+*xRouteBench q50 incumbent, using the official training split only.*
+
 ### Validation-only routing-aware probe pilot
 
 We also ran a validation-only active acquisition pilot using the frozen seed-11 `neural_lowrank` decoder, 13 validation newcomers, and 3,372 validation queries. Disjoint support-only banks allocate 32 reference prompts and 100 probe candidates per benchmark (160 reference and 500 candidate prompts total). Every newcomer starts from a common set of 10 balanced warm-up probes and advances with identical round-robin benchmark quotas to budgets 50 and 100 across four arms (`balanced_random`, `score_fisher`, `d_optimal`, and `routing_expected_improvement`) in [the pilot script](../scripts/pilot_routing_acquisition.py).
