@@ -2,7 +2,9 @@
 
 Can 50, 100, or 200 binary answers place a new language model inside a router without querying every candidate on future inputs? This NYCU Deep Learning Practice Group 11 project freezes a shared question decoder, infers an 8D vector for each newcomer, and selects one model per query, building on [EmbedLLM: Learning Compact Representations of Large Language Models, ICLR 2025](https://openreview.net/forum?id=Fs9EabmQrJ).
 
-We independently implement EmbedLLM-style few-answer onboarding and test directly when query-level matches overcome an established incumbent. EmbedLLM already performs per-query routing, and prior work on cold-start onboarding includes [UniRoute](https://arxiv.org/abs/2502.08773) and [ZeroRouter](https://arxiv.org/abs/2601.06220).
+We independently implement EmbedLLM-style few-answer onboarding and test directly when query-level matches overcome an established incumbent. EmbedLLM already performs per-query routing, and prior work on cold-start onboarding includes [UniRoute](https://arxiv.org/abs/2502.08773) and [ZeroRouter](https://arxiv.org/abs/2601.06220). Original EmbedLLM learned model-ID embeddings for unseen questions. Our variant freezes a shared decoder to onboard unseen model IDs.
+
+Selecting the 8D decoder checkpoint by validation routing accuracy gained +3.53 and +3.48 macro pp over score-MAE selection at 200 probes on the 13-model and expanded 37-model pools. Adding softmax regret shifted macro accuracy by +0.06 and +0.12 pp, leaving routing-selected BCE at -0.80 pp on 13 models and an uncertain +0.61 pp (95% interval crossing zero) against the fixed comparator on the 37-model pool in [the final report](reports/FINAL_REPORT.md).
 
 Offline replay spans 88 models and 22,475 representative questions across five benchmarks (`LogiQA`, `MMLU`, `MathQA`, `MedMCQA`, `TruthfulQA`). It uses 62 training models on 15,733 support items, 13 validation models on 3,372 queries, and 13 test candidates on 3,370 unseen queries across seeds 11, 23, and 37. Because this evaluation reuses test models and questions already scored in the benchmark study, it acts as an exploratory downstream reanalysis even though validation selects all margins and test labels never enter fitting. Efficiency covers probe label budget, 8D storage, and one intended model call per query, leaving live calls, deployment cost, and latency out of scope in [the final report](reports/FINAL_REPORT.md).
 
@@ -67,6 +69,13 @@ python scripts/run_routing.py --run artifacts/reproduction --phase validation --
 python scripts/run_routing.py --run artifacts/reproduction --phase test --output artifacts/routing_reproduction
 ```
 
+Optional two-step reproduction for the checkpoint-selection and softmax-regret study in [the routing-learning script](scripts/pilot_routing_learning.py) uses `--run`, `--checkpoints`, and `--output` on a fresh clone so `artifacts/reproduction` feeds both phases while checked-in reports remain untouched.
+
+```bash
+python scripts/pilot_routing_learning.py --phase train_validate --run artifacts/reproduction --checkpoints artifacts/reproduction_learning --output artifacts/routing_learning_reproduction
+python scripts/pilot_routing_learning.py --phase test --run artifacts/reproduction --checkpoints artifacts/reproduction_learning --output artifacts/routing_learning_reproduction
+```
+
 To route a single prompt, first fit a newcomer embedding via `scripts/embed_new_model.py` (`plan` then `infer` with `--variant neural_lowrank` on the same run and seed), optionally install the text encoder packages, and run the query selector.
 
 ```bash
@@ -88,4 +97,4 @@ Pass `--question-vector path.npy` to supply a precomputed `all-mpnet-base-v2` ve
 | `docs/` | Model mathematics, prior work, data provenance, independent reviews |
 | `tests/` | Numerical, data-boundary, and integration tests |
 
-Related methods include [tinyBenchmarks](https://proceedings.mlr.press/v235/maia-polo24a.html), [Active Evaluation Acquisition](https://proceedings.mlr.press/v267/li25bp.html), [ATLAS](https://proceedings.mlr.press/v306/li26fx.html), and [SkillEval](https://arxiv.org/abs/2610.28767). Dataset card Apache-2.0 metadata does not establish upstream prompt licenses, and detailed source comparisons live in [related work](docs/research/related_work.md), [novelty review](docs/research/novelty_review.md), and [data sources](docs/research/data_sources.md).
+Related methods include [softmax regret routing](https://arxiv.org/abs/2505.16037), [few-observation LLM profiles](https://arxiv.org/abs/2609.37362), [tinyBenchmarks](https://proceedings.mlr.press/v235/maia-polo24a.html), [Active Evaluation Acquisition](https://proceedings.mlr.press/v267/li25bp.html), [ATLAS](https://proceedings.mlr.press/v306/li26fx.html), and [SkillEval](https://arxiv.org/abs/2610.28767). Dataset card Apache-2.0 metadata does not establish upstream prompt licenses, and detailed source comparisons live in [related work](docs/research/related_work.md), [novelty review](docs/research/novelty_review.md), and [data sources](docs/research/data_sources.md).
