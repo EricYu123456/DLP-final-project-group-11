@@ -17,7 +17,7 @@ from coldstart.adaptation import adapt_many, sigmoid
 from coldstart.data import load_dataset
 from coldstart.models import create_decoder, load_decoder, save_decoder, select_device
 from coldstart.probes import select_probe_order
-from coldstart.splits import load_family_table, load_split
+from coldstart.splits import dataset_fingerprint, load_family_table, load_split
 from evaluate_metadata_excluded import load_oracle
 from route_query import choose_models, interaction_scores
 from run_experiment import atomic_csv, atomic_json, decoder_configuration, training_configuration
@@ -173,6 +173,10 @@ def train_all(dataset, split, config, orders, prior_strength, output, device):
     training = dataset.subset(split.train_models, split.train_items)
     target = dataset.subset(split.val_models, split.val_items)
     spec = decoder_configuration(dataset, split, config, VARIANT)
+    context = {"training_model_ids": training.model_ids.tolist(),
+               "training_prompt_ids": training.prompt_ids.tolist(),
+               "dataset_fingerprint": dataset_fingerprint(dataset),
+               "prior_strength": prior_strength}
     rows, selection = [], []
     for seed in config["seeds"]:
         support = dataset.subset(split.val_models, orders[seed][:PRIMARY_BUDGET])
@@ -185,7 +189,7 @@ def train_all(dataset, split, config, orders, prior_strength, output, device):
                 decoder = create_decoder(spec, seed)
                 decoder.load_state_dict(checkpoint.pop("state"))
                 checkpoint["arm"] = arm
-                save_decoder(output / "checkpoints" / f"{arm}_{seed}.pt", decoder, checkpoint)
+                save_decoder(output / "checkpoints" / f"{arm}_{seed}.pt", decoder, {**checkpoint, **context})
                 selection.append(checkpoint)
                 print(f"{arm} seed={seed} epoch={checkpoint['epoch']} "
                       f"routing={checkpoint['macro_routing_accuracy']:.5f} "

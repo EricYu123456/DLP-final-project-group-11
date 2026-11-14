@@ -85,6 +85,16 @@ python scripts/route_query.py --run artifacts/reproduction --seed 11 --trained-m
 
 Pass `--question-vector path.npy` to supply a precomputed `all-mpnet-base-v2` vector as an alternative to raw text. Pure low-rank ranking omits `--benchmark` because shared question offsets cancel, while passing `--benchmark` adds probability scores and `--minimum-gain` two-candidate gating. The CLI prints JSON naming one candidate for downstream dispatch, and a validation-prompt check on a 50-probe fit matched the released vector within `5.25e-7` maximum score error and picked the same model in [the query router](scripts/route_query.py).
 
+The previous workflow still works with the legacy checkpoint. For the routing-selected BCE model, plan probes with `scripts/embed_new_model.py plan`, have the model provider or user fill binary `response` values in `artifacts/new_model/probes.csv` for the new LLM, and use the same checkpoint for `fit` and routing in `scripts/route_query.py` (using the earlier text-encoder install step for raw text).
+
+```bash
+python scripts/embed_new_model.py plan --run artifacts/reproduction --variant neural_lowrank --seed 11 --budget 200 --output artifacts/new_model/probes.csv
+python scripts/route_query.py fit --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --responses artifacts/new_model/probes.csv --model-name my_model --output artifacts/new_model/routing_embedding.npz
+python scripts/route_query.py --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --trained-model 50 --candidate-embedding artifacts/new_model/routing_embedding.npz --prompt "What causes the phases of the Moon?"
+```
+
+As an alternative to `--prompt`, `--stdin` consumes one nonempty prompt per line and emits one independent JSON choice per line while reusing the decoder and text encoder, and optional `--question-vector` remains available for saved features. Optional `--learning-selection` supplies a custom `selection.json` for older routing-learning checkpoint metadata. These commands select which model should answer, with the caller handling generation separately.
+
 ## Repository guide and related work
 
 | Path | Role |
