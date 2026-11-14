@@ -6,18 +6,16 @@ import argparse
 from collections import defaultdict
 import csv
 from pathlib import Path
-from time import perf_counter
 
 import numpy as np
 from threadpoolctl import threadpool_limits
 
 from route_query import ROOT
-from coldstart.adaptation import adapt_map, sigmoid
 from pilot_competitive_onboarding import EXACT_CAP, EXACT_STOP, RANDOM_STOP, VALIDATED_K, run_episode
 from run_experiment import atomic_csv, atomic_json
 from run_external_routing import paired_queries
 from run_sequential_routing import (CAP, SCREENED_PER_STEP, WARMUP, input_context, probabilities,
-                                    read_json, seed_episodes, state_summary, stop_indices)
+                                    read_json, seed_episodes, stop_indices, trajectory)
 
 
 BUDGETS = (20, 50, 100, CAP)
@@ -26,50 +24,13 @@ DETAIL_TOLERANCE = 0.002
 DETAIL_CONDITION = "evpi_0.002"
 
 
-def information_gain(eligible, design, offsets, fit, gap, gradients):
-    candidates = design[eligible]
-    probability = sigmoid(offsets[eligible] + candidates @ fit.latent)
-    weight = probability * (1 - probability)
-    projected = candidates @ fit.covariance
-    update_scale = weight / (1 + weight * np.einsum("ij,ij->i", projected, candidates))
-    variance = np.einsum("ij,ij->i", gradients @ fit.covariance, gradients)
-    sigma = np.sqrt(np.maximum(variance, 0))
-    active = sigma > np.finfo(np.float64).eps
-    ratio = np.divide(gap, sigma, out=np.zeros_like(sigma), where=active)
-    curvature = np.divide(np.exp(-0.5 * ratio ** 2), 2 * np.sqrt(2 * np.pi) * sigma,
-                          out=np.zeros_like(sigma), where=active)
-    return update_scale * ((projected @ gradients.T) ** 2 @ curvature) / len(gap)
-
-
 def smooth_path(episode, margin, options, *, tolerance=0.0, cap=CAP):
-    order, domains = episode["random_order"], episode["probe_domains"]
-    design, offsets = episode["probe_design"], episode["probe_offsets"]
-    prior = episode["prior"]
-    rng = np.random.default_rng(np.random.SeedSequence([episode["seed"], episode["model_id"]]))
-    started = perf_counter()
-    selected = order[:WARMUP].tolist()
-    observed = np.empty(cap, dtype=np.float64)
-    for index, probe in enumerate(selected):
-        observed[index] = episode["observe"](probe)
-    available = np.ones(len(order), dtype=bool)
-    available[selected] = False
-    fit = adapt_map(design[selected], offsets[selected], observed[:WARMUP], *prior, **options)
-    latents, trace = [], []
-    for budget in range(WARMUP, cap + 1):
-        _, gap, gradients, evpi = state_summary(fit, *episode["reference"], episode["reference_incumbent"], margin)
-        trace.append((evpi, float(gap.max()), perf_counter() - started))
-        latents.append(fit.latent)
-        if budget == cap or (tolerance > 0 and evpi <= tolerance):
-            break
-        eligible = np.flatnonzero(available & (domains == domains[order[budget]]))
-        shortlist = rng.permutation(eligible)[:SCREENED_PER_STEP]
-        chosen = shortlist[information_gain(shortlist, design, offsets, fit, gap, gradients).argmax()]
-        observed[budget] = episode["observe"](chosen)
-        selected.append(chosen)
-        available[chosen] = False
-        fit = adapt_map(design[selected], offsets[selected], observed[:budget + 1], *prior,
-                        initial=fit.latent, **options)
-    return np.stack(latents), np.asarray(trace)
+    seed = np.random.SeedSequence([episode["seed"], episode["model_id"]])
+    latents, trace, _, _ = trajectory(episode["random_order"], episode["probe_domains"],
+                                      episode["probe_design"], episode["probe_offsets"], episode["observe"],
+                                      episode["reference"], episode["reference_incumbent"], episode["prior"],
+                                      margin, options, seed, tolerance, selection="smooth", cap=cap)
+    return latents, np.asarray(trace)
 
 
 def metrics(episode, path, budget, margin, truth, weights):

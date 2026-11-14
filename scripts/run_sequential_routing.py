@@ -26,6 +26,7 @@ WARMUP = 10
 CAP = 200
 SCREENED_PER_STEP = 48
 EXACT_PER_STEP = 8
+SELECTORS = ("exact", "random", "smooth")
 FIXED_BUDGETS = (50, 100, CAP)
 THRESHOLDS = (0.0, 1e-5, 3e-5, 1e-4, 3e-4, 1e-3, 3e-3, 0.01, 0.02, 0.05)
 MAX_VALIDATION_LOSS = 0.001
@@ -81,11 +82,29 @@ def select_probe(eligible, design, offsets, selected_design, selected_offsets, o
     return chosen, chosen_outcomes
 
 
+def information_gain(eligible, design, offsets, fit, gap, gradients):
+    """Approximate the decision-loss reduction from a rank-one precision update."""
+    candidates = design[eligible]
+    probability = sigmoid(offsets[eligible] + candidates @ fit.latent)
+    weight = probability * (1 - probability)
+    projected = candidates @ fit.covariance
+    update_scale = weight / (1 + weight * np.einsum("ij,ij->i", projected, candidates))
+    variance = np.einsum("ij,ij->i", gradients @ fit.covariance, gradients)
+    sigma = np.sqrt(np.maximum(variance, 0))
+    active = sigma > np.finfo(np.float64).eps
+    ratio = np.divide(gap, sigma, out=np.zeros_like(sigma), where=active)
+    curvature = np.divide(np.exp(-0.5 * ratio ** 2), 2 * np.sqrt(2 * np.pi) * sigma,
+                          out=np.zeros_like(sigma), where=active)
+    return update_scale * ((projected @ gradients.T) ** 2 @ curvature) / len(gap)
+
+
 def probe_steps(order, domains, design, offsets, reference, incumbent, prior, margin,
-                solver_options, shortlist_seed, tolerance, *, selection="exact"):
+                solver_options, shortlist_seed, tolerance, *, selection="exact", cap=CAP):
     """Yield one selected probe and receive its response before selecting again."""
-    if selection not in ("exact", "random"):
-        raise ValueError("Probe selection must be exact or random.")
+    if selection not in SELECTORS:
+        raise ValueError(f"Probe selection must be one of {', '.join(SELECTORS)}.")
+    if not WARMUP <= cap <= len(order):
+        raise ValueError(f"Probe cap must be between the {WARMUP}-answer warm-up and the bank size.")
     rng = np.random.default_rng(shortlist_seed)
     reference_design, reference_offsets = reference
     selected = list(order[:WARMUP])
@@ -97,29 +116,33 @@ def probe_steps(order, domains, design, offsets, reference, incumbent, prior, ma
     available = np.ones(len(order), dtype=bool)
     available[selected] = False
     trace, latents = [], []
-    for budget in range(WARMUP, CAP + 1):
+    for budget in range(WARMUP, cap + 1):
         state = state_summary(fit, reference_design, reference_offsets, incumbent, margin)
         trace.append((state[-1], float(state[1].max()), perf_counter() - started))
         latents.append(fit.latent)
-        if budget == CAP or (tolerance > 0 and state[-1] <= tolerance):
-            if budget == CAP:
+        if budget == cap or (tolerance > 0 and state[-1] <= tolerance):
+            if budget == cap:
                 stop_reason = "cap"
             else:
                 stop_reason = "sufficient_reference_evidence" if state[1].max() > 0 else "weak_on_reference"
             return np.array(latents), trace, selected, stop_reason
-        if selection == "exact":
+        if selection == "random":
+            chosen = order[budget]
+        else:
             domain = domains[order[budget]]
             eligible = np.flatnonzero(available & (domains == domain))
             screened = rng.permutation(eligible)[:SCREENED_PER_STEP]
-            chosen, after = select_probe(screened, design, offsets, design[selected], offsets[selected],
-                                         observed, reference_design, reference_offsets, fit, prior, state, solver_options)
-        else:
-            chosen = order[budget]
+            if selection == "exact":
+                chosen, after = select_probe(screened, design, offsets, design[selected], offsets[selected],
+                                             observed, reference_design, reference_offsets, fit, prior, state, solver_options)
+            else:
+                _, gap, gradients, _ = state
+                chosen = screened[information_gain(screened, design, offsets, fit, gap, gradients).argmax()]
         actual = yield chosen
         selected.append(chosen)
         observed = np.r_[observed, actual]
         available[chosen] = False
-        if np.isfinite(actual):
+        if np.isfinite(actual) or selection == "smooth":
             if selection == "exact":
                 fit = after[int(actual)]
             else:
@@ -128,10 +151,10 @@ def probe_steps(order, domains, design, offsets, reference, incumbent, prior, ma
 
 
 def trajectory(order, domains, design, offsets, observe, reference, incumbent, prior, margin,
-               solver_options, shortlist_seed, tolerance, *, selection="exact"):
+               solver_options, shortlist_seed, tolerance, *, selection="exact", cap=CAP):
     """Replay one arrival, invoking the response callback only for chosen probes."""
     steps = probe_steps(order, domains, design, offsets, reference, incumbent, prior, margin,
-                        solver_options, shortlist_seed, tolerance, selection=selection)
+                        solver_options, shortlist_seed, tolerance, selection=selection, cap=cap)
     try:
         candidate = next(steps)
         while True:

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -13,7 +14,7 @@ from threadpoolctl import threadpool_limits
 from route_query import LEARNING_SELECTION, ROOT, VARIANT
 from embed_new_model import read_prompts
 from run_experiment import sha256
-from run_sequential_routing import B, input_context, onboarding_context, probe_steps, read_json
+from run_sequential_routing import B, SELECTORS, input_context, onboarding_context, probe_steps, read_json
 
 
 def read_history(path: Path | None) -> list[tuple[int, int]]:
@@ -62,21 +63,25 @@ def onboard(args):
     reference = np.array([positions[prompt] for prompt in protocol["reference_prompt_ids"]])
     candidate_ids = np.array(protocol["candidate_prompt_ids"])
     candidates = np.array([positions[int(prompt)] for prompt in candidate_ids])
-    incumbent = int(np.flatnonzero(dataset.model_ids == protocol["incumbent_model_id"])[0])
-    if incumbent not in split.train_models:
-        raise ValueError("The incumbent must be part of the established roster.")
+    incumbent_id = protocol["incumbent_model_id"] if args.incumbent_model_id is None else args.incumbent_model_id
+    established = split.train_models[dataset.model_ids[split.train_models] == incumbent_id]
+    if not len(established):
+        raise ValueError(f"Incumbent model {incumbent_id} is outside the established training roster.")
+    incumbent = int(established[0])
     checkpoint = args.checkpoints / f"{B}_{args.seed}.pt"
     _, incumbent_latent, context = onboarding_context(dataset, split, config, learned, incumbent, reference,
                                                       candidates, args.seed, checkpoint)
     options = {key: config["adaptation"][key] for key in ("max_iterations", "tolerance")}
     rng = np.random.SeedSequence([args.seed, args.episode_id])
-    margin, tolerance = selection["admission_margin"], selection["evpi_tolerance"]
+    margin = selection["admission_margin"]
+    tolerance = selection["evpi_tolerance"] if args.evpi_tolerance is None else args.evpi_tolerance
     steps = probe_steps(context["random_order"], context["probe_domains"], context["probe_design"],
                         context["probe_offsets"], context["reference"], context["reference_incumbent"],
-                        context["prior"], margin, options, rng, tolerance)
+                        context["prior"], margin, options, rng, tolerance, selection=args.selector)
     probe, stopped = replay(steps, candidate_ids, history)
     common = {"model_name": args.model_name, "episode_id": args.episode_id, "seed": args.seed,
-              "responses_received": len(history)}
+              "responses_received": len(history), "selector": args.selector,
+              "evpi_tolerance": tolerance, "incumbent_model_id": incumbent_id}
     if stopped is None:
         prompt_id = int(candidate_ids[probe])
         prompt = read_prompts(np.array([prompt_id]), args.question_source)[prompt_id]
@@ -95,17 +100,24 @@ def onboard(args):
                             prompt_ids=dataset.prompt_ids[split.train_items], **shared)
     return {**common, "status": "stop", "reason": reason, "reference_evpi": trace[-1][0],
             "embedding": str(args.embedding), "checkpoint": str(checkpoint),
-            "incumbent_model_id": protocol["incumbent_model_id"], "incumbent_embedding": str(incumbent_embedding),
+            "incumbent_embedding": str(incumbent_embedding),
             "minimum_gain": margin}
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, epilog=(
         "Start with an empty history. Append each returned prompt_id and its binary correctness "
-        "to the CSV in order, then rerun with the same episode ID and seed. The command never calls a model."))
+        "to the CSV in order. Keep the same episode ID, seed, selector, tolerance and incumbent "
+        "for each step. The command never calls a model."))
     parser.add_argument("--model-name", required=True)
     parser.add_argument("--episode-id", type=int, required=True, help="Stable nonnegative ID for the shortlist sequence.")
     parser.add_argument("--seed", type=int, default=11)
+    parser.add_argument("--selector", choices=SELECTORS, default="exact",
+                        help="Probe selection method. All three use the same stopping rule.")
+    parser.add_argument("--evpi-tolerance", type=float,
+                        help="Stopping threshold (default: frozen 0.0003, 0 runs to the cap). "
+                             "0.002 is an example from validation.")
+    parser.add_argument("--incumbent-model-id", type=int, help="Established model ID from the training roster.")
     parser.add_argument("--responses", type=Path, help="CSV containing chronological prompt_id,response pairs.")
     parser.add_argument("--embedding", type=Path, required=True,
                         help="Newcomer .npz path. On stop, the incumbent .npz is saved beside it.")
@@ -117,6 +129,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.episode_id < 0:
         parser.error("--episode-id must be nonnegative.")
+    if args.evpi_tolerance is not None and (not math.isfinite(args.evpi_tolerance) or args.evpi_tolerance < 0):
+        parser.error("--evpi-tolerance must be finite and nonnegative.")
     try:
         with threadpool_limits(limits=1):
             result = onboard(args)
