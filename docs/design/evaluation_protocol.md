@@ -1,5 +1,7 @@
 # Evaluation protocol
 
+This archival document preserves the October 2026 benchmark-score protocol. The primary November 2026 routing protocol and results appear in [the final report](../../reports/FINAL_REPORT.md).
+
 This protocol predicts held-out models' scores on held-out benchmark questions from 50, 100, or 200 observed answers. The primary regime is `strict_unseen_item`: final test-question labels are unavailable for every model during training, probe selection, adaptation, and tuning. It implements the information boundary in §9.1 of [the project discussion](../../doc/EmbedLLM_期末專題選題討論.md). The random-model experiment uses [protocol.json](../../configs/protocol.json); the paired family experiment uses the separately frozen [family_protocol.json](../../configs/family_protocol.json).
 
 The score is performance on the retained historical prompt/category representatives and their recorded binary labels. The release does not preserve all generation settings, evaluator revisions, or scoring-filter identities; singleton structure does not establish uniform evaluation conditions. This score is not an estimate of general intelligence, the complete original benchmark, or a newly queried frontier model's future performance. The method adapts a small evaluator; it does not compress or fine-tune an LLM.

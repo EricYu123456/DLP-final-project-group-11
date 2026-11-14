@@ -37,7 +37,7 @@ Raw argmax routes 18.55%, 16.23%, and 13.04% of queries to newcomers and capture
 
 *Macro routing accuracy across 50, 100, and 200 balanced-random probes per candidate. The left panel compares four pool routers across all 13 held-out models alongside the full 15,733-probe 8D reference line. The right panel plots add-one macro gain over the Meta-Llama-3-70B-Instruct incumbent under validation margins with 95% paired, conditional query-bootstrap intervals.*
 
-A separate validation-only pilot comparing balanced random, score-Fisher, D-optimal, and routing-aware expected improvement acquisition at budgets 50 and 100 also produced negative gains under the fixed 0.10 admission margin (-0.13 and -0.04 percentage points vs. balanced random) in [the acquisition pilot](scripts/pilot_routing_acquisition.py) and [the pilot summary](reports/routing/acquisition_pilot/summary.csv).
+A separate validation-only pilot comparing balanced random, score-Fisher, D-optimal, and routing-aware expected improvement acquisition at budgets 50 and 100 also produced negative gains under the fixed 0.10 admission margin (-0.13 and -0.04 percentage points vs. balanced random) in [the acquisition pilot](scripts/pilot_routing_acquisition.py) and [the pilot summary](reports/routing/acquisition_pilot/summary.csv). An exploratory validation pilot on support-selected fallback routing also found no general advantage across budgets (+0.44, +2.51, and +0.77 macro points at 50, 100, and 200 probes, with -0.37 micro points at 200) in [the final report](reports/FINAL_REPORT.md) and [the anchored pilot summary](reports/routing/anchored_pilot/summary.csv).
 
 ## Secondary study on benchmark-score prediction
 
@@ -62,7 +62,7 @@ python -m pip install -e ".[dev]"
 python -m pytest -q
 python scripts/download_data.py
 python scripts/prepare_data.py --no-split
-python scripts/run_experiment.py --phase train_validate --output artifacts/reproduction --evaluate-validation
+python scripts/run_experiment.py --phase train_validate --output artifacts/reproduction --evaluate-validation --save-predictions
 python scripts/run_routing.py --run artifacts/reproduction --phase validation --output artifacts/routing_reproduction
 python scripts/run_routing.py --run artifacts/reproduction --phase test --output artifacts/routing_reproduction
 ```

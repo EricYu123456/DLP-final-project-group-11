@@ -12,7 +12,7 @@ Our secondary study from 2026-10-28 remains valid within its original boundaries
 
 ## Routing protocol and information boundaries
 
-Routing reuses the frozen `main_v2` `neural_lowrank` 8D decoder (`sigmoid(offset(question) + feature(question)^T model_embedding)`), trained on 62 historical models and 15,733 support questions. Legacy hyperparameter selection used 13 validation models and 3,372 validation queries to minimize cold-start score MAE. Onboarding never refits the shared decoder. For each held-out model, a convex Newton MAP solver fits only that candidate's 8D vector from nested balanced-random sets of 50, 100, or 200 binary probe answers across seeds 11, 23, and 37. Every query independently scores all pool embeddings and selects one candidate before reading target correctness, using released binary labels strictly for offline replay scoring.
+Routing reuses the frozen `main_v2` `neural_lowrank` 8D decoder (`sigmoid(offset(question) + feature(question)^T model_embedding)`), trained on 62 historical models and 15,733 support questions. Legacy hyperparameter selection used 13 validation models and 3,372 validation queries to minimize cold-start score MAE. Onboarding never refits the shared decoder. For each held-out model, Newton's method solves the convex MAP problem to fit only that candidate's 8D vector from nested balanced-random sets of 50, 100, or 200 binary probe answers across seeds 11, 23, and 37. Every query independently scores all pool embeddings and selects one candidate before reading target correctness, using released binary labels strictly for offline replay scoring.
 
 We evaluate two protocols on the same 3,370 unseen test question groups across `LogiQA`, `MMLU`, `MathQA`, `MedMCQA`, and `TruthfulQA` in [the routing runner](../scripts/run_routing.py) and [the validation record](routing/validation_selection.json).
 
@@ -93,6 +93,22 @@ Under the fixed 0.10 admission rule, routing-aware expected improvement reaches 
 
 ```bash
 python scripts/pilot_routing_acquisition.py --run artifacts/main_v2 --validation-selection reports/routing/validation_selection.json --output reports/routing/acquisition_pilot
+```
+
+### Exploratory support-selected fallback router
+
+We also ran an exploratory fallback routing check across the 13 validation candidates and 3,372 validation queries using saved `neural_lowrank` predictions in [the anchored pilot script](../scripts/pilot_anchored_routing.py), [the anchored pilot summary](routing/anchored_pilot/summary.csv), [the fold breakdown](routing/anchored_pilot/folds.csv), and [the per-seed breakdown](routing/anchored_pilot/by_seed.csv). Per seed (11, 23, and 37) and budget (50, 100, and 200), the policy selects one default candidate from the same balanced-random probe answers by highest probe macro accuracy and lowest source ID on ties, then switches independently for each prompt only when the highest embedding correctness score exceeds the default by a margin. Two benchmark-stratified validation query folds (1,687 and 1,685 queries) learn each budget's macro-gain-maximizing margin on the opposite fold. Decoder, checkpoint, and model tuning had prior full validation access, so only margin selection is cross-fit. This result is exploratory validation, with no final-test score.
+
+| Budget | Default macro / micro (%) | Cross-fit macro / micro (%) | Macro gain (pp) | Conditional 95% CI (pp) | Micro gain (pp) | Switch (%) | Rescues / harms |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 50 | 51.51 / 62.21 | 51.95 / 62.24 | +0.44 | [-0.10, +1.01] | +0.03 | 1.89 | 11.67 / 10.67 |
+| 100 | 49.37 / 62.59 | 51.88 / 62.83 | +2.51 | [+1.65, +3.39] | +0.24 | 5.95 | 42.00 / 34.00 |
+| 200 | 52.92 / 65.69 | 53.69 / 65.32 | +0.77 | [-0.17, +1.77] | -0.37 | 6.41 | 32.67 / 45.00 |
+
+Macro gains against the same-budget default are +0.44, +2.51, and +0.77 percentage points at 50, 100, and 200 probes, with conditional 95% intervals of [-0.10, +1.01], [+1.65, +3.39], and [-0.17, +1.77] points and micro gains of +0.03, +0.24, and -0.37 points. Each interval conditions on the two selected fold thresholds and the candidate roster. At 100 probes, 5.95% of queries switch, averaging 42 rescues and 34 harms per seed, and both folds gain macro accuracy (2.97 and 2.04 percentage points under margins 0.05 and 0.075). That budget-100 gain concentrates in decoder and probe seed 11 (+6.50 macro points, 101 rescues against 81 harms), where support chose the weaker default ID 64 while seeds 23 and 37 chose ID 5 (+1.03 and 0.00 macro points). Across budgets, results show no general advantage, and micro accuracy falls at 200 probes. Reproducing this analysis on a fresh run requires `--evaluate-validation --save-predictions` at `train_validate`.
+
+```bash
+python scripts/pilot_anchored_routing.py --run artifacts/main_v2 --output reports/routing/anchored_pilot
 ```
 
 ## Secondary study on historical benchmark-score estimates (2026-10-28)
