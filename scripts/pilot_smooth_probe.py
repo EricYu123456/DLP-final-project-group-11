@@ -41,25 +41,25 @@ def information_gain(eligible, design, offsets, fit, gap, gradients):
     return update_scale * ((projected @ gradients.T) ** 2 @ curvature) / len(gap)
 
 
-def smooth_path(episode, margin, options, *, tolerance=0.0):
+def smooth_path(episode, margin, options, *, tolerance=0.0, cap=CAP):
     order, domains = episode["random_order"], episode["probe_domains"]
     design, offsets = episode["probe_design"], episode["probe_offsets"]
     prior = episode["prior"]
     rng = np.random.default_rng(np.random.SeedSequence([episode["seed"], episode["model_id"]]))
     started = perf_counter()
     selected = order[:WARMUP].tolist()
-    observed = np.empty(CAP, dtype=np.float64)
+    observed = np.empty(cap, dtype=np.float64)
     for index, probe in enumerate(selected):
         observed[index] = episode["observe"](probe)
     available = np.ones(len(order), dtype=bool)
     available[selected] = False
     fit = adapt_map(design[selected], offsets[selected], observed[:WARMUP], *prior, **options)
     latents, trace = [], []
-    for budget in range(WARMUP, CAP + 1):
+    for budget in range(WARMUP, cap + 1):
         _, gap, gradients, evpi = state_summary(fit, *episode["reference"], episode["reference_incumbent"], margin)
         trace.append((evpi, float(gap.max()), perf_counter() - started))
         latents.append(fit.latent)
-        if budget == CAP or (tolerance > 0 and evpi <= tolerance):
+        if budget == cap or (tolerance > 0 and evpi <= tolerance):
             break
         eligible = np.flatnonzero(available & (domains == domains[order[budget]]))
         shortlist = rng.permutation(eligible)[:SCREENED_PER_STEP]

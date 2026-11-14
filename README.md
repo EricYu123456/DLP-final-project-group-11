@@ -117,6 +117,12 @@ python scripts/route_query.py --run artifacts/main_v2 --checkpoint artifacts/rou
 
 Both steps reuse the same trained files or take fresh overrides via `--run`, `--checkpoints`, `--selection`, and `--learning-selection`, keeping the same decoder for both (`--checkpoint` in `scripts/route_query.py`). The CLI yields choices, and the external caller submits model generation and scoring. When an incoming prompt has no manually supplied `--benchmark`, any positive `--minimum-gain` with exactly two candidates uses the arithmetic mean of learned benchmark biases as the logit offset component (the same fallback as external replay) to compute gating probabilities that remain uncalibrated for arbitrary traffic, and omitting both `--benchmark` and a positive `--minimum-gain` retains raw interaction `argmax` by default.
 
+An end-to-end local integration demo in [the live routing demo script](scripts/demo_live_routing.py) runs live onboarding and query dispatch on GPU using the documented PyTorch environment plus `sentence-transformers`, `transformers`, and `pyarrow` against pinned `ARC-Challenge` data and public Hugging Face checkpoints, with checked-in records in [the live demo summary](reports/routing/live_demo/demo.json) and [the dispatch log](reports/routing/live_demo/dispatch.csv).
+
+```bash
+python scripts/demo_live_routing.py --output artifacts/live_demo_reproduction
+```
+
 ## Repository guide and related work
 
 | Path | Role |
