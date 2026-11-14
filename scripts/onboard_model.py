@@ -7,6 +7,7 @@ import csv
 import json
 import math
 from pathlib import Path
+import sys
 
 import numpy as np
 from threadpoolctl import threadpool_limits
@@ -48,7 +49,25 @@ def replay(steps, candidate_ids, history):
     return local, None
 
 
-def onboard(args):
+def read_stream_answer(stream, expected):
+    line = stream.readline()
+    if not line:
+        raise ValueError(f"Input closed while waiting for response to prompt {expected}.")
+    try:
+        answer = json.loads(line)
+    except json.JSONDecodeError as error:
+        raise ValueError(f"Expected a JSON answer for prompt {expected}.") from error
+    if not isinstance(answer, dict) or type(answer.get("prompt_id")) is not int:
+        raise ValueError(f"Supply an integer prompt_id for prompt {expected}.")
+    if answer["prompt_id"] != expected:
+        raise ValueError(f"Stream response is for prompt {answer['prompt_id']}, expected {expected}.")
+    response = answer.get("response")
+    if type(response) is not int or response not in (0, 1):
+        raise ValueError(f"Supply a binary 0 or 1 response for prompt {expected}.")
+    return response
+
+
+def onboard(args, stream=None):
     history = read_history(args.responses)
     dataset, split, config, _, _, _ = input_context(args.run)
     learned = read_json(args.learning_selection)
@@ -83,10 +102,21 @@ def onboard(args):
               "responses_received": len(history), "selector": args.selector,
               "evpi_tolerance": tolerance, "incumbent_model_id": incumbent_id}
     if stopped is None:
-        prompt_id = int(candidate_ids[probe])
-        prompt = read_prompts(np.array([prompt_id]), args.question_source)[prompt_id]
-        benchmark = dataset.benchmark_names[context["probe_domains"][probe]]
-        return {**common, "status": "next_probe", "prompt_id": prompt_id, "benchmark": benchmark, "prompt": prompt}
+        texts = read_prompts(candidate_ids if stream is not None else candidate_ids[[probe]], args.question_source)
+        try:
+            while True:
+                prompt_id = int(candidate_ids[probe])
+                benchmark = dataset.benchmark_names[context["probe_domains"][probe]]
+                message = {**common, "status": "next_probe", "prompt_id": prompt_id,
+                           "benchmark": benchmark, "prompt": texts[prompt_id]}
+                if stream is None:
+                    return message
+                print(json.dumps(message), flush=True)
+                response = read_stream_answer(stream, prompt_id)
+                common["responses_received"] += 1
+                probe = steps.send(response)
+        except StopIteration as done:
+            stopped = done.value
     latents, trace, selected, reason = stopped
     args.embedding.parent.mkdir(parents=True, exist_ok=True)
     shared = {"checkpoint_sha256": np.array(sha256(checkpoint)), "seed": np.array(args.seed),
@@ -106,9 +136,10 @@ def onboard(args):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, epilog=(
-        "Start with an empty history. Append each returned prompt_id and its binary correctness "
-        "to the CSV in order. Keep the same episode ID, seed, selector, tolerance and incumbent "
-        "for each step. The command never calls a model."))
+        "Supply each returned prompt_id and its binary correctness in chronological order. Use "
+        "--responses for a saved CSV prefix. With --stdin, reply to each next_probe JSON line with "
+        'one line such as {"prompt_id": 123, "response": 1}. Keep the same episode ID, seed, selector, '
+        "tolerance and incumbent when resuming."))
     parser.add_argument("--model-name", required=True)
     parser.add_argument("--episode-id", type=int, required=True, help="Stable nonnegative ID for the shortlist sequence.")
     parser.add_argument("--seed", type=int, default=11)
@@ -118,7 +149,9 @@ def main(argv=None):
                         help="Stopping threshold (default: frozen 0.0003, 0 runs to the cap). "
                              "0.002 is an example from validation.")
     parser.add_argument("--incumbent-model-id", type=int, help="Established model ID from the training roster.")
-    parser.add_argument("--responses", type=Path, help="CSV containing chronological prompt_id,response pairs.")
+    parser.add_argument("--responses", type=Path, help="CSV prefix containing chronological prompt_id,response pairs.")
+    parser.add_argument("--stdin", action="store_true",
+                        help="Exchange one JSON probe and binary answer per line until stop.")
     parser.add_argument("--embedding", type=Path, required=True,
                         help="Newcomer .npz path. On stop, the incumbent .npz is saved beside it.")
     parser.add_argument("--run", type=Path, default=ROOT / "artifacts/main_v2")
@@ -133,10 +166,10 @@ def main(argv=None):
         parser.error("--evpi-tolerance must be finite and nonnegative.")
     try:
         with threadpool_limits(limits=1):
-            result = onboard(args)
+            result = onboard(args, sys.stdin if args.stdin else None)
     except (OSError, ValueError) as error:
         parser.error(str(error))
-    print(json.dumps(result, indent=2))
+    print(json.dumps(result, indent=None if args.stdin else 2), flush=args.stdin)
     return 0
 
 

@@ -1,0 +1,31 @@
+{
+  "phase": "Exploratory EmbedLLM validation decomposition at the archived primary budget.",
+  "main_comparator_source": "summary.csv in the same output directory. It stores aggregate accuracy, without per-query correctness.",
+  "model_ids": [
+    5,
+    7,
+    28,
+    32,
+    44,
+    47,
+    52,
+    57,
+    64,
+    68,
+    71,
+    79,
+    80
+  ],
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "questions": 3372,
+  "total_probes": 1300,
+  "question_selection_only": "Lowest-count model (source-ID tie break) and its best smooth probe from the same seeded shortlist as joint selection.",
+  "model_allocation_only": "Choose the best smooth score among each eligible model's next probe from the exact archived balanced-random order.",
+  "shared_protocol": "Same warmup, bank, benchmark quota order, checkpoint, cap, MAP and query selection as the archived main study.",
+  "paired_interval": "Only between the two new arms, conditional on the three seeds, with queries resampled within benchmark.",
+  "stopping_quality_scored": false
+}

@@ -109,7 +109,15 @@ For `scripts/onboard_model.py`, `--selector` accepts `exact`, `random`, or `smoo
 python scripts/onboard_model.py --model-name my_model --episode-id 42 --seed 11 --selector smooth --evpi-tolerance 0.002 --incumbent-model-id 3 --embedding artifacts/new_model/smooth_embedding.npz
 ```
 
-Obtain the model's answer externally, append its binary correctness under `prompt_id,response` in `artifacts/new_model/adaptive_responses.csv`, and rerun the exact first command with `--responses artifacts/new_model/adaptive_responses.csv` and the same episode ID and seed, repeating until stopping. A `stop` response writes the newcomer embedding alongside `adaptive_embedding.incumbent.npz` and reports the checkpoint, stop reason, and margin. Apply the gate to choose one model per prompt with `scripts/route_query.py`.
+Obtain the model's answer externally, append its binary correctness under `prompt_id,response` in `artifacts/new_model/adaptive_responses.csv`, and rerun the exact first command with `--responses artifacts/new_model/adaptive_responses.csv` and the same episode ID and seed, repeating until stopping. A `stop` response writes the newcomer embedding alongside `adaptive_embedding.incumbent.npz` and reports the checkpoint, stop reason, and margin.
+
+For a persistent session that keeps the decoder and data loaded across probes, add `--stdin`. Each `next_probe` payload arrives as one JSON object per line on standard output, and the caller replies on standard input with one JSON line containing an integer `prompt_id` matching the emitted ID and an integer `response` equal to `0` or `1`. Reaching `stop` writes the same two embeddings and prints the final `stop` JSON line. Save a chronological `prompt_id,response` history externally if resuming with `--responses prefix.csv` and identical settings.
+
+```bash
+python scripts/onboard_model.py --stdin --model-name my_model --episode-id 42 --seed 11 --embedding artifacts/new_model/adaptive_embedding.npz
+```
+
+Apply the gate to choose one model per prompt with `scripts/route_query.py`.
 
 ```bash
 python scripts/route_query.py --run artifacts/main_v2 --checkpoint artifacts/routing_learning/checkpoints/B_bce_routing_selection_11.pt --candidate-embedding artifacts/new_model/adaptive_embedding.incumbent.npz --candidate-embedding artifacts/new_model/adaptive_embedding.npz --minimum-gain 0.025 --prompt "What causes the phases of the Moon?"

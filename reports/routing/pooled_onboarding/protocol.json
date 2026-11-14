@@ -1,0 +1,59 @@
+{
+  "phase": "EmbedLLM validation only",
+  "model_ids": [
+    5,
+    7,
+    28,
+    32,
+    44,
+    47,
+    52,
+    57,
+    64,
+    68,
+    71,
+    79,
+    80
+  ],
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "questions": 3372,
+  "checkpoint": "B_bce_routing_selection",
+  "prior_strength": 0.3,
+  "warmup_per_model": 10,
+  "cap_per_model": 200,
+  "horizons": [
+    650,
+    1300,
+    2600
+  ],
+  "primary": 1300,
+  "candidates": 500,
+  "text_reference": 160,
+  "shortlist": 48,
+  "round_robin": "Fixed balanced order per model, lowest-count model first. Equal ties follow source ID order.",
+  "joint": "Deterministically shuffled shortlist per seed, model, next count and benchmark. Rank-one smooth reduction in Gaussian pairwise-sum upper bound. Zero-score fallback favors lowest count and first shortlist item.",
+  "query_policy": "Select one model by maximum predicted correctness, with no incumbent or admission margin.",
+  "fixed_policies": "One model for all queries or one model per benchmark, using empirical probe means or predicted reference means. Per-benchmark choices use the incoming benchmark label.",
+  "bootstrap": "Paired validation queries resampled within benchmark after averaging seeds.",
+  "fixed_count_gate": {
+    "minimum_macro_gain": 0.005,
+    "minimum_lower_ci_above": 0,
+    "minimum_positive_seeds": 2,
+    "met": false
+  },
+  "stopping_gate": {
+    "thresholds": [
+      0.002,
+      0.005,
+      0.01,
+      0.02
+    ],
+    "minimum_saving": 0.2,
+    "minimum_lower_ci": -0.005,
+    "quality_scored": false
+  }
+}

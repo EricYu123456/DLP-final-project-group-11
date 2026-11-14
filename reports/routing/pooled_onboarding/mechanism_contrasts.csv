@@ -1,0 +1,6 @@
+selection,comparator_selection,macro_gain,micro_gain,macro_ci_low,macro_ci_high,positive_seed_count
+question_selection_only,round_robin_random,0.01880515472632538,0.04161724001581657,,,
+model_allocation_only,round_robin_random,0.01457623282529219,0.03548833531039941,,,
+joint_smooth,model_allocation_only,0.009702283078326102,0.006524317912218303,,,
+joint_smooth,question_selection_only,0.0054733611772929125,0.0003954132068011429,,,
+question_selection_only,model_allocation_only,0.004228921901033105,0.006128904705417161,-0.0043093281429384695,0.013137212031389435,3
