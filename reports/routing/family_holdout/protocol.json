@@ -1,0 +1,106 @@
+{
+  "phase": "Retrospective routing on EmbedLLM family tests already used for the score-prediction study.",
+  "archive": "artifacts\\family_lowrank_secondary_v2",
+  "scored_at_utc": "2026-11-14T22:39:28+00:00",
+  "families": {
+    "Llama": {
+      "models": [
+        10,
+        16,
+        20,
+        34,
+        41,
+        61,
+        74,
+        106
+      ],
+      "probe_pool_questions": 15733,
+      "available_queries": 3370,
+      "scored_common_queries": 3370,
+      "queries_by_benchmark": {
+        "LogiQA": 97,
+        "MMLU": 2076,
+        "MathQA": 448,
+        "MedMCQA": 627,
+        "TruthfulQA": 122
+      },
+      "training_models_per_arm": [
+        40,
+        40
+      ],
+      "shared_training_models": 32,
+      "relatives_in_allowed_training": 8
+    },
+    "Mistral": {
+      "models": [
+        6,
+        12,
+        44,
+        47,
+        56,
+        90
+      ],
+      "probe_pool_questions": 15733,
+      "available_queries": 3370,
+      "scored_common_queries": 3370,
+      "queries_by_benchmark": {
+        "LogiQA": 97,
+        "MMLU": 2076,
+        "MathQA": 448,
+        "MedMCQA": 627,
+        "TruthfulQA": 122
+      },
+      "training_models_per_arm": [
+        40,
+        40
+      ],
+      "shared_training_models": 32,
+      "relatives_in_allowed_training": 8
+    },
+    "Yi": {
+      "models": [
+        1,
+        31,
+        98
+      ],
+      "probe_pool_questions": 15733,
+      "available_queries": 3370,
+      "scored_common_queries": 3370,
+      "queries_by_benchmark": {
+        "LogiQA": 97,
+        "MMLU": 2076,
+        "MathQA": 448,
+        "MedMCQA": 627,
+        "TruthfulQA": 122
+      },
+      "training_models_per_arm": [
+        40,
+        40
+      ],
+      "shared_training_models": 34,
+      "relatives_in_allowed_training": 6
+    }
+  },
+  "arm_order": [
+    "excluded",
+    "related_allowed"
+  ],
+  "budgets": [
+    50,
+    100,
+    200
+  ],
+  "primary_budget": 200,
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "routing": "All candidates in one held family. Select one model per query by archived probability. Source ID breaks ties.",
+  "comparators": "Archived smoothed global and benchmark means and KNN reuse the same probes and selected settings. The direct fixed choice uses equal-benchmark observed probe accuracy.",
+  "training_composition": "The related-allowed and excluded arms swap training slots at equal roster size. The contrast can reflect replacements as well as ancestry.",
+  "query_truth": "Prepared strict labels from the original view. Score only queries with complete binary outcomes across the same candidate pool.",
+  "quality": "Macro equally weights the five benchmarks. Micro weights queries. Within-benchmark shuffle retains the observed selection shares.",
+  "intervals": "Conditional paired bootstrap within benchmark, after averaging the same three seeds.",
+  "equal_family_descriptive": true
+}
