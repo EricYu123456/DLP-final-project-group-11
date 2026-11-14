@@ -145,6 +145,8 @@ def main(argv: list[str] | None = None) -> int:
     query.add_argument("--question-vector", type=Path, help="An all-mpnet-base-v2 question vector in .npy format.")
     query.add_argument("--prompt", help="Prompt text. Requires the optional sentence-transformers package.")
     query.add_argument("--stdin", action="store_true", help="Read one prompt per nonempty line and print one JSON choice.")
+    query.add_argument("--stdin-json", action="store_true",
+                       help='Read one JSON object per line, such as {"prompt":"First line\\nSecond line"}.')
     parser.add_argument("--benchmark", help="Known benchmark name, used to compute correctness probabilities.")
     parser.add_argument("--minimum-gain", type=float, default=0.0,
                         help="Minimum probability gain required to replace the first candidate. Uses the mean learned "
@@ -207,7 +209,21 @@ def main(argv: list[str] | None = None) -> int:
         except ImportError:
             parser.error("Text prompts require sentence-transformers. Use --question-vector for saved features.")
         encoder = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
-        if args.stdin:
+        if args.stdin_json:
+            for number, line in enumerate(sys.stdin, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    request = json.loads(line)
+                except json.JSONDecodeError as error:
+                    parser.error(f"Invalid JSON on input line {number} ({error.msg}).")
+                if not isinstance(request, dict) or set(request) != {"prompt"} or not isinstance(request["prompt"], str):
+                    parser.error(f"Input line {number} must be a JSON object containing only a prompt string.")
+                prompt = request["prompt"]
+                if not prompt.strip():
+                    parser.error(f"Input line {number} has an empty prompt.")
+                print(json.dumps(route(encoder.encode(prompt)), ensure_ascii=False), flush=True)
+        elif args.stdin:
             for line in sys.stdin:
                 prompt = line.rstrip("\r\n")
                 if prompt.strip():

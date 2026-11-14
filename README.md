@@ -8,6 +8,21 @@ Adaptive onboarding reduces probes by 77.3% against the strongest incumbent (ID 
 
 In a live GPU integration check on ARC-Challenge, smooth onboarding stopped after 19 newcomer probes and made exactly one actual call for each of 24 prompts, routing all 24 to the incumbent in [the live demo summary](reports/routing/live_demo/demo.json) and [the dispatch log](reports/routing/live_demo/dispatch.csv). This confirms end-to-end execution without establishing routing accuracy.
 
+```mermaid
+flowchart TD
+    subgraph onboarding["Onboarding"]
+        O1["Select probe"] --> O2["Read one scored newcomer answer"]
+        O2 --> O3["Update 8D embedding"]
+        O3 -->|while threshold and cap allow| O1
+        O3 -->|stop| O4["Store 8D profile"]
+    end
+    subgraph serving["Per-prompt serving"]
+        S1["One new prompt and text embedding"] --> S2["Score existing and new model profiles with frozen shared decoder"]
+        S2 --> S3["Send prompt only to one selected LLM"]
+    end
+    O4 -. saved profile .-> S2
+```
+
 ## Primary routing results
 
 ### Simultaneous all-unseen pool
@@ -93,7 +108,7 @@ python scripts/route_query.py fit --run artifacts/reproduction --checkpoint arti
 python scripts/route_query.py --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --trained-model 50 --candidate-embedding artifacts/new_model/routing_embedding.npz --prompt "What causes the phases of the Moon?"
 ```
 
-As an alternative to `--prompt`, `--stdin` consumes one nonempty prompt per line and emits one independent JSON choice per line while reusing the decoder and text encoder, and optional `--question-vector` remains available for saved features. Optional `--learning-selection` supplies a custom `selection.json` for older routing-learning checkpoint metadata. These commands select which model should answer, with the caller handling generation separately.
+As an alternative to `--prompt`, `--stdin` consumes one nonempty prompt per line and emits one independent JSON choice per line while reusing the decoder and text encoder, and optional `--question-vector` remains available for saved features. For multiline prompts, use `scripts/route_query.py --stdin-json` instead of `--stdin` with the same flags. `--stdin-json` treats each nonblank line as one JSON object with a single `prompt` string such as `{"prompt":"Find x.\n2x + 7 = 13"}`, supports embedded newline escapes, and prints one model choice per line. Optional `--learning-selection` supplies a custom `selection.json` for older routing-learning checkpoint metadata. These commands select which model should answer, with the caller handling generation separately.
 
 ### Adaptive onboarding
 
