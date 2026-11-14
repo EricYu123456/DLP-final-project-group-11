@@ -1,0 +1,246 @@
+{
+  "source": "ulab-ai/xRouteBench",
+  "revision": "ea4b6e1b29d9a734f55f0a637baf326bad6aa681",
+  "tasks": [
+    "arc_challenge",
+    "boolq",
+    "commonsense_qa",
+    "hellaswag",
+    "openbook_qa"
+  ],
+  "source_roster": [
+    {
+      "model_name": "cogito-v2-1-671b",
+      "api_model_id": "deepcogito/cogito-v2-1-671b",
+      "service": "Together"
+    },
+    {
+      "model_name": "deepseek-v3.1",
+      "api_model_id": "deepseek-ai/DeepSeek-V3.1",
+      "service": "Together"
+    },
+    {
+      "model_name": "gemma-2-9b-it",
+      "api_model_id": "google/gemma-2-9b-it",
+      "service": "NVIDIA"
+    },
+    {
+      "model_name": "gpt-oss-120b",
+      "api_model_id": "openai/gpt-oss-120b",
+      "service": "Together"
+    },
+    {
+      "model_name": "gpt-oss-20b",
+      "api_model_id": "openai/gpt-oss-20b",
+      "service": "Together"
+    },
+    {
+      "model_name": "llama-3-8b-instruct-lite",
+      "api_model_id": "meta-llama/Meta-Llama-3-8B-Instruct-Lite",
+      "service": "Together"
+    },
+    {
+      "model_name": "llama-3.3-70b-instruct-turbo",
+      "api_model_id": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "service": "Together"
+    },
+    {
+      "model_name": "llama-4-maverick",
+      "api_model_id": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+      "service": "Together"
+    },
+    {
+      "model_name": "llama3-70b-instruct",
+      "api_model_id": "meta/llama3-70b-instruct",
+      "service": "NVIDIA"
+    },
+    {
+      "model_name": "mistral-7b-instruct-v0.3",
+      "api_model_id": "mistralai/mistral-7b-instruct-v0.3",
+      "service": "NVIDIA"
+    },
+    {
+      "model_name": "mistral-small-3-24b-instruct",
+      "api_model_id": "mistralai/Mistral-Small-24B-Instruct-2501",
+      "service": "Together"
+    },
+    {
+      "model_name": "mixtral-8x22b-instruct-v0.1",
+      "api_model_id": "mistralai/mixtral-8x22b-instruct-v0.1",
+      "service": "NVIDIA"
+    },
+    {
+      "model_name": "mixtral-8x7b-instruct-v0.1",
+      "api_model_id": "mistralai/mixtral-8x7b-instruct-v0.1",
+      "service": "NVIDIA"
+    },
+    {
+      "model_name": "qwen2.5-7b-instruct",
+      "api_model_id": "qwen/qwen2.5-7b-instruct",
+      "service": "NVIDIA"
+    },
+    {
+      "model_name": "qwen2.5-7b-instruct-turbo",
+      "api_model_id": "Qwen/Qwen2.5-7B-Instruct-Turbo",
+      "service": "Together"
+    },
+    {
+      "model_name": "qwen3-coder-next",
+      "api_model_id": "Qwen/Qwen3-Coder-Next-FP8",
+      "service": "Together"
+    },
+    {
+      "model_name": "qwen3-next-80b-a3b-instruct",
+      "api_model_id": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "service": "Together"
+    },
+    {
+      "model_name": "rnj-1-instruct",
+      "api_model_id": "essentialai/rnj-1-instruct",
+      "service": "Together"
+    }
+  ],
+  "eligible_models": [
+    "cogito-v2-1-671b",
+    "deepseek-v3.1",
+    "gemma-2-9b-it",
+    "gpt-oss-120b",
+    "gpt-oss-20b",
+    "llama-3.3-70b-instruct-turbo",
+    "llama-4-maverick",
+    "mistral-7b-instruct-v0.3",
+    "mistral-small-3-24b-instruct",
+    "mixtral-8x22b-instruct-v0.1",
+    "mixtral-8x7b-instruct-v0.1",
+    "qwen2.5-7b-instruct",
+    "qwen3-coder-next",
+    "qwen3-next-80b-a3b-instruct",
+    "rnj-1-instruct"
+  ],
+  "excluded": {
+    "llama3-70b-instruct": "direct API alias of EmbedLLM source model 50",
+    "llama-3-8b-instruct-lite": "INT4 variant of EmbedLLM source model 64",
+    "qwen2.5-7b-instruct-turbo": "same backbone as canonical qwen2.5-7b-instruct; keep canonical endpoint"
+  },
+  "anchors": [
+    {
+      "model": "gpt-oss-20b",
+      "quantile": 0.5,
+      "support_rank": 8,
+      "train_macro_accuracy": 0.8372361111111111
+    },
+    {
+      "model": "llama-4-maverick",
+      "quantile": 0.75,
+      "support_rank": 12,
+      "train_macro_accuracy": 0.8808194444444444
+    },
+    {
+      "model": "cogito-v2-1-671b",
+      "quantile": 0.9,
+      "support_rank": 14,
+      "train_macro_accuracy": 0.8828571428571429
+    },
+    {
+      "model": "qwen3-next-80b-a3b-instruct",
+      "quantile": 1.0,
+      "support_rank": 15,
+      "train_macro_accuracy": 0.8881904761904762
+    }
+  ],
+  "train_counts": {
+    "arc_challenge": {
+      "raw_groups": 449,
+      "raw_records": 8100,
+      "retained": 448,
+      "ambiguous_or_repeated": 1
+    },
+    "boolq": {
+      "raw_groups": 400,
+      "raw_records": 7200,
+      "retained": 400
+    },
+    "commonsense_qa": {
+      "raw_groups": 400,
+      "raw_records": 7200,
+      "retained": 400
+    },
+    "hellaswag": {
+      "raw_groups": 400,
+      "raw_records": 7200,
+      "retained": 400
+    },
+    "openbook_qa": {
+      "raw_groups": 450,
+      "raw_records": 8100,
+      "retained": 450
+    }
+  },
+  "test_identity_counts": {
+    "arc_challenge": {
+      "raw_groups": 500,
+      "raw_records": 9000,
+      "retained": 497,
+      "xroute_train_overlap": 3
+    },
+    "boolq": {
+      "raw_groups": 50,
+      "raw_records": 900,
+      "retained": 50
+    },
+    "commonsense_qa": {
+      "raw_groups": 50,
+      "raw_records": 900,
+      "retained": 50
+    },
+    "hellaswag": {
+      "raw_groups": 50,
+      "raw_records": 900,
+      "retained": 50
+    },
+    "openbook_qa": {
+      "raw_groups": 498,
+      "raw_records": 9000,
+      "retained": 494,
+      "ambiguous_or_repeated": 2,
+      "xroute_train_overlap": 2
+    }
+  },
+  "overlap": "identical normalized question stems and stripped EmbedLLM raw prompts; all xRoute train stems excluded from test",
+  "duplicate_policy": "discard any normalized group with repeated model rows or differing rendered user queries",
+  "family_scope": "exact listed aliases excluded; broader ancestry and families can overlap",
+  "test_preparation_columns": [
+    "task_name",
+    "query",
+    "model_name"
+  ],
+  "checkpoint_arm": "B_bce_routing_selection",
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "unknown_task_offset": "learned difficulty plus mean source benchmark bias",
+  "encoder": "sentence-transformers/all-mpnet-base-v2",
+  "feature_input": "NFKC-normalized released User Query preserving question, context and choices",
+  "reference_per_task": 32,
+  "candidate_per_task": 100,
+  "screened_per_step": 48,
+  "margin": 0.025,
+  "tolerance": 0.002,
+  "warmup": 10,
+  "cap": 200,
+  "prior_strength": 0.3,
+  "criterion": {
+    "primary_anchors": [
+      0.5,
+      0.75,
+      0.9
+    ],
+    "minimum_relative_probe_saving_vs_random_own_stop": 0.1,
+    "minimum_conditional_macro_ci_lower_bound_vs_random_200": -0.005
+  },
+  "inference_scope": "conditional paired query intervals given fixed anchors, newcomers and draws; no external tuning",
+  "max_encoder_tokens": 384,
+  "prompts_exceeding_encoder_limit": 2
+}
