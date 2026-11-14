@@ -99,7 +99,7 @@ All `24` held-out `ARC-Challenge` prompts, filtered to exclude normalized train 
 Reproduction uses the existing GPU PyTorch environment documented in [the README](../README.md) with optional `sentence-transformers`, `transformers`, and `pyarrow` packages, retrieving source data and public checkpoints at pinned revisions. Omitting `--run`, `--checkpoint`, and `--learning-selection` reuses local defaults while `--output artifacts/live_demo_reproduction` preserves checked-in files.
 
 ```bash
-python scripts/demo_live_routing.py --output artifacts/live_demo_reproduction
+python scripts/demo_live_routing.py --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --learning-selection artifacts/routing_learning_reproduction/selection.json --output artifacts/live_demo_reproduction
 ```
 
 ### Checkpoint selection and routing-aware training

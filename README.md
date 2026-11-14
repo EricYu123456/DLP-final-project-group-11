@@ -77,7 +77,7 @@ Install Python 3.10+ with PyTorch, prepare the pinned dataset, train and validat
 ```bash
 python -m pip install -e ".[dev]"
 python -m pytest -q
-python scripts/download_data.py
+python scripts/download_data.py --full-csv
 python scripts/prepare_data.py --no-split
 python scripts/run_experiment.py --phase train_validate --output artifacts/reproduction --evaluate-validation --save-predictions
 python scripts/run_routing.py --run artifacts/reproduction --phase validation --output artifacts/routing_reproduction
@@ -91,7 +91,7 @@ python scripts/pilot_routing_learning.py --phase train_validate --run artifacts/
 python scripts/pilot_routing_learning.py --phase test --run artifacts/reproduction --checkpoints artifacts/reproduction_learning --output artifacts/routing_learning_reproduction
 ```
 
-To route a single prompt, first fit a newcomer embedding via `scripts/embed_new_model.py` (`plan` then `infer` with `--variant neural_lowrank` on the same run and seed), optionally install the text encoder packages, and run the query selector.
+To route a single prompt, first fit `artifacts/new_model/fit/embedding.npz` via `scripts/embed_new_model.py` (`plan`, fill binary `response` values, then `infer` with `--run artifacts/reproduction --variant neural_lowrank --seed 11 --output artifacts/new_model/fit`), optionally install the text encoder packages, and run the query selector.
 
 ```bash
 python -m pip install "sentence-transformers==5.1.2" "transformers==4.57.1"
@@ -104,24 +104,26 @@ The previous workflow still works with the legacy checkpoint. For the routing-se
 
 ```bash
 python scripts/embed_new_model.py plan --run artifacts/reproduction --variant neural_lowrank --seed 11 --budget 200 --output artifacts/new_model/probes.csv
-python scripts/route_query.py fit --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --responses artifacts/new_model/probes.csv --model-name my_model --output artifacts/new_model/routing_embedding.npz
-python scripts/route_query.py --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --trained-model 50 --candidate-embedding artifacts/new_model/routing_embedding.npz --prompt "What causes the phases of the Moon?"
+python scripts/route_query.py fit --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --learning-selection artifacts/routing_learning_reproduction/selection.json --responses artifacts/new_model/probes.csv --model-name my_model --output artifacts/new_model/routing_embedding.npz
+python scripts/route_query.py --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --learning-selection artifacts/routing_learning_reproduction/selection.json --trained-model 50 --candidate-embedding artifacts/new_model/routing_embedding.npz --prompt "What causes the phases of the Moon?"
 ```
 
 As an alternative to `--prompt`, `--stdin` consumes one nonempty prompt per line and emits one independent JSON choice per line while reusing the decoder and text encoder, and optional `--question-vector` remains available for saved features. For multiline prompts, use `scripts/route_query.py --stdin-json` instead of `--stdin` with the same flags. `--stdin-json` treats each nonblank line as one JSON object with a single `prompt` string such as `{"prompt":"Find x.\n2x + 7 = 13"}`, supports embedded newline escapes, and prints one model choice per line. Optional `--learning-selection` supplies a custom `selection.json` for older routing-learning checkpoint metadata. These commands select which model should answer, with the caller handling generation separately.
 
 ### Adaptive onboarding
 
+The adaptive and live examples below require running the optional checkpoint-selection training above, and the live demo additionally requires `pyarrow` (`python -m pip install pyarrow`) alongside the pinned encoder packages.
+
 Start sequential onboarding for a newcomer to receive a `next_probe` JSON payload containing `prompt_id`, `prompt` text, and `benchmark`.
 
 ```bash
-python scripts/onboard_model.py --model-name my_model --episode-id 42 --seed 11 --embedding artifacts/new_model/adaptive_embedding.npz
+python scripts/onboard_model.py --run artifacts/reproduction --checkpoints artifacts/reproduction_learning/checkpoints --learning-selection artifacts/routing_learning_reproduction/selection.json --model-name my_model --episode-id 42 --seed 11 --embedding artifacts/new_model/adaptive_embedding.npz
 ```
 
 For `scripts/onboard_model.py`, `--selector` accepts `exact`, `random`, or `smooth` with `exact` as the default, where `smooth` uses rank-one decision-weighted selection with no hypothetical MAP solves. All three use the frozen `0.0003` EVPI threshold by default and accept `--evpi-tolerance` overrides, with `0` requesting up to `200` probes. Optional `--incumbent-model-id` chooses an established training model. Keep the same incumbent ID, seed, episode ID, selector, and threshold for every invocation of a history. Below, `0.002` is a validation example whose external result did not beat balanced random in [the final report](reports/FINAL_REPORT.md).
 
 ```bash
-python scripts/onboard_model.py --model-name my_model --episode-id 42 --seed 11 --selector smooth --evpi-tolerance 0.002 --incumbent-model-id 3 --embedding artifacts/new_model/smooth_embedding.npz
+python scripts/onboard_model.py --run artifacts/reproduction --checkpoints artifacts/reproduction_learning/checkpoints --learning-selection artifacts/routing_learning_reproduction/selection.json --model-name my_model --episode-id 42 --seed 11 --selector smooth --evpi-tolerance 0.002 --incumbent-model-id 3 --embedding artifacts/new_model/smooth_embedding.npz
 ```
 
 Obtain the model's answer externally, append its binary correctness under `prompt_id,response` in `artifacts/new_model/adaptive_responses.csv`, and rerun the exact first command with `--responses artifacts/new_model/adaptive_responses.csv` and the same episode ID and seed, repeating until stopping. A `stop` response writes the newcomer embedding alongside `adaptive_embedding.incumbent.npz` and reports the checkpoint, stop reason, and margin.
@@ -129,13 +131,13 @@ Obtain the model's answer externally, append its binary correctness under `promp
 For a persistent session that keeps the decoder and data loaded across probes, add `--stdin`. Each `next_probe` payload arrives as one JSON object per line on standard output, and the caller replies on standard input with one JSON line containing an integer `prompt_id` matching the emitted ID and an integer `response` equal to `0` or `1`. Reaching `stop` writes the same two embeddings and prints the final `stop` JSON line. Save a chronological `prompt_id,response` history externally if resuming with `--responses prefix.csv` and identical settings.
 
 ```bash
-python scripts/onboard_model.py --stdin --model-name my_model --episode-id 42 --seed 11 --embedding artifacts/new_model/adaptive_embedding.npz
+python scripts/onboard_model.py --run artifacts/reproduction --checkpoints artifacts/reproduction_learning/checkpoints --learning-selection artifacts/routing_learning_reproduction/selection.json --stdin --model-name my_model --episode-id 42 --seed 11 --embedding artifacts/new_model/adaptive_embedding.npz
 ```
 
 Apply the gate to choose one model per prompt with `scripts/route_query.py`.
 
 ```bash
-python scripts/route_query.py --run artifacts/main_v2 --checkpoint artifacts/routing_learning/checkpoints/B_bce_routing_selection_11.pt --candidate-embedding artifacts/new_model/adaptive_embedding.incumbent.npz --candidate-embedding artifacts/new_model/adaptive_embedding.npz --minimum-gain 0.025 --prompt "What causes the phases of the Moon?"
+python scripts/route_query.py --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --learning-selection artifacts/routing_learning_reproduction/selection.json --candidate-embedding artifacts/new_model/adaptive_embedding.incumbent.npz --candidate-embedding artifacts/new_model/adaptive_embedding.npz --minimum-gain 0.025 --prompt "What causes the phases of the Moon?"
 ```
 
 Both steps reuse the same trained files or take fresh overrides via `--run`, `--checkpoints`, `--selection`, and `--learning-selection`, keeping the same decoder for both (`--checkpoint` in `scripts/route_query.py`). The CLI yields choices, and the external caller submits model generation and scoring. When an incoming prompt has no manually supplied `--benchmark`, any positive `--minimum-gain` with exactly two candidates uses the arithmetic mean of learned benchmark biases as the logit offset component (the same fallback as external replay) to compute gating probabilities that remain uncalibrated for arbitrary traffic, and omitting both `--benchmark` and a positive `--minimum-gain` retains raw interaction `argmax` by default.
@@ -143,7 +145,7 @@ Both steps reuse the same trained files or take fresh overrides via `--run`, `--
 An end-to-end local integration demo in [the live routing demo script](scripts/demo_live_routing.py) runs live onboarding and query dispatch on GPU using the documented PyTorch environment plus `sentence-transformers`, `transformers`, and `pyarrow` against pinned `ARC-Challenge` data and public Hugging Face checkpoints, with checked-in records in [the live demo summary](reports/routing/live_demo/demo.json) and [the dispatch log](reports/routing/live_demo/dispatch.csv).
 
 ```bash
-python scripts/demo_live_routing.py --output artifacts/live_demo_reproduction
+python scripts/demo_live_routing.py --run artifacts/reproduction --checkpoint artifacts/reproduction_learning/checkpoints/B_bce_routing_selection_11.pt --learning-selection artifacts/routing_learning_reproduction/selection.json --output artifacts/live_demo_reproduction
 ```
 
 ## Repository guide and related work
