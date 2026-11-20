@@ -1,0 +1,34 @@
+{
+  "rows": [
+    {
+      "precision": "float32",
+      "queries": 64,
+      "batch": 16,
+      "conversion_seconds": 5.00003807246685e-07,
+      "encoder_seconds": 28.807472500018775,
+      "matching_routes": 64,
+      "maximum_score_difference": 0.0,
+      "mean_vector_cosine": 1.0
+    },
+    {
+      "precision": "bfloat16",
+      "queries": 64,
+      "batch": 16,
+      "conversion_seconds": 9.00006853044033e-07,
+      "encoder_seconds": 12.167542900016997,
+      "matching_routes": 64,
+      "maximum_score_difference": 0.0004902621856756606,
+      "mean_vector_cosine": 0.9999851584434509
+    },
+    {
+      "precision": "int8",
+      "queries": 64,
+      "batch": 16,
+      "conversion_seconds": 1.5297737999935634,
+      "encoder_seconds": 9.6219654000015,
+      "matching_routes": 58,
+      "maximum_score_difference": 0.06306990523358275,
+      "mean_vector_cosine": 0.5207740068435669
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "11": {
+    "within_panel_risk": 0.1103582767352056,
+    "questions": 160,
+    "proxies": [],
+    "seconds": 2.6559404999716207,
+    "adaptive": false,
+    "quadrature": false,
+    "acquisition_proxies": [],
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  },
+  "23": {
+    "within_panel_risk": 0.10593365880319354,
+    "questions": 160,
+    "proxies": [],
+    "seconds": 2.666234100004658,
+    "adaptive": false,
+    "quadrature": false,
+    "acquisition_proxies": [],
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  },
+  "37": {
+    "within_panel_risk": 0.11116835648496397,
+    "questions": 160,
+    "proxies": [],
+    "seconds": 3.1062441000249237,
+    "adaptive": false,
+    "quadrature": false,
+    "acquisition_proxies": [],
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  }
+}

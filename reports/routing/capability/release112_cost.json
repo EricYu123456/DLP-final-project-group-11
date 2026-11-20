@@ -1,0 +1,19 @@
+{
+  "shared_support_text_features": {
+    "seconds": 29.515277099970262,
+    "questions": 592,
+    "board_peak_mib": 13049
+  },
+  "11": {
+    "selection_seconds": 1.5200114999897778,
+    "fit_and_export_seconds": 0.19732510001631454
+  },
+  "23": {
+    "selection_seconds": 1.5239379000267945,
+    "fit_and_export_seconds": 0.2476287999888882
+  },
+  "37": {
+    "selection_seconds": 1.5518074999563396,
+    "fit_and_export_seconds": 0.19884069997351617
+  }
+}

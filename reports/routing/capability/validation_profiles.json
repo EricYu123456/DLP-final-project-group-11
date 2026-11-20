@@ -1,0 +1,1006 @@
+{
+  "kernel": {
+    "encoders": [
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.551765643168583,
+    "micro": 0.6599446421510479,
+    "top_share": 0.881771451166469,
+    "objective": 0.5896282928124457,
+    "validation_win": true,
+    "training_seconds": 0.6947962999693118,
+    "selection_seconds": 0.4949969999724999
+  },
+  "short-panel": {
+    "encoders": [
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "stratified",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5488641439938168,
+    "micro": 0.6605377619612495,
+    "top_share": 0.9127125345986556,
+    "objective": 0.5879499102824182,
+    "validation_win": true,
+    "training_seconds": 0.6947962999693118,
+    "selection_seconds": 0.5133150999899954,
+    "probe_count": 120,
+    "matched_reference": {
+      "strength": 1.0,
+      "macro": 0.5359527663788543,
+      "micro": 0.658560695927244,
+      "top_share": 0.9859628311585608,
+      "objective": 0.5788655417207906
+    }
+  },
+  "views_small/ridge": {
+    "encoders": [
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      3.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5528822143664931,
+    "micro": 0.6603400553578489,
+    "top_share": 0.8936338473705022,
+    "objective": 0.5904924587134677,
+    "validation_win": true,
+    "training_seconds": 96.58741049998207,
+    "selection_seconds": 1.3907043000217527
+  },
+  "views_small/tree": {
+    "encoders": [
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.05,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5538078013926973,
+    "micro": 0.6616251482799526,
+    "top_share": 0.9172597864768685,
+    "objective": 0.5915438728032366,
+    "validation_win": true,
+    "training_seconds": 143.0195637999568,
+    "selection_seconds": 1.3989287000149488
+  },
+  "topic/trees_160": {
+    "encoders": [
+      "topic/trees_160",
+      "kernel"
+    ],
+    "encoder_weights": [
+      0.7,
+      0.3
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 1.2,
+    "macro": 0.5542116822978884,
+    "micro": 0.6619217081850534,
+    "top_share": 0.9069790431000396,
+    "objective": 0.5919101913583962,
+    "validation_win": true,
+    "training_seconds": 55.15646510000806,
+    "selection_seconds": 2.0488451999844983
+  },
+  "gpu16/minute_15": {
+    "encoders": [
+      "gpu16/minute_15",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      3.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5514593481128183,
+    "micro": 0.6613285883748518,
+    "top_share": 0.8892843020956901,
+    "objective": 0.5899135822045299,
+    "validation_win": true,
+    "training_seconds": 928.2532481999951,
+    "selection_seconds": 1.4925846999976784
+  },
+  "topic/trees_420": {
+    "encoders": [
+      "topic/trees_420",
+      "kernel"
+    ],
+    "encoder_weights": [
+      0.4,
+      0.6
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5541478018266826,
+    "micro": 0.6610320284697508,
+    "top_share": 0.9087584025306445,
+    "objective": 0.5915572811517564,
+    "validation_win": true,
+    "training_seconds": 131.17746079998324,
+    "selection_seconds": 1.974047800002154
+  },
+  "gpu16/minute_35_5": {
+    "encoders": [
+      "gpu16/minute_35_5",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      3.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5480683882918355,
+    "micro": 0.6596480822459471,
+    "top_share": 0.9153815737445631,
+    "objective": 0.5871212811757744,
+    "validation_win": true,
+    "training_seconds": 2158.2335612000315,
+    "selection_seconds": 1.4615010999841616
+  },
+  "gpu16/minute_35_5+views_small/ridge": {
+    "encoders": [
+      "gpu16/minute_35_5",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5528074422100117,
+    "micro": 0.6603400553578489,
+    "top_share": 0.8898774219058917,
+    "objective": 0.5904438568117547,
+    "validation_win": true,
+    "training_seconds": 2254.8209717000136,
+    "selection_seconds": 1.418464899994433
+  },
+  "gpu16/minute_35_5+views_small/tree": {
+    "encoders": [
+      "gpu16/minute_35_5",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 2.0,
+    "correction": 0.4,
+    "signal": 1.2,
+    "macro": 0.5498844101074379,
+    "micro": 0.6595492289442467,
+    "top_share": 0.8798932384341637,
+    "objective": 0.588267096700321,
+    "validation_win": true,
+    "training_seconds": 2301.2531249999884,
+    "selection_seconds": 1.4656883000279777
+  },
+  "gpu16/minute_53": {
+    "encoders": [
+      "gpu16/minute_53",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      3.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.4,
+    "signal": 0.75,
+    "macro": 0.5493745613674096,
+    "micro": 0.6597469355476473,
+    "top_share": 0.9057928034796362,
+    "objective": 0.5880048923304928,
+    "validation_win": true,
+    "training_seconds": 3207.4773991000257,
+    "selection_seconds": 2.924319000041578
+  },
+  "gpu16/minute_53+views_small/ridge": {
+    "encoders": [
+      "gpu16/minute_53",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.05,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.549459595381015,
+    "micro": 0.6594503756425465,
+    "top_share": 0.8788058521154607,
+    "objective": 0.5879563684725511,
+    "validation_win": true,
+    "training_seconds": 3304.0648096000077,
+    "selection_seconds": 1.4804182999650948
+  },
+  "gpu16/minute_53+views_small/tree": {
+    "encoders": [
+      "gpu16/minute_53",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.05,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5519478803383915,
+    "micro": 0.6601423487544484,
+    "top_share": 0.9051996836694346,
+    "objective": 0.5898159442840114,
+    "validation_win": true,
+    "training_seconds": 3350.4969628999825,
+    "selection_seconds": 1.4964866999653168
+  },
+  "gpu16/minute_67_5": {
+    "encoders": [
+      "gpu16/minute_35_5",
+      "gpu16/minute_67_5",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.4,
+    "signal": 0.75,
+    "macro": 0.5511820525323261,
+    "micro": 0.6597469355476473,
+    "top_share": 0.9098457888493475,
+    "objective": 0.5891797615876886,
+    "validation_win": true,
+    "training_seconds": 4077.2476363999886,
+    "selection_seconds": 2.872741799976211
+  },
+  "gpu16/minute_67_5+views_small/ridge": {
+    "encoders": [
+      "gpu16/minute_67_5",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5502890597690325,
+    "micro": 0.6597469355476473,
+    "top_share": 0.8828588374851719,
+    "objective": 0.5885993162915477,
+    "validation_win": true,
+    "training_seconds": 4173.835046899971,
+    "selection_seconds": 1.52552199998172
+  },
+  "gpu16/minute_67_5+views_small/tree": {
+    "encoders": [
+      "gpu16/minute_67_5",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.4,
+    "signal": 0.75,
+    "macro": 0.5506832892333456,
+    "micro": 0.6604389086595492,
+    "top_share": 0.9167655199683669,
+    "objective": 0.5890977560325169,
+    "validation_win": true,
+    "training_seconds": 4220.267200199945,
+    "selection_seconds": 1.5528861999628134
+  },
+  "views_expert/ridge": {
+    "encoders": [
+      "views_expert/ridge"
+    ],
+    "encoder_weights": null,
+    "algorithm": "pca",
+    "policy": "balanced",
+    "rank": 24,
+    "ridge": 0.2,
+    "domain_scale": 0.08,
+    "temperature": 0.035,
+    "signal": 0.25,
+    "macro": 0.5470374033884408,
+    "micro": 0.6595492289442467,
+    "top_share": 0.8801897983392646,
+    "objective": 0.5864165423329728,
+    "validation_win": true,
+    "training_seconds": 741.7139268000028,
+    "selection_seconds": 1.3374677000101656
+  },
+  "views_expert/tree": {
+    "encoders": [
+      "views_expert/tree",
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 1.2,
+    "macro": 0.5506599199516752,
+    "micro": 0.6595492289442467,
+    "top_share": 0.8681296955318308,
+    "objective": 0.5887711780990752,
+    "validation_win": true,
+    "training_seconds": 789.1516174999997,
+    "selection_seconds": 1.3552130000316538
+  },
+  "gpu8/minute_2_2": {
+    "encoders": [
+      "gpu8/minute_2_2",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      3.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5456235214724271,
+    "micro": 0.6596480822459471,
+    "top_share": 0.9096480822459471,
+    "objective": 0.5855321177431592,
+    "validation_win": true,
+    "training_seconds": 136.88662480004132,
+    "selection_seconds": 1.4010541000170633
+  },
+  "gpu8/minute_2_2+views_small/ridge": {
+    "encoders": [
+      "gpu8/minute_2_2",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.4,
+    "signal": 0.75,
+    "macro": 0.5467928136474922,
+    "micro": 0.6594503756425465,
+    "top_share": 0.9161724001581653,
+    "objective": 0.5862229603457612,
+    "validation_win": true,
+    "training_seconds": 233.4740353000234,
+    "selection_seconds": 1.3965713999932632
+  },
+  "gpu8/minute_2_2+views_small/tree": {
+    "encoders": [
+      "gpu8/minute_2_2",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5475368206836586,
+    "micro": 0.6602412020561487,
+    "top_share": 0.9123171213918546,
+    "objective": 0.5869833541640301,
+    "validation_win": true,
+    "training_seconds": 279.90618859999813,
+    "selection_seconds": 1.4081425999756902
+  },
+  "gpu8/minute_4_6": {
+    "encoders": [
+      "gpu8/minute_4_6",
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.05,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5513737618183029,
+    "micro": 0.6610320284697508,
+    "top_share": 0.9175563463819691,
+    "objective": 0.5897541551463097,
+    "validation_win": true,
+    "training_seconds": 280.90084430004936,
+    "selection_seconds": 1.3836640000226907
+  },
+  "gpu8/minute_4_6+views_small/ridge": {
+    "encoders": [
+      "gpu8/minute_4_6",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.4,
+    "signal": 0.75,
+    "macro": 0.5516291078105139,
+    "micro": 0.6600434954527481,
+    "top_share": 0.9138987742190589,
+    "objective": 0.5895741434852959,
+    "validation_win": true,
+    "training_seconds": 377.4882548000314,
+    "selection_seconds": 1.4085708999773487
+  },
+  "gpu8/minute_4_6+views_small/tree": {
+    "encoders": [
+      "gpu8/minute_4_6",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 2.0,
+    "correction": 0.4,
+    "signal": 1.2,
+    "macro": 0.5558375324646032,
+    "micro": 0.6606366152629498,
+    "top_share": 0.8809806247528668,
+    "objective": 0.5925172114440245,
+    "validation_win": true,
+    "training_seconds": 423.92040810000617,
+    "selection_seconds": 1.4197438000119291
+  },
+  "gpu8/minute_8_1": {
+    "encoders": [
+      "gpu8/minute_8_1",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      3.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5485039994795555,
+    "micro": 0.6599446421510479,
+    "top_share": 0.9165678133649665,
+    "objective": 0.5875082244145778,
+    "validation_win": true,
+    "training_seconds": 490.8627341000247,
+    "selection_seconds": 1.4066490000113845
+  },
+  "gpu8/minute_8_1+views_small/ridge": {
+    "encoders": [
+      "gpu8/minute_8_1",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5491209128008097,
+    "micro": 0.6597469355476473,
+    "top_share": 0.902135231316726,
+    "objective": 0.5878400207622028,
+    "validation_win": true,
+    "training_seconds": 587.4501446000068,
+    "selection_seconds": 1.416690100042615
+  },
+  "gpu8/minute_20": {
+    "encoders": [
+      "gpu8/minute_8_1",
+      "gpu8/minute_20",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5476856674203927,
+    "micro": 0.6600434954527481,
+    "top_share": 0.9106366152629498,
+    "objective": 0.5870109072317171,
+    "validation_win": true,
+    "training_seconds": 1204.911196400004,
+    "selection_seconds": 2.829535900033079
+  },
+  "gpu8/minute_35_5": {
+    "encoders": [
+      "gpu8/minute_8_1",
+      "gpu8/minute_35_5",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5481536323517264,
+    "micro": 0.6606366152629498,
+    "top_share": 0.9090549624357452,
+    "objective": 0.5875226763706547,
+    "validation_win": true,
+    "training_seconds": 2134.832154200005,
+    "selection_seconds": 2.7557467000442557
+  },
+  "gpu8/minute_35_5+views_small/ridge": {
+    "encoders": [
+      "gpu8/minute_35_5",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 2.0,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5489185928074535,
+    "micro": 0.6597469355476473,
+    "top_share": 0.8783115856069593,
+    "objective": 0.5877085127665214,
+    "validation_win": true,
+    "training_seconds": 2231.419564699987,
+    "selection_seconds": 1.377594300021883
+  },
+  "gpu8/minute_35_5+views_small/tree": {
+    "encoders": [
+      "gpu8/minute_35_5",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 2.0,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.548589033493161,
+    "micro": 0.6596480822459471,
+    "top_share": 0.8772241992882562,
+    "objective": 0.5874597005566362,
+    "validation_win": true,
+    "training_seconds": 2277.8517179999617,
+    "selection_seconds": 1.4110713999834843
+  },
+  "gpu8/minute_51": {
+    "encoders": [
+      "gpu8/minute_8_1",
+      "gpu8/minute_35_5",
+      "gpu8/minute_51",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      1.0,
+      9.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5462513200497487,
+    "micro": 0.6605377619612495,
+    "top_share": 0.91073546856465,
+    "objective": 0.586251574718774,
+    "validation_win": true,
+    "training_seconds": 3064.820985700004,
+    "selection_seconds": 2.8006103000370786
+  },
+  "gpu8/minute_51+views_small/ridge": {
+    "encoders": [
+      "gpu8/minute_51",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 2.0,
+    "correction": 0.4,
+    "signal": 0.3,
+    "macro": 0.5466230540119377,
+    "micro": 0.6596480822459471,
+    "top_share": 0.9137999209173587,
+    "objective": 0.5861818138938409,
+    "validation_win": true,
+    "training_seconds": 3161.408396199986,
+    "selection_seconds": 1.3712680999888107
+  },
+  "gpu8/minute_51+views_small/tree": {
+    "encoders": [
+      "gpu8/minute_51",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "pca",
+    "policy": "balanced",
+    "rank": 61,
+    "ridge": 0.2,
+    "domain_scale": 0.08,
+    "temperature": 0.0,
+    "signal": 0.25,
+    "macro": 0.5447519567380804,
+    "micro": 0.6594503756425465,
+    "top_share": 0.9187425860023725,
+    "objective": 0.5848964033546435,
+    "validation_win": true,
+    "training_seconds": 3207.8405494999606,
+    "selection_seconds": 1.5078281000023708
+  },
+  "gpu8/minute_67_5": {
+    "encoders": [
+      "gpu8/minute_8_1",
+      "gpu8/minute_35_5",
+      "gpu8/minute_67_5",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      1.0,
+      9.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.546112883835414,
+    "micro": 0.6600434954527481,
+    "top_share": 0.910340055357849,
+    "objective": 0.585988597901481,
+    "validation_win": true,
+    "training_seconds": 4054.760224300029,
+    "selection_seconds": 2.932725099963136
+  },
+  "gpu8/minute_67_5+views_small/ridge": {
+    "encoders": [
+      "gpu8/minute_67_5",
+      "views_small/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 2.0,
+    "correction": 0.4,
+    "signal": 0.75,
+    "macro": 0.5484933178405654,
+    "micro": 0.6596480822459471,
+    "top_share": 0.9035191775405299,
+    "objective": 0.5873974853824491,
+    "validation_win": true,
+    "training_seconds": 4151.347634800011,
+    "selection_seconds": 1.507137699984014
+  },
+  "gpu8/minute_67_5+views_small/tree": {
+    "encoders": [
+      "gpu8/minute_67_5",
+      "views_small/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5451455355139717,
+    "micro": 0.6598457888493475,
+    "top_share": 0.9130090945037564,
+    "objective": 0.5852906241813532,
+    "validation_win": true,
+    "training_seconds": 4197.779788099986,
+    "selection_seconds": 1.426596299977973
+  },
+  "gpu16/minute_35_5+views_expert/ridge": {
+    "encoders": [
+      "gpu16/minute_35_5",
+      "views_expert/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "algorithm": "pca",
+    "policy": "balanced",
+    "rank": 24,
+    "ridge": 0.2,
+    "domain_scale": 0.08,
+    "temperature": 0.035,
+    "signal": 0.25,
+    "macro": 0.5511505256183108,
+    "micro": 0.6599446421510479,
+    "top_share": 0.8869118228548833,
+    "objective": 0.5892284664047688,
+    "validation_win": true,
+    "training_seconds": 2899.9474880000344,
+    "selection_seconds": 1.4210655000060797
+  },
+  "gpu16/minute_35_5+views_expert/tree": {
+    "encoders": [
+      "gpu16/minute_35_5",
+      "views_expert/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5481531784161873,
+    "micro": 0.6608343218663504,
+    "top_share": 0.8915579280347964,
+    "objective": 0.5875915786237443,
+    "validation_win": true,
+    "training_seconds": 2947.3851787000312,
+    "selection_seconds": 1.4176773999934085
+  },
+  "gpu16/minute_53+views_expert/ridge": {
+    "encoders": [
+      "gpu16/minute_53",
+      "views_expert/ridge",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.05,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5461019581207472,
+    "micro": 0.6595492289442467,
+    "top_share": 0.9126136812969553,
+    "objective": 0.5858085029089721,
+    "validation_win": true,
+    "training_seconds": 3949.1913259000285,
+    "selection_seconds": 1.4064951000036672
+  },
+  "gpu16/minute_53+views_expert/tree": {
+    "encoders": [
+      "gpu16/minute_53",
+      "views_expert/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.05,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5520002489710526,
+    "micro": 0.6602412020561487,
+    "top_share": 0.906385923289838,
+    "objective": 0.5898845825508362,
+    "validation_win": true,
+    "training_seconds": 3996.6290166000254,
+    "selection_seconds": 1.4254307000082918
+  },
+  "gpu16/minute_67_5+views_expert/ridge": {
+    "encoders": [
+      "gpu16/minute_67_5",
+      "views_expert/ridge",
+      "kernel"
+    ],
+    "encoder_weights": null,
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.3,
+    "macro": 0.5470582823200112,
+    "micro": 0.6595492289442467,
+    "top_share": 0.908560695927244,
+    "objective": 0.5864301136384936,
+    "validation_win": true,
+    "training_seconds": 4818.961563199991,
+    "selection_seconds": 1.4246311000315472
+  },
+  "gpu16/minute_67_5+views_expert/tree": {
+    "encoders": [
+      "gpu16/minute_67_5",
+      "views_expert/tree",
+      "kernel"
+    ],
+    "encoder_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "algorithm": "fingerprint",
+    "policy": "balanced",
+    "bandwidth": 0.18,
+    "ridge": 0.5,
+    "correction": 0.8,
+    "signal": 0.75,
+    "macro": 0.5502793130420349,
+    "micro": 0.6598457888493475,
+    "top_share": 0.8892843020956899,
+    "objective": 0.5886275795745943,
+    "validation_win": true,
+    "training_seconds": 4866.399253899988,
+    "selection_seconds": 1.4245506000006571
+  }
+}

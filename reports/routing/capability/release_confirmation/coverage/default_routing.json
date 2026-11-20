@@ -1,0 +1,12 @@
+{
+  "seed": 8800,
+  "raw_queries": 48,
+  "matching_choices": 48,
+  "seconds": 1.967060399998445,
+  "first_result": {
+    "model_id": 50,
+    "selected": "meta-llama/Meta-Llama-3-70B-Instruct",
+    "questions": 200,
+    "method": "text-kernel"
+  }
+}

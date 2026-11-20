@@ -1,0 +1,23 @@
+{
+  "questions": 4503,
+  "models": 112,
+  "batch_size": 16,
+  "threads": 1,
+  "seconds": {
+    "original": [
+      2.602692599990405,
+      2.466134399990551,
+      2.5139842000207864
+    ],
+    "cached": [
+      1.958524200017564,
+      1.9941343999817036,
+      1.9527332999859937
+    ]
+  },
+  "speedup": 1.283611507071621,
+  "maximum_score_gap": 0,
+  "matching_choices": 4503,
+  "unique_format_signatures": 665,
+  "warmup": "16 training questions; each pass starts with fresh caches"
+}

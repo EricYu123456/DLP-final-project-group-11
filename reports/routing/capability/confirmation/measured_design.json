@@ -1,0 +1,7 @@
+{
+  "roster": "All 13 candidates on the audited roster",
+  "panel": "Use only the original presentation of each of the same 200 seed-11 questions. Each candidate runs once per question. Twelve runs use pinned GGUF conversions; the CodeLlama-70B run uses its original AWQ weights.",
+  "measurements": "Compare archived binary grades alone with the same grades plus actual candidate option distributions and short free responses. The AWQ candidate supplies one-token likelihoods and no complete free-answer matches.",
+  "fit": "Choose the historical nominal-response decoder on the development roster. Within the 200 candidate questions, use four folds to estimate reliability, the weight on actual distributions, and the optional per-option tilt. Probe grades from the other two seeds are excluded.",
+  "test": "Use the 4,985 reserved questions and the earlier 3,370 in separate results. Compare the binary-only, measured and measured-choice arms on identical historical outcomes. Evaluate against both versions of original EmbedLLM on the same seed. Candidate models only run on the 200 onboarding questions."
+}

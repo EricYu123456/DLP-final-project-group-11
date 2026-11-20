@@ -1,0 +1,107 @@
+{
+  "validation_13_11": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.0,
+    "peer_penalty": 1.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "validation_13_23": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.0,
+    "peer_penalty": 1.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "validation_13_37": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 1.0,
+    "peer_mix": 0.5,
+    "peer_penalty": 4.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "validation_metrics": {
+    "macro": 0.5272460514087962,
+    "micro": 0.6418544879398972,
+    "top_share": 0.776789244760775,
+    "objective": 0.5673590041946815
+  },
+  "audited_13_11": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.0,
+    "peer_penalty": 1.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "audited_13_23": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.5,
+    "peer_penalty": 4.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "audited_13_37": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.5,
+    "peer_penalty": 4.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "expanded_37_11": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.5,
+    "peer_penalty": 4.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "expanded_37_23": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.5,
+    "peer_penalty": 1.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  },
+  "expanded_37_37": {
+    "encoder": "mpnet",
+    "ridge": 0.5,
+    "kernel": "rbf",
+    "signal": 0.0,
+    "peer_mix": 0.5,
+    "peer_penalty": 1.0,
+    "domain_readout": "panel-template",
+    "probe_count": 200,
+    "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+  }
+}

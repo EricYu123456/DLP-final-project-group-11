@@ -1,0 +1,16 @@
+{
+  "groups": 1600,
+  "upstream_questions": 1601,
+  "questions_by_source": [
+    21,
+    1002,
+    227,
+    313,
+    37
+  ],
+  "seed": 52419,
+  "warm_up": 80,
+  "batch": 40,
+  "maximum_questions": 200,
+  "stopping_gain": 0.002
+}

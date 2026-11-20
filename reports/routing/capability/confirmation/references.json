@@ -1,0 +1,41 @@
+{
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  },
+  "native-noisy": {
+    "macro": 0.5096694049694712,
+    "micro": 0.628212732305259,
+    "top_share": 0.632463424278371,
+    "objective": 0.551159569536997
+  },
+  "cold-balanced-120": {
+    "strength": 10.0,
+    "policy": "balanced",
+    "budget": 120,
+    "macro": 0.5274821016415703,
+    "micro": 0.656781336496639,
+    "top_share": 0.9661921708185054,
+    "objective": 0.5727368338408443
+  },
+  "cold-balanced-200": {
+    "strength": 1.0,
+    "policy": "balanced",
+    "budget": 200,
+    "macro": 0.540079429237602,
+    "micro": 0.6544088572558323,
+    "top_share": 0.8811783313562674,
+    "objective": 0.5800947290439826
+  },
+  "cold-representative-200": {
+    "strength": 1.0,
+    "policy": "representative",
+    "budget": 200,
+    "macro": 0.5445299841283974,
+    "micro": 0.6548042704626335,
+    "top_share": 0.8947212336892053,
+    "objective": 0.58312598434538
+  }
+}

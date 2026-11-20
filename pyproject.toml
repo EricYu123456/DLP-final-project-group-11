@@ -21,6 +21,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.4,<10"]
+routing = ["transformers==4.57.1", "sentence-transformers==5.1.2", "catboost==1.2.8", "pyahocorasick>=2.2,<3"]
+routing-research = ["tabicl==2.2.0", "bitsandbytes==0.48.2", "accelerate==1.11.0", "sentencepiece>=0.2,<0.3", "pyarrow>=17,<24"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

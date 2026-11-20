@@ -1,0 +1,10 @@
+{
+  "queries": 64,
+  "batch": 16,
+  "previous_total_seconds": 0.9908438000129536,
+  "optimized_total_seconds": 0.289359999995213,
+  "first_batch_seconds": 0.24648349999915808,
+  "three_warm_batches_seconds": 0.04287649999605492,
+  "max_probability_difference": 4.718447854656915e-16,
+  "matching_source": 64
+}

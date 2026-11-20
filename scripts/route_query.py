@@ -13,9 +13,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from coldstart.adaptation import adapt_map, sigmoid
-from coldstart.models import load_decoder
-from embed_new_model import load_run, read_responses
-from run_experiment import checkpoint_path, sha256
 
 
 VARIANT = "neural_lowrank"
@@ -59,6 +56,9 @@ def add_run_options(parser: argparse.ArgumentParser) -> None:
 
 
 def decoder_context(args: argparse.Namespace):
+    from coldstart.models import load_decoder
+    from run_experiment import checkpoint_path
+
     seed = 11 if args.seed is None else args.seed
     path = args.checkpoint or checkpoint_path(args.run, VARIANT, seed)
     decoder, metadata = load_decoder(path)
@@ -92,6 +92,9 @@ def decoder_context(args: argparse.Namespace):
 
 
 def fit(args: argparse.Namespace) -> dict:
+    from embed_new_model import load_run, read_responses
+    from run_experiment import sha256
+
     path, decoder, seed, training_ids, _, strength = decoder_context(args)
     dataset, split, config, lock, _ = load_run(args.run, VARIANT, seed)
     if training_ids != dataset.model_ids[split.train_models].tolist():
@@ -131,16 +134,62 @@ def fit_main(argv: list[str]) -> int:
     return 0
 
 
+def json_prompts(lines, parser):
+    if lines is sys.stdin and not lines.isatty() and hasattr(lines, "reconfigure"):
+        lines.reconfigure(encoding="utf-8-sig")
+        if not sys.stdout.isatty() and hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8")
+    for number, line in enumerate(lines, start=1):
+        if not line.strip():
+            continue
+        try:
+            request = json.loads(line)
+        except json.JSONDecodeError as error:
+            parser.error(f"Invalid JSON on input line {number} ({error.msg}).")
+        if not isinstance(request, dict) or set(request) != {"prompt"} or not isinstance(request["prompt"], str):
+            parser.error(f"Input line {number} must be a JSON object containing only a prompt string.")
+        if not request["prompt"].strip():
+            parser.error(f"Input line {number} has an empty prompt.")
+        yield request["prompt"]
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["confirmation"]:
+        from serve_confirmation_router import main as confirmation_main
+
+        return confirmation_main(argv[1:])
+    if argv[:1] == ["release"]:
+        if argv[1:2] in (["plan"], ["fit"]):
+            from serve_release_pool import main as onboard_release
+
+            return onboard_release(argv[1:])
+        options = argv[2:] if argv[1:2] == ["route"] else argv[1:]
+        if "--pool" in options or any(value.startswith("--pool=") for value in options):
+            from serve_confirmation_router import main as confirmation_main
+
+            return confirmation_main(["route", *options])
+        from confirm_release_panel import main as release_main
+
+        explicit = {arg.split("=", 1)[0] for arg in options}
+        clean_pool = ROOT / "artifacts/capability_routing/release_confirmation/coverage/text-kernel_8800.joblib"
+        if not explicit.intersection({"--name", "--seed", "--out", "--report"}) and clean_pool.is_file():
+            options = ["--name", "clean-200", *options]
+        return release_main(["--phase", "route", *options])
+    if argv[:1] == ["capability"]:
+        from serve_capability_router import main as capability_main
+        return capability_main(argv[1:])
     if argv[:1] == ["fit"]:
         return fit_main(argv[1:])
-    parser = argparse.ArgumentParser(description=__doc__, epilog="Use route_query.py fit --help to fit a candidate.")
+    parser = argparse.ArgumentParser(description=__doc__, epilog="Use confirmation --help for probe plans and measured model embeddings.")
     add_run_options(parser)
     parser.add_argument("--trained-model", type=int, action="append", default=[],
                         help="Source model ID from the checkpoint's training set. Repeat for more.")
     parser.add_argument("--candidate-embedding", type=Path, action="append", default=[],
                         help="Embedding fitted to this decoder. Repeat for more.")
+    parser.add_argument("--tier", help="Use a trained capability routing tier with the bundled 13-model roster.")
+    parser.add_argument("--batch-size", type=int, help="Route this many incoming prompts together with the confirmed router.")
+    parser.add_argument("--encoder-precision", choices=("float32", "bfloat16"), help="Precision for the confirmed router's question embeddings.")
     query = parser.add_mutually_exclusive_group(required=True)
     query.add_argument("--question-vector", type=Path, help="An all-mpnet-base-v2 question vector in .npy format.")
     query.add_argument("--prompt", help="Prompt text. Requires the optional sentence-transformers package.")
@@ -153,7 +202,25 @@ def main(argv: list[str] | None = None) -> int:
                              "benchmark bias when the prompt has no benchmark label.")
     args = parser.parse_args(argv)
     if not args.trained_model and not args.candidate_embedding:
+        if (args.prompt is not None or args.stdin or args.stdin_json) and all(
+                token.split("=", 1)[0] not in {"--minimum-gain", "--benchmark", "--checkpoint", "--run", "--seed"}
+                for token in argv):
+            selection = ROOT / "reports/routing/capability/confirmation/selection.json"
+            if args.tier is None and selection.is_file():
+                method = json.loads(selection.read_text(encoding="utf-8"))["default_method"]
+                pool = ROOT / "artifacts/capability_routing/confirmation" / f"audited_13_{method}.joblib"
+                if pool.is_file():
+                    from serve_confirmation_router import main as confirmation_main
+                    return confirmation_main(["route", *argv])
+            if args.batch_size is not None or args.encoder_precision:
+                parser.error("Batch size and encoder precision require a confirmed router. Use confirmation route with a fitted pool.")
+            from serve_capability_router import main as capability_main
+            return capability_main(["route", *argv])
         parser.error("Supply at least one trained model or candidate embedding.")
+    if args.tier:
+        parser.error("Use capability route --embedding with capability profiles and a budget tier.")
+    if args.batch_size is not None or args.encoder_precision:
+        parser.error("Batch size and encoder precision apply to confirmation route.")
     if not 0 <= args.minimum_gain <= 1:
         parser.error("--minimum-gain must be between 0 and 1.")
     if args.minimum_gain and len(args.trained_model) + len(args.candidate_embedding) != 2:
@@ -173,6 +240,8 @@ def main(argv: list[str] | None = None) -> int:
         candidates.append({"model_id": model_id})
         candidate_latents.append(weights[training_rows[model_id]])
     if args.candidate_embedding:
+        from run_experiment import sha256
+
         decoder_digest = sha256(checkpoint)
         for path in args.candidate_embedding:
             with np.load(path, allow_pickle=False) as fit:
@@ -210,18 +279,7 @@ def main(argv: list[str] | None = None) -> int:
             parser.error("Text prompts require sentence-transformers. Use --question-vector for saved features.")
         encoder = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
         if args.stdin_json:
-            for number, line in enumerate(sys.stdin, start=1):
-                if not line.strip():
-                    continue
-                try:
-                    request = json.loads(line)
-                except json.JSONDecodeError as error:
-                    parser.error(f"Invalid JSON on input line {number} ({error.msg}).")
-                if not isinstance(request, dict) or set(request) != {"prompt"} or not isinstance(request["prompt"], str):
-                    parser.error(f"Input line {number} must be a JSON object containing only a prompt string.")
-                prompt = request["prompt"]
-                if not prompt.strip():
-                    parser.error(f"Input line {number} has an empty prompt.")
+            for prompt in json_prompts(sys.stdin, parser):
                 print(json.dumps(route(encoder.encode(prompt)), ensure_ascii=False), flush=True)
         elif args.stdin:
             for line in sys.stdin:

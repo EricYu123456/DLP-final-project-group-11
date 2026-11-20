@@ -1,0 +1,48 @@
+{
+  "best": {
+    "name": "general",
+    "algorithm": "local",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 12,
+    "focus": 15,
+    "signal": 0.65,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "calibration": 0.0,
+    "macro": 0.543507214366493,
+    "micro": 0.6590549624357454,
+    "top_share": 0.8621984974298141,
+    "objective": 0.5839489261907314,
+    "subpool_gain": 2.2954506310843282e-05,
+    "within_domain_gain": 0.005203034801029806,
+    "robust_objective": 0.5865619208444017
+  },
+  "short": {
+    "name": "general",
+    "algorithm": "local",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 12,
+    "focus": 3,
+    "signal": 0.65,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "calibration": 0.5,
+    "macro": 0.5396913480893477,
+    "micro": 0.6561882166864373,
+    "top_share": 0.8017991300909451,
+    "objective": 0.5804652520983291,
+    "subpool_gain": -0.0028932531042080737,
+    "within_domain_gain": 0.00837925241978466,
+    "robust_objective": 0.5832082517561175
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

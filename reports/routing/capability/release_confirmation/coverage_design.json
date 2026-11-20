@@ -1,0 +1,6 @@
+{
+  "question": "Can a fixed, text-only sampling design reduce sensitivity to which 200 prompts are graded?",
+  "panel": "Fifteen independent 200-question deployments per design for the 112-model roster, seeds 8800 through 8814. The paired designs use identical source quotas and training banks, with one representative per canonical stem. No seed selection or pooling.",
+  "methods": "The control stratifies each source along one random projection, as in the existing protocol. The alternative recursively partitions semantic and visible-format features into approximately equal-mass leaves along their largest variance directions. In each leaf choose the most central of four uniformly sampled prompts. Keep the existing 18D capability estimator and CPU text-kernel decoder fixed.",
+  "assessment": "Draw up to 1,500 new canonical training groups outside past evaluations and panels before revealing their grades. Evaluate against the paired control and a complete upstream TextMF refit excluding all new groups. Also report the unchanged official 3,000-question benchmark as a previously inspected secondary split. Use bootstrap intervals over deployments and grouped questions. Seed 8800 is the deployment example."
+}

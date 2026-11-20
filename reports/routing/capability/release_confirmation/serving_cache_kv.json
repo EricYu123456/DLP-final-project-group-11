@@ -1,0 +1,14 @@
+{
+  "mode": "kv",
+  "device": "cpu",
+  "queries": 64,
+  "batch": 16,
+  "targets": 8,
+  "fit_and_cache_seconds": 11.138875100004952,
+  "first_batch_seconds": 0.9597900999942794,
+  "remaining_seconds_per_query": 0.0583691020826033,
+  "total_seconds": 14.90038209996419,
+  "extra_peak_MiB": 779.48046875,
+  "matching_routes": 64,
+  "max_score_difference": 0.0
+}

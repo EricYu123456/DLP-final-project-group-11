@@ -1,0 +1,7 @@
+{
+  "objective": "Use more CPU computation on the responses already obtained to stabilize each candidate's embedding and decide whether the remaining questions are worth collecting.",
+  "locked_data": "Use the 15 coverage panels, one independent deployment per seed, before the new 1,503-question comparison is revealed. The original 3,000-question test is secondary. No best-seed selection.",
+  "estimator": "Use 12 stratified Bayesian bootstrap draws per current panel and refit the measured task abilities, latent skill directions and weighted kernel ridge readout. Average the original fit and the bootstrap mean equally. Compress the average residual coefficient matrix to rank 12. Each model has ten source coordinates and twelve residual skill coordinates.",
+  "stopping": "At nested budgets 100, 140, 170, and 200, estimate the value of the remaining questions from bootstrap changes in the winning score over 300 ungraded training-bank queries. Shrink uncertainty by sqrt(1-n/200). Stop if expected gain is below 0.5 or 1.0 percentage points, reported separately. Each decision sees only the current prefix. The fixed-200 arm is a separate counterfactual.",
+  "comparisons": "Compare both stopping rules and the fixed-200 posterior average with the unchanged coverage-panel estimator on exactly the same candidate grades, the full deterministic original and the authors' default inference. Report actual numbers of questions, fitted model accuracy, run time, and uncertainty across panels and question groups."
+}

@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "forest-cpu",
+    "algorithm": "forest",
+    "readout": "text",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 200,
+    "penalty": 3.0,
+    "nearest": 0.0,
+    "signal": 0.75,
+    "residual": 0.1,
+    "macro": 0.5472284520625493,
+    "micro": 0.6597469355476473,
+    "top_share": 0.8991696322657177,
+    "objective": 0.5866099212823337,
+    "subpool_gain": 0.0007222138633168368,
+    "within_domain_gain": 0.0015515727934700776,
+    "robust_objective": 0.5877468146107272
+  },
+  "short": {
+    "name": "forest-cpu",
+    "algorithm": "forest",
+    "readout": "text",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 120,
+    "penalty": 15.0,
+    "nearest": 0.0,
+    "signal": 0.75,
+    "residual": 0.1,
+    "macro": 0.5363449624878577,
+    "micro": 0.6561882166864373,
+    "top_share": 0.8841439304072756,
+    "objective": 0.5782901014573605,
+    "subpool_gain": -0.0025684451468867804,
+    "within_domain_gain": -0.0003545017101238745,
+    "robust_objective": 0.5768286280288552
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

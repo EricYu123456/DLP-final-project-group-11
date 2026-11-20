@@ -1,0 +1,27 @@
+{
+  "shortest": {
+    "name": "tabular-budget-160",
+    "probes": 160,
+    "fit_seconds": 41.21890093333786,
+    "macro": 0.5759486700135866,
+    "micro": 0.6260000066666667,
+    "top_share": 0.3875555555555555,
+    "micro_ci_low": 0.0197661733739484,
+    "macro_ci_low": 0.0081523453873985,
+    "micro_gain": 0.0297777777777777,
+    "macro_gain": 0.0228961637397266
+  },
+  "near_200": {
+    "name": "tabular-panel",
+    "probes": 200,
+    "fit_seconds": 34.22466843334647,
+    "macro": 0.5919645907099581,
+    "micro": 0.6493333533333333,
+    "top_share": 0.4135555555555555,
+    "micro_ci_low": 0.0425139608057744,
+    "macro_ci_low": 0.0244635111386595,
+    "micro_gain": 0.0531111111111111,
+    "macro_gain": 0.0389120844360981
+  },
+  "rule": "Smallest nested panel with positive lower paired macro and micro bounds against default EmbedLLM and concentration below 97% on validation. Near-200 additionally keeps both accuracy metrics within one percentage point of the 200-prompt setting."
+}

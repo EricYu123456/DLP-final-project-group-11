@@ -1,0 +1,38 @@
+{
+  "seeds": [
+    7100,
+    7101,
+    7102,
+    7103,
+    7104,
+    7105,
+    7106,
+    7107,
+    7108,
+    7109,
+    7110,
+    7111,
+    7112,
+    7113,
+    7114
+  ],
+  "fresh_questions": 2556,
+  "fresh_groups": 2549,
+  "fresh_counts": [
+    223,
+    0,
+    132,
+    21,
+    1187,
+    242,
+    342,
+    188,
+    189,
+    32
+  ],
+  "training_questions": 14572,
+  "training_groups": 13876,
+  "probes": 200,
+  "reduced_probes": 140,
+  "selected_seed": null
+}

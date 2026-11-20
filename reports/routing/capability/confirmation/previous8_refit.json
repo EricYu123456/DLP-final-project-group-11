@@ -1,0 +1,46 @@
+{
+  "training": [
+    {
+      "seed": 11,
+      "reference_models": 62,
+      "epoch": 22,
+      "training_questions": 10748,
+      "prior_strength": 0.3
+    },
+    {
+      "seed": 11,
+      "reference_models": 75,
+      "epoch": 22,
+      "training_questions": 10748,
+      "prior_strength": 0.3
+    },
+    {
+      "seed": 23,
+      "reference_models": 62,
+      "epoch": 42,
+      "training_questions": 10748,
+      "prior_strength": 0.3
+    },
+    {
+      "seed": 23,
+      "reference_models": 75,
+      "epoch": 42,
+      "training_questions": 10748,
+      "prior_strength": 0.3
+    },
+    {
+      "seed": 37,
+      "reference_models": 62,
+      "epoch": 46,
+      "training_questions": 10748,
+      "prior_strength": 0.3
+    },
+    {
+      "seed": 37,
+      "reference_models": 75,
+      "epoch": 46,
+      "training_questions": 10748,
+      "prior_strength": 0.3
+    }
+  ]
+}

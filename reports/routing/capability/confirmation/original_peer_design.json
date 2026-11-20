@@ -1,0 +1,5 @@
+{
+  "hypothesis": "On contested multiple-choice prompts, the answer distribution of a close historical peer in the original question format may add information to the eight-helper estimator. The existing UNA run also covers contested free-response prompts. Its shared multiple-choice measurements are reused without a second invocation.",
+  "protocol": "Keep the 95-dimensional candidate profiles, the same 200 balanced panel grades and the eight existing independent helpers. Add one original-order UNA-SimpleSmaug-34B likelihood measurement only for multiple-choice questions already flagged by the frozen Qwen/Math gate. Skip the extra peer for all other queries. UNA is separate from both candidate rosters.",
+  "test": "Use the fresh 1,600-group audit that was fixed before observing its results. The shared query model excludes that entire audit, the preceding release reserve, and the three candidate probe panels. Compare directly with the same 200-question balanced eight-helper estimator trained on the same remaining history and the independent full-data TextMF refit. Older questions are supplementary."
+}

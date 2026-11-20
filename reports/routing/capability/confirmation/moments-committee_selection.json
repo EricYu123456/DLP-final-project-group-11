@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "moments-committee",
+    "algorithm": "moments",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "proxies": "smol qwen math phi",
+    "policy": "balanced",
+    "probe_count": 120,
+    "pseudo": 15.0,
+    "sharpness": 30.0,
+    "signal": 1.4,
+    "macro": 0.5286195225886606,
+    "micro": 0.6426453143534994,
+    "top_share": 0.6403716884143931,
+    "objective": 0.5685285497063541,
+    "subpool_gain": -0.013612863150339747,
+    "within_domain_gain": 0.019977808828585235,
+    "robust_objective": 0.5717110225454769
+  },
+  "short": {
+    "name": "moments-committee",
+    "algorithm": "moments",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "proxies": "smol qwen math phi",
+    "policy": "balanced",
+    "probe_count": 120,
+    "pseudo": 15.0,
+    "sharpness": 30.0,
+    "signal": 1.4,
+    "macro": 0.5286195225886606,
+    "micro": 0.6426453143534994,
+    "top_share": 0.6403716884143931,
+    "objective": 0.5685285497063541,
+    "subpool_gain": -0.013612863150339747,
+    "within_domain_gain": 0.019977808828585235,
+    "robust_objective": 0.5717110225454769
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,5 @@
+roster,split,seed,queries,correct,original_correct,top_model,top_count,switched,rescues,harms,oracle_correct
+audited_13,previous_test,9200,3370,2214,2203,ConvexAI__Luminex-34B-v0.1,3264,112,32,21,3020
+audited_13,confirmation,9200,4985,3285,3282,ConvexAI__Luminex-34B-v0.1,4838,165,40,37,4468
+expanded_37,previous_test,9200,3370,2468,2494,CausalLM__34b-beta,2095,1135,111,137,3249
+expanded_37,confirmation,9200,4985,3612,3654,CausalLM__34b-beta,3110,1662,174,216,4823

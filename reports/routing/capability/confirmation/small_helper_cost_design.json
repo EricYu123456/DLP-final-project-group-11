@@ -1,0 +1,6 @@
+{
+  "objective": "Reduce the number of auxiliary LLMs needed by the frozen 120-question conditional method, especially in the concentrated 13-model pool.",
+  "early_stage": "Use only the SmolLM2-360M and Qwen2.5-Math-1.5B responses, two text projections fitted on historical prompts, and the same candidate embeddings. Train a score regressor and a model-choice classifier to reproduce the full teacher's scores and winner. Use 10,748 historical teacher predictions to fit both. No additional candidate answers are read.",
+  "gate": "On a fixed half of the 3,372 grade-free development prompts, learn which stage-one choices agree with the teacher. On the other half calibrate 21 acceptance quantiles with a multiplicity-adjusted one-sided binomial criterion. Compare the prespecified 0.5% and 1.5% overall changed-choice budgets. The 0.5% setting is the primary point. Reuse the two measured helper responses whenever a prompt goes to the full decoder.",
+  "evaluation": "Compare the unchanged 13- and 37-candidate teacher, small-helper policies and original baselines on 4,985 confirmation questions. This cost study follows the earlier router and text-only gate evaluations."
+}

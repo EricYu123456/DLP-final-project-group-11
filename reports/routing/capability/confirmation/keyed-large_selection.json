@@ -1,0 +1,50 @@
+{
+  "best": {
+    "name": "keyed-large",
+    "algorithm": "answers",
+    "answer_keys": true,
+    "readout": "large-committee",
+    "proxies": "qwen math yi phi moe-gated",
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 2.8,
+    "nearest": 0.2,
+    "signal": 0.7,
+    "source_mix": 1.0,
+    "peer_mix": 0.45,
+    "macro": 0.5439649819431054,
+    "micro": 0.658560695927244,
+    "top_share": 0.8973902728351127,
+    "objective": 0.5840734818375539,
+    "subpool_gain": -0.0008754973698305024,
+    "within_domain_gain": 0.000743560523687023,
+    "robust_objective": 0.5840075134144822
+  },
+  "short": {
+    "name": "keyed-large",
+    "algorithm": "answers",
+    "answer_keys": true,
+    "readout": "large-committee",
+    "proxies": "qwen math yi phi moe-gated",
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 2.8,
+    "nearest": 0.2,
+    "signal": 0.7,
+    "source_mix": 1.0,
+    "peer_mix": 0.45,
+    "macro": 0.5332088028073838,
+    "micro": 0.6558916567813365,
+    "top_share": 0.8738631870304467,
+    "objective": 0.5761478016982673,
+    "subpool_gain": -0.002594572782255103,
+    "within_domain_gain": 0.0016733357827312084,
+    "robust_objective": 0.5756871831985053
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

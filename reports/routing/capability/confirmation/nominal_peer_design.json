@@ -1,0 +1,5 @@
+{
+  "reason": "Previously measured 200-question panels identified UNA-SimpleSmaug-34B as a close historical peer of the leader and Koala-13B as a close historical peer of its challenger in two of three audited runs.",
+  "intervention": "Add the actual original-prompt outputs of UNA and Koala to the six nominal answer channels, on the same previously frozen disagreement gate. Neither historical peer is a candidate in the 13- or 37-model pool. Use the same historical grades, 850 training updates, 41 latent coordinates, and the same fifteen 200-question candidate panels as the nominal replication. Also fit UNA-only as a prespecified ablation.",
+  "evaluation": "Compare each variant to the matched six-helper estimator, fixed candidate, and original EmbedLLM. Report the 419 most recently withheld questions, the full 2,551-question bank, and the original 4,985 separately. Existing comparator scores are known, so these are follow-up comparisons."
+}

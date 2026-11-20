@@ -1,0 +1,14 @@
+{
+  "models": 112,
+  "questions_per_model": 200,
+  "distinct_grades": 22400,
+  "embedding_shape": [
+    112,
+    18
+  ],
+  "maximum_embedding_gap": 0.0,
+  "correct_choices": 48,
+  "raw_queries": 48,
+  "cold_fit_seconds": 5.57385390001582,
+  "full_wall_seconds": 21.79078089998802
+}

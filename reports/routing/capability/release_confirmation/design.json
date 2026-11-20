@@ -1,0 +1,33 @@
+{
+  "seed": 111805,
+  "reserved_questions": 3617,
+  "refit_excludes_groups": 3507,
+  "counts": [
+    277,
+    116,
+    157,
+    71,
+    1649,
+    332,
+    496,
+    188,
+    227,
+    104
+  ],
+  "candidate_bank": 2748,
+  "probe_candidates_by_benchmark": [
+    220,
+    86,
+    220,
+    220,
+    863,
+    220,
+    259,
+    220,
+    220,
+    220
+  ],
+  "training": "Each estimate uses one common panel of 200 prompts with 112 graded model responses per prompt. Public names and architectural parent information contain no benchmark scores.",
+  "controls": "Canonical upstream TextMF is refit after excluding every reserved group. The two original release splits retain their official-reference fit.",
+  "selection": "Cross-validation within each individual 200-question panel; development reporting on the previously examined published validation split."
+}

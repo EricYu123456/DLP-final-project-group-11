@@ -1,0 +1,5 @@
+{
+  "objective": "Avoid generating any answers on simple incoming questions while retaining the decisions of the 120-question full decoder.",
+  "method": "Distill the fixed teacher into the existing calibrated classifier and score regressor. Replace the 360M and 1.5B answer signals in the first stage with MPNet coordinates, task membership and predicted historical model abilities from the frozen CPU text readout. Keep the risk budgets and development split unchanged. Reuse the question embedding if full decoding is required.",
+  "test": "Compare both policies on the 4,985 held-out and 3,370 older prompts, separately. Report teacher agreement, fraction of queries that still require answer generation, actual batch wall time, and accuracy. The teacher and previous cost experiments have already been evaluated on these prompts."
+}

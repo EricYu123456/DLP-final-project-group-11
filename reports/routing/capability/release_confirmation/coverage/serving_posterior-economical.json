@@ -1,0 +1,9 @@
+{
+  "method": "posterior-economical",
+  "seed": 8800,
+  "raw_prompts": 48,
+  "batch_size": 16,
+  "probes": 100,
+  "selected_ids_match": 48,
+  "cold_wall_seconds": 1.73738730000332
+}

@@ -1,0 +1,71 @@
+{
+  "11": {
+    "signals": [
+      0.6198126864980216,
+      0.42680627630556367
+    ],
+    "verified_panel_keys": 52,
+    "answer_dimensions": 74,
+    "questions": 200,
+    "proxies": [
+      "smol",
+      "qwen",
+      "math",
+      "yi",
+      "moe-gated"
+    ],
+    "seconds": 58.312572700029705,
+    "adaptive": false,
+    "quadrature": false,
+    "acquisition_proxies": [],
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  },
+  "23": {
+    "signals": [
+      0.5006524391054811,
+      0.20708345470123324
+    ],
+    "verified_panel_keys": 52,
+    "answer_dimensions": 74,
+    "questions": 200,
+    "proxies": [
+      "smol",
+      "qwen",
+      "math",
+      "yi",
+      "moe-gated"
+    ],
+    "seconds": 53.13342660001945,
+    "adaptive": false,
+    "quadrature": false,
+    "acquisition_proxies": [],
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  },
+  "37": {
+    "signals": [
+      0.8535921349714161,
+      0.24250067289178717
+    ],
+    "verified_panel_keys": 52,
+    "answer_dimensions": 74,
+    "questions": 200,
+    "proxies": [
+      "smol",
+      "qwen",
+      "math",
+      "yi",
+      "moe-gated"
+    ],
+    "seconds": 53.28843060001964,
+    "adaptive": false,
+    "quadrature": false,
+    "acquisition_proxies": [],
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  }
+}

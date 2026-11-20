@@ -1,0 +1,60 @@
+split,result,prompt_id,task,original,selected,prompt
+previous_test,rescue,1943,MMLU,ConvexAI__Luminex-34B-v0.1,google__gemma-2b-it,"The following are multiple choice questions (with answers) about formal logic.
+Use indirect truth tables to determine whether each set of propositions is consistent. If the set is consistent, choose an option with a consistent valuation. (There may be other consistent valuations.)
+D ≡ E
+F ∨ D
+~E · ~F
+A. Inconsistent
+B. Consistent. Consistent valuation when D, E, and F are true
+C. Consistent. Consistent valuation when D and E are true and F is false
+D. Consistent. Consistent valuation when D and F are true and E is false
+Answer:"
+previous_test,rescue,3407,MMLU,ConvexAI__Luminex-34B-v0.1,google__gemma-2b-it,"The following are multiple choice questions (with answers) about high school physics.
+An object carries a charge of –1 C. How many excess electrons does it contain?
+A. 6.25 × 10^18
+B. 8.00 × 10^18
+C. 1.60 × 10^19
+D. 3.20 × 10^19
+Answer:"
+previous_test,harm,2006,MMLU,ConvexAI__Luminex-34B-v0.1,google__gemma-2b-it,"The following are multiple choice questions (with answers) about formal logic.
+S Select the best translation into predicate logic. Some kind people help some endangered species. (Ex: x is endangered; Kx: x is kind; Px: x is a person; Sx: x is a species; Hxy: x helps y)
+A. (∃x){(Kx • Px) • (∃y)[(Ey • Sy) • Hxy]}
+B. (∃x)(∃y){[(Kx • Sx) • (Ey • Py)] • Hxy}
+C. (∃x)(∃y){[(Kx • Sx) • (Ey • Py)] • Hyx}
+D. (∃x)(∃y){[(Kx • Px) • (Ey • Sy)] ⊃ Hxy}
+Answer:"
+previous_test,harm,8045,MedMCQA,google__gemma-2b-it,ConvexAI__Luminex-34B-v0.1,"Question: In ALL patient; at which stage can the orthodontic treatment be done:
+Choices:
+A. During chemotherapy
+B. Before chemotherapy
+C. 2 years after remission
+D. Any time as not affected by ALL
+Answer:"
+confirmation,rescue,2007,MMLU,ConvexAI__Luminex-34B-v0.1,google__gemma-2b-it,"The following are multiple choice questions (with answers) about formal logic.
+Select the best English interpretation of the given proposition, using the following translation key: Ax: x is an apartment Hx: x is a house Lx: x is large Bxy: x is bigger than y (∀x)[Ax ⊃ (∃y)(Hy • Bxy)]
+A. Every apartment is bigger than some house.
+B. Every house is bigger than all apartments.
+C. Every house is bigger than some apartment.
+D. Some house is bigger than every apartment.
+Answer:"
+confirmation,rescue,3447,MMLU,ConvexAI__Luminex-34B-v0.1,google__gemma-2b-it,"The following are multiple choice questions (with answers) about high school physics.
+A car starts from rest and uniformly accelerates to a final speed of 20.0 m/s in a time of 15.0 s. How far does the car travel during this time?
+A. 150 m 
+B. 300 m
+C. 450 m
+D. 600 m
+Answer:"
+confirmation,harm,2673,MMLU,ConvexAI__Luminex-34B-v0.1,google__gemma-2b-it,"The following are multiple choice questions (with answers) about human sexuality.
+For purposes of conception, the best position for intercourse is:
+A. woman-on-top
+B. man-on-top
+C. rear entry
+D. side-to-side
+Answer:"
+confirmation,harm,4575,MedMCQA,ConvexAI__Luminex-34B-v0.1,google__gemma-2b-it,"Question: A case of jaundice with 50% direct bilirubin, other LFTs normal. Diagnosis is –
+Choices:
+A. Rotor syndrome
+B. Gilbert syndrome
+C. Glucuronyl transferase deficiency
+D. Primary biliary cirrhosis
+Answer:"

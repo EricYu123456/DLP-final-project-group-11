@@ -1,0 +1,14 @@
+{
+  "mode": "none",
+  "device": "cpu",
+  "queries": 64,
+  "batch": 16,
+  "targets": 8,
+  "fit_and_cache_seconds": 3.9306082999682985,
+  "first_batch_seconds": 13.394408599997405,
+  "remaining_seconds_per_query": 0.8198638354163753,
+  "total_seconds": 56.67848099995172,
+  "extra_peak_MiB": 362.3671875,
+  "matching_routes": 64,
+  "max_score_difference": 0.0
+}

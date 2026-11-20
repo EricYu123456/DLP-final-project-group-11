@@ -1,0 +1,6 @@
+{
+  "question": "Can the author's original 232-dimensional TextMF close the equal-data gap by spending more training updates on exactly the same 200 graded questions?",
+  "controls": "Keep the upstream model, default training noise, optimizer, learning rate, batch size, original record order and fixed training seed. Compare 50, 200 and 800 epochs within each individual panel. The full supervised budget remains 200 distinct question IDs per candidate.",
+  "selection": "Use three held-out folds of the same 200 questions, keeping each canonical question group in one fold within its source. Choose the epoch count maximizing 0.65 times macro plus 0.35 times micro deterministic routing accuracy. Ties choose fewer epochs. Refit once on that panel and score both native inference modes.",
+  "evaluation": "Compare with the already fitted CPU text router on the 3,000 official test questions and the 3,617 reserved questions. The prior 50-epoch and text-router aggregate results were known before this compute sensitivity analysis."
+}

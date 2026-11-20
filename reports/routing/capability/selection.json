@@ -1,0 +1,395 @@
+{
+  "primary_roster": "audited_13",
+  "metric": "routed correctness; macro equal over five benchmarks",
+  "selection_objective": "Prefer joint validation wins on macro and micro over cold and known-ID EmbedLLM with lower top share than previous 8D. Within that tier maximize 0.65 * macro + 0.35 * micro.",
+  "probe_cap_per_candidate": 200,
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "tiers": {
+    "8g-10m": {
+      "stage": "gpu8/minute_4_6+views_small/tree",
+      "encoders": [
+        "gpu8/minute_4_6",
+        "views_small/tree",
+        "kernel"
+      ],
+      "encoder_weights": [
+        1.0,
+        2.0,
+        2.0
+      ],
+      "algorithm": "fingerprint",
+      "policy": "balanced",
+      "bandwidth": 0.18,
+      "ridge": 2.0,
+      "correction": 0.4,
+      "signal": 1.2,
+      "macro": 0.5558375324646032,
+      "micro": 0.6606366152629498,
+      "top_share": 0.8809806247528668,
+      "objective": 0.5925172114440245,
+      "validation_win": true,
+      "training_seconds": 423.92040810000617,
+      "selection_seconds": 1.4197438000119291,
+      "hardware": {
+        "stage": "minute_4_6",
+        "member": 1,
+        "seed": 401,
+        "updates": 1106,
+        "training_examples": 70812,
+        "batch": 64,
+        "proposed_batch": 64,
+        "max_tokens": 192,
+        "elapsed_seconds": 423.92040810000617,
+        "allocator_limit_mib": 6183.0,
+        "peak_allocated_mib": 5013.25732421875,
+        "peak_reserved_mib": 6070.0,
+        "board_peak_mib": 8010,
+        "board_initial_mib": 1649,
+        "gpu": "NVIDIA GeForce RTX 5070 Ti",
+        "sequential_components": [
+          "gpu8/minute_4_6",
+          "views_small/tree"
+        ],
+        "component_seconds": [
+          280.90084430004936,
+          143.0195637999568
+        ]
+      }
+    },
+    "8g-30to60m": {
+      "stage": "gpu8/minute_35_5+views_small/ridge",
+      "encoders": [
+        "gpu8/minute_35_5",
+        "views_small/ridge",
+        "kernel"
+      ],
+      "encoder_weights": [
+        1.0,
+        1.0,
+        6.0
+      ],
+      "algorithm": "fingerprint",
+      "policy": "balanced",
+      "bandwidth": 0.18,
+      "ridge": 2.0,
+      "correction": 0.8,
+      "signal": 0.3,
+      "macro": 0.5489185928074535,
+      "micro": 0.6597469355476473,
+      "top_share": 0.8783115856069593,
+      "objective": 0.5877085127665214,
+      "validation_win": true,
+      "training_seconds": 2231.419564699987,
+      "selection_seconds": 1.377594300021883,
+      "hardware": {
+        "stage": "minute_35_5",
+        "member": 2,
+        "seed": 402,
+        "updates": 8836,
+        "training_examples": 565532,
+        "batch": 64,
+        "proposed_batch": 64,
+        "max_tokens": 192,
+        "elapsed_seconds": 2231.419564699987,
+        "allocator_limit_mib": 6183.0,
+        "peak_allocated_mib": 5013.25732421875,
+        "peak_reserved_mib": 6070.0,
+        "board_peak_mib": 8010,
+        "board_initial_mib": 1649,
+        "gpu": "NVIDIA GeForce RTX 5070 Ti",
+        "sequential_components": [
+          "gpu8/minute_35_5",
+          "views_small/ridge"
+        ],
+        "component_seconds": [
+          2134.832154200005,
+          96.58741049998207
+        ]
+      }
+    },
+    "16g-30to60m": {
+      "stage": "gpu16/minute_35_5+views_small/ridge",
+      "encoders": [
+        "gpu16/minute_35_5",
+        "views_small/ridge",
+        "kernel"
+      ],
+      "encoder_weights": [
+        1.0,
+        1.0,
+        6.0
+      ],
+      "algorithm": "fingerprint",
+      "policy": "balanced",
+      "bandwidth": 0.18,
+      "ridge": 0.5,
+      "correction": 0.8,
+      "signal": 0.75,
+      "macro": 0.5528074422100117,
+      "micro": 0.6603400553578489,
+      "top_share": 0.8898774219058917,
+      "objective": 0.5904438568117547,
+      "validation_win": true,
+      "training_seconds": 2254.8209717000136,
+      "selection_seconds": 1.418464899994433,
+      "hardware": {
+        "stage": "minute_35_5",
+        "member": 1,
+        "seed": 401,
+        "updates": 2382,
+        "training_examples": 85780,
+        "batch": 36,
+        "proposed_batch": 36,
+        "max_tokens": 256,
+        "elapsed_seconds": 2254.8209717000136,
+        "allocator_limit_mib": 14428.4375,
+        "peak_allocated_mib": 13044.93505859375,
+        "peak_reserved_mib": 14378.0,
+        "board_peak_mib": 15651,
+        "board_initial_mib": 1487,
+        "gpu": "NVIDIA GeForce RTX 5070 Ti",
+        "median_active_board_mib": 15532.0,
+        "median_active_gpu_utilization": 100.0,
+        "sequential_components": [
+          "gpu16/minute_35_5",
+          "views_small/ridge"
+        ],
+        "component_seconds": [
+          2158.2335612000315,
+          96.58741049998207
+        ]
+      }
+    },
+    "8g-over60m": {
+      "stage": "gpu8/minute_67_5+views_small/ridge",
+      "encoders": [
+        "gpu8/minute_67_5",
+        "views_small/ridge",
+        "kernel"
+      ],
+      "encoder_weights": [
+        1.0,
+        1.0,
+        6.0
+      ],
+      "algorithm": "fingerprint",
+      "policy": "balanced",
+      "bandwidth": 0.18,
+      "ridge": 2.0,
+      "correction": 0.4,
+      "signal": 0.75,
+      "macro": 0.5484933178405654,
+      "micro": 0.6596480822459471,
+      "top_share": 0.9035191775405299,
+      "objective": 0.5873974853824491,
+      "validation_win": true,
+      "training_seconds": 4151.347634800011,
+      "selection_seconds": 1.507137699984014,
+      "hardware": {
+        "stage": "minute_67_5",
+        "member": 3,
+        "seed": 403,
+        "updates": 16920,
+        "training_examples": 1082908,
+        "batch": 64,
+        "proposed_batch": 64,
+        "max_tokens": 192,
+        "elapsed_seconds": 4151.347634800011,
+        "allocator_limit_mib": 6183.0,
+        "peak_allocated_mib": 5013.25732421875,
+        "peak_reserved_mib": 6070.0,
+        "board_peak_mib": 8010,
+        "board_initial_mib": 1649,
+        "gpu": "NVIDIA GeForce RTX 5070 Ti",
+        "sequential_components": [
+          "gpu8/minute_67_5",
+          "views_small/ridge"
+        ],
+        "component_seconds": [
+          4054.760224300029,
+          96.58741049998207
+        ]
+      }
+    },
+    "16g-over60m": {
+      "stage": "gpu16/minute_53+views_expert/tree",
+      "encoders": [
+        "gpu16/minute_53",
+        "views_expert/tree",
+        "kernel"
+      ],
+      "encoder_weights": [
+        1.0,
+        2.0,
+        2.0
+      ],
+      "algorithm": "fingerprint",
+      "policy": "balanced",
+      "bandwidth": 0.18,
+      "ridge": 0.05,
+      "correction": 0.8,
+      "signal": 0.75,
+      "macro": 0.5520002489710526,
+      "micro": 0.6602412020561487,
+      "top_share": 0.906385923289838,
+      "objective": 0.5898845825508362,
+      "validation_win": true,
+      "training_seconds": 3996.6290166000254,
+      "selection_seconds": 1.4254307000082918,
+      "hardware": {
+        "stage": "minute_53",
+        "member": 2,
+        "seed": 402,
+        "updates": 3557,
+        "training_examples": 128080,
+        "batch": 36,
+        "proposed_batch": 36,
+        "max_tokens": 256,
+        "elapsed_seconds": 3996.6290166000254,
+        "allocator_limit_mib": 14428.4375,
+        "peak_allocated_mib": 13046.919921875,
+        "peak_reserved_mib": 14378.0,
+        "board_peak_mib": 15651,
+        "board_initial_mib": 1487,
+        "gpu": "NVIDIA GeForce RTX 5070 Ti",
+        "median_active_board_mib": 15534.0,
+        "median_active_gpu_utilization": 100.0,
+        "sequential_components": [
+          "gpu16/minute_53",
+          "views_expert/tree"
+        ],
+        "component_seconds": [
+          3207.4773991000257,
+          789.1516174999997
+        ]
+      }
+    },
+    "cpu-kernel": {
+      "stage": "kernel",
+      "encoders": [
+        "kernel"
+      ],
+      "encoder_weights": null,
+      "algorithm": "fingerprint",
+      "policy": "balanced",
+      "bandwidth": 0.05,
+      "ridge": 0.5,
+      "correction": 0.8,
+      "signal": 0.75,
+      "macro": 0.551765643168583,
+      "micro": 0.6599446421510479,
+      "top_share": 0.881771451166469,
+      "objective": 0.5896282928124457,
+      "validation_win": true,
+      "training_seconds": 0.6947962999693118,
+      "selection_seconds": 0.4949969999724999
+    },
+    "cpu-topic": {
+      "stage": "topic/trees_160",
+      "encoders": [
+        "topic/trees_160",
+        "kernel"
+      ],
+      "encoder_weights": [
+        0.7,
+        0.3
+      ],
+      "algorithm": "fingerprint",
+      "policy": "balanced",
+      "bandwidth": 0.18,
+      "ridge": 0.5,
+      "correction": 0.8,
+      "signal": 1.2,
+      "macro": 0.5542116822978884,
+      "micro": 0.6619217081850534,
+      "top_share": 0.9069790431000396,
+      "objective": 0.5919101913583962,
+      "validation_win": true,
+      "training_seconds": 55.15646510000806,
+      "selection_seconds": 2.0488451999844983
+    },
+    "cpu-short": {
+      "stage": "short-panel",
+      "encoders": [
+        "kernel"
+      ],
+      "encoder_weights": null,
+      "algorithm": "fingerprint",
+      "policy": "stratified",
+      "bandwidth": 0.05,
+      "ridge": 0.5,
+      "correction": 0.8,
+      "signal": 0.75,
+      "macro": 0.5488641439938168,
+      "micro": 0.6605377619612495,
+      "top_share": 0.9127125345986556,
+      "objective": 0.5879499102824182,
+      "validation_win": true,
+      "training_seconds": 0.6947962999693118,
+      "selection_seconds": 0.5133150999899954,
+      "probe_count": 120,
+      "matched_reference": {
+        "strength": 1.0,
+        "macro": 0.5359527663788543,
+        "micro": 0.658560695927244,
+        "top_share": 0.9859628311585608,
+        "objective": 0.5788655417207906
+      }
+    }
+  },
+  "best_hardware_on_validation": "8g-10m",
+  "best_requested_tier": "8g-10m",
+  "economical_on_validation": "cpu-short",
+  "economical_rule": "Among joint validation winners, minimize shared training time, then questions per candidate, then selection time. Fall back to the best GPU validation objective.",
+  "original_cold_policy": "EmbedLLM-200-representative",
+  "original_fits": {
+    "balanced": {
+      "strength": 1.0,
+      "macro": 0.5371877140648991,
+      "micro": 0.6535191775405299,
+      "top_share": 0.8821668643732701,
+      "objective": 0.5779037262813699
+    },
+    "informative": {
+      "strength": 0.1,
+      "macro": 0.4969799496299467,
+      "micro": 0.6110122578094108,
+      "top_share": 0.6601423487544483,
+      "objective": 0.5368912574927591
+    },
+    "representative": {
+      "strength": 1.0,
+      "macro": 0.5414683974280219,
+      "micro": 0.6593515223408462,
+      "top_share": 0.9753855278766311,
+      "objective": 0.5827274911475104
+    }
+  },
+  "validation_targets": {
+    "native": {
+      "method": "EmbedLLM-known",
+      "macro": "0.5405415830779773",
+      "micro": "0.6559905100830368",
+      "top_share": "0.8982799525504152",
+      "objective": "0.5809487075297481"
+    },
+    "cold": {
+      "method": "EmbedLLM-200-representative",
+      "macro": "0.5414683974280219",
+      "micro": "0.6593515223408462",
+      "top_share": "0.9753855278766311",
+      "objective": "0.5827274911475104"
+    },
+    "old": {
+      "method": "previous-8D",
+      "macro": "0.5515532615652241",
+      "micro": "0.6610320284697508",
+      "top_share": "0.9214116251482799",
+      "objective": "0.5898708299818085"
+    }
+  }
+}

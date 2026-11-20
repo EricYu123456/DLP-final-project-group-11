@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "forest-committee",
+    "algorithm": "forest",
+    "readout": "committee",
+    "axes": "qwen",
+    "policy": "balanced",
+    "probe_count": 200,
+    "penalty": 15.0,
+    "nearest": 0.0,
+    "signal": 0.75,
+    "residual": 0.1,
+    "macro": 0.5466650492108419,
+    "micro": 0.6598457888493475,
+    "top_share": 0.9084618426255436,
+    "objective": 0.5862783080843188,
+    "subpool_gain": 0.000355813372912997,
+    "within_domain_gain": 0.0009549277238919398,
+    "robust_objective": 0.5869336786327213
+  },
+  "short": {
+    "name": "forest-committee",
+    "algorithm": "forest",
+    "readout": "committee",
+    "axes": "qwen",
+    "policy": "balanced",
+    "probe_count": 120,
+    "penalty": 3.0,
+    "nearest": 0.0,
+    "signal": 0.75,
+    "residual": 0.6,
+    "macro": 0.536779330247647,
+    "micro": 0.6561882166864373,
+    "top_share": 0.8521154606563859,
+    "objective": 0.5785724405012236,
+    "subpool_gain": -0.00399632051697672,
+    "within_domain_gain": 0.0012953475613090226,
+    "robust_objective": 0.5772219540233897
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "method": "active-peer-stop",
+  "models": 13,
+  "questions_per_model": 200,
+  "distinct_grades": 2600,
+  "panel_sizes": [
+    80,
+    120,
+    160,
+    200
+  ],
+  "cold_fit_seconds": 11.053457900008652,
+  "plan_grade_fit_seconds": 53.605060199974105,
+  "maximum_profile_difference": 0.0,
+  "embedding_dimensions": [
+    95
+  ],
+  "stop_reason": "budget"
+}

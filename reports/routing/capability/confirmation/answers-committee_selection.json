@@ -1,0 +1,48 @@
+{
+  "best": {
+    "name": "answers-committee",
+    "algorithm": "answers",
+    "readout": "committee",
+    "proxies": "smol qwen math phi",
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 2.8,
+    "nearest": 0.2,
+    "signal": 0.7,
+    "source_mix": 1.0,
+    "peer_mix": 0.45,
+    "macro": 0.5428383829781606,
+    "micro": 0.6589561091340451,
+    "top_share": 0.8972914195334124,
+    "objective": 0.5834795871327201,
+    "subpool_gain": -0.000752519138463803,
+    "within_domain_gain": 0.0008698672955028741,
+    "robust_objective": 0.5835382612112396
+  },
+  "short": {
+    "name": "answers-committee",
+    "algorithm": "answers",
+    "readout": "committee",
+    "proxies": "smol qwen math phi",
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 2.8,
+    "nearest": 0.2,
+    "signal": 0.7,
+    "source_mix": 0.4,
+    "peer_mix": 0.45,
+    "macro": 0.5387246744379895,
+    "micro": 0.6565836298932385,
+    "top_share": 0.8088177145116647,
+    "objective": 0.5799753088473267,
+    "subpool_gain": -0.007386732345694191,
+    "within_domain_gain": 0.00382200282671613,
+    "robust_objective": 0.5781929440878377
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

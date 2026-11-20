@@ -1,0 +1,5 @@
+{
+  "method": "Keep the full-history nine-space conservative ensemble and the 15 preassigned panels. Use the nested source-balanced prefixes of 80, 120, 160 or 200 questions. Fit each candidate using only observed prefix grades. Existing results for the 200-question ensemble are known.",
+  "selection": "On the 62-history/13-development model split only, choose the shortest prefix whose mean macro and micro accuracy are each within 0.25 percentage points of the 200-question ensemble and whose largest model share is at most two points higher. The tolerances come from the earlier deployment budget comparison. Freeze this length before evaluating it on the 13- and 37-model target rosters.",
+  "evaluation": "Compare the selected prefix to 200 questions for the same ensemble and to full-data deterministic EmbedLLM on the original 4985 and 3370 questions. Use paired resampling over candidate panels and query groups."
+}

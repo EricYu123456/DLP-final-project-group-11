@@ -1,0 +1,15 @@
+{
+  "mode": "cuda",
+  "device": "cuda",
+  "queries": 64,
+  "batch": 16,
+  "targets": 8,
+  "fit_and_cache_seconds": 4.782141700037755,
+  "first_batch_seconds": 0.4939587999833748,
+  "remaining_seconds_per_query": 0.018035550000301253,
+  "total_seconds": 6.14180690003559,
+  "extra_peak_MiB": 1093.12890625,
+  "matching_routes": 64,
+  "max_score_difference": 1.1072595609284974e-06,
+  "torch_peak_reserved_MiB": 766.0
+}

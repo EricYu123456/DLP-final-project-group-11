@@ -1,0 +1,44 @@
+{
+  "best": {
+    "name": "gp-cpu",
+    "algorithm": "coregionalized",
+    "readout": "text",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 200,
+    "metadata": 0.54,
+    "signal": 0.65,
+    "residual": 0.0,
+    "macro": 0.5314089911711871,
+    "micro": 0.6530249110320284,
+    "top_share": 0.8081257413997628,
+    "objective": 0.5739745631224815,
+    "subpool_gain": -0.008840323144736931,
+    "within_domain_gain": 0.003706354823793298,
+    "robust_objective": 0.5714075789620097
+  },
+  "short": {
+    "name": "gp-cpu",
+    "algorithm": "coregionalized",
+    "readout": "text",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 120,
+    "metadata": 0.0,
+    "signal": 0.65,
+    "residual": 0.0,
+    "macro": 0.5300755216529857,
+    "micro": 0.6478845393436141,
+    "top_share": 0.6963226571767497,
+    "objective": 0.5713086778447056,
+    "subpool_gain": -0.01308384229295594,
+    "within_domain_gain": 0.004725177479850398,
+    "robust_objective": 0.5671293454381529
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "best": {
+    "name": "rescue-rubric",
+    "algorithm": "rescue",
+    "readout": "committee",
+    "axes": "qwen",
+    "policy": "skill-stratified",
+    "probe_count": 200,
+    "trees": 620,
+    "alpha": 1.1,
+    "macro": 0.5354393741844696,
+    "micro": 0.6575721629102412,
+    "top_share": 0.9332740213523131,
+    "objective": 0.5781858502384897,
+    "subpool_gain": -0.002566724012545199,
+    "within_domain_gain": 0.006431421524994932,
+    "robust_objective": 0.5801181989947145
+  },
+  "short": {
+    "name": "rescue-rubric",
+    "algorithm": "rescue",
+    "readout": "committee",
+    "axes": "qwen",
+    "policy": "skill-stratified",
+    "probe_count": 120,
+    "trees": 620,
+    "alpha": 1.1,
+    "macro": 0.5259577218182427,
+    "micro": 0.6543100039541321,
+    "top_share": 0.9060893633847371,
+    "objective": 0.570881020565804,
+    "subpool_gain": -0.005656470534164912,
+    "within_domain_gain": 0.007101386432160314,
+    "robust_objective": 0.5716034785148018
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

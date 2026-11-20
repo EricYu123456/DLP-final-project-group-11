@@ -1,0 +1,50 @@
+{
+  "best": {
+    "name": "latent-general",
+    "algorithm": "types",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "policy": "balanced",
+    "probe_count": 200,
+    "classes": 6,
+    "steps": 470,
+    "shrink": 22,
+    "neighbor": 0,
+    "type_mix": 0.5,
+    "signal": 0.8,
+    "macro": 0.5483869201761339,
+    "micro": 0.6609331751680506,
+    "top_share": 0.9051008303677343,
+    "objective": 0.5877781094233048,
+    "subpool_gain": 0.0012397399663602287,
+    "within_domain_gain": 0.003914122268826881,
+    "robust_objective": 0.5903550405408984
+  },
+  "short": {
+    "name": "latent-general",
+    "algorithm": "types",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "policy": "balanced",
+    "probe_count": 120,
+    "classes": 12,
+    "steps": 470,
+    "shrink": 22,
+    "neighbor": 0.65,
+    "type_mix": 0.5,
+    "signal": 0.8,
+    "macro": 0.5412117258287409,
+    "micro": 0.6563859232898379,
+    "top_share": 0.860023724792408,
+    "objective": 0.5815226949401249,
+    "subpool_gain": -0.003333225388458061,
+    "within_domain_gain": 0.004049798378629534,
+    "robust_objective": 0.5818809814352106
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

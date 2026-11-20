@@ -1,0 +1,7 @@
+roster,seed,probes,historical_questions,reference_models,fresh_questions,fit_or_load_seconds,first_peer,second_peer
+audited_13,11,200,8457,75,1716,19.00578680000035,fblgit__UNA-SimpleSmaug-34b-v1beta,google__gemma-7b-it
+audited_13,23,200,8457,75,1716,18.801114499976393,ConvexAI__Luminex-34B-v0.2,TheBloke__koala-13B-HF
+audited_13,37,200,8457,75,1716,17.431153000041377,fblgit__UNA-SimpleSmaug-34b-v1beta,TheBloke__koala-13B-HF
+expanded_37,11,200,8457,75,1716,17.799565000052098,dfurman__HermesBagel-34B-v0.1,bardsai__jaskier-7b-dpo-v5.6
+expanded_37,23,200,8457,75,1716,17.931131299992558,Qwen__Qwen1.5-32B-Chat,allenai__tulu-2-dpo-70b
+expanded_37,37,200,8457,75,1716,17.818788299977314,deepseek-ai__deepseek-llm-67b-chat,SUSTech__SUS-Chat-34B

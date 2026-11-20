@@ -1,0 +1,42 @@
+{
+  "best": {
+    "name": "rescue-general",
+    "algorithm": "rescue",
+    "readout": "general",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 200,
+    "trees": 160,
+    "alpha": 1.1,
+    "macro": 0.544519925764069,
+    "micro": 0.6555950968762356,
+    "top_share": 0.8959074733096086,
+    "objective": 0.5833962356533273,
+    "subpool_gain": -5.139889728269786e-05,
+    "within_domain_gain": 0.008020205157367483,
+    "robust_objective": 0.5873806387833698
+  },
+  "short": {
+    "name": "rescue-general",
+    "algorithm": "rescue",
+    "readout": "general",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 120,
+    "trees": 160,
+    "alpha": 1.1,
+    "macro": 0.5333244998789048,
+    "micro": 0.6544088572558323,
+    "top_share": 0.8940292605773034,
+    "objective": 0.5757040249608294,
+    "subpool_gain": -0.0023138291077675456,
+    "within_domain_gain": 0.006927545083568841,
+    "robust_objective": 0.57801088294873
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

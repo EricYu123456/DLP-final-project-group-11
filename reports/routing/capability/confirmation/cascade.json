@@ -1,0 +1,41 @@
+{
+  "configs": [
+    {
+      "name": "budget-cascade",
+      "algorithm": "cascade",
+      "readout": "text",
+      "coordinates": "joint-general",
+      "policy": "balanced",
+      "probe_count": 120,
+      "classes": 12,
+      "steps": 470,
+      "shrink": 22,
+      "neighbor": 0.0,
+      "type_mix": 0.5,
+      "signal": 1.7,
+      "teacher": "latent-general",
+      "threshold": 0.13
+    }
+  ],
+  "weights": [
+    1
+  ],
+  "validation": {
+    "threshold": 0.13,
+    "heavy_query_fraction": 0.45759193357058126,
+    "macro": 0.5409850644287971,
+    "micro": 0.6553973902728352,
+    "top_share": 0.7709568999604587,
+    "objective": 0.5810293784742104
+  },
+  "teacher_validation": {
+    "threshold": -1.0,
+    "heavy_query_fraction": 1.0,
+    "macro": 0.5407502858551076,
+    "micro": 0.6549031237643337,
+    "top_share": 0.7537564254646106,
+    "objective": 0.5807037791233367
+  },
+  "rule": "Minimize large-decoder use within 0.25 points of its development macro and micro accuracy and 2 points of its concentration. All choices use the same 120-item embeddings.",
+  "shared_student_seconds": 4.395441200002097
+}

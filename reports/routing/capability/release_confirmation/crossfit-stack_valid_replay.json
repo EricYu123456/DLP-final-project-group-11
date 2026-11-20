@@ -1,0 +1,11 @@
+{
+  "method": "crossfit-stack",
+  "split": "valid",
+  "seed": 11,
+  "prompt_id": 4,
+  "measured_questions": 200,
+  "selected": "meta-llama/Meta-Llama-3-70B-Instruct",
+  "offline_selected": "meta-llama/Meta-Llama-3-70B-Instruct",
+  "max_absolute_score_difference": 3.082379974039817e-07,
+  "cold_cli_seconds": 22.031230100023095
+}

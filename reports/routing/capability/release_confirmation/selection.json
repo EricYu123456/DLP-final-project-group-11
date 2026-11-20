@@ -1,0 +1,41 @@
+{
+  "primary": {
+    "name": "tabular-panel",
+    "technique": "tabular",
+    "questions": 200,
+    "proxies": [],
+    "micro": 0.6493333533333333,
+    "macro": 0.5919645907099581,
+    "top_share": 0.4135555555555555,
+    "mean_fit_seconds": 34.22466843334647,
+    "public_default_micro": 0.5962221933333334,
+    "public_default_macro": 0.5530525062738599
+  },
+  "economical": {
+    "name": "multidimensional",
+    "technique": "ensemble",
+    "questions": 200,
+    "proxies": [],
+    "micro": 0.6449999833333334,
+    "macro": 0.5919060415201537,
+    "top_share": 0.3935555555555556,
+    "mean_fit_seconds": 9.461133166662572,
+    "public_default_micro": 0.5962221933333334,
+    "public_default_macro": 0.5530525062738599
+  },
+  "panel_preset": {
+    "name": "crossfit-stack",
+    "technique": "stack",
+    "questions": 200,
+    "proxies": [],
+    "micro": 0.6450000133333333,
+    "macro": 0.5911203813124144,
+    "top_share": 0.45555555555555555,
+    "mean_fit_seconds": 63.68604436670042,
+    "public_default_micro": 0.5962221933333334,
+    "public_default_macro": 0.5530525062738599
+  },
+  "selection_data": "Previously studied public validation questions. Reserve and original test outcomes play no role.",
+  "panel_preset_rule": "Fixed 200-question panel with an internal four-fold stack. This preset was specified before inspecting its own public validation results.",
+  "economic_rule": "First minimize auxiliary query models, then probe count and fitting time, within 0.50 points micro and 0.75 points macro of the public-validation leader."
+}

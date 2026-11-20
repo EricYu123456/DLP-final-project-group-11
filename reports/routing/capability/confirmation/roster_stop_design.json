@@ -1,0 +1,5 @@
+{
+  "question": "Can the existing within-panel posterior stopping rule save graded questions in the concentrated pool while beating TextMF trained with all 200? The full 200-question CPU router's 13-roster score and earlier stopping results in the 112-roster study are known.",
+  "procedure": "Reuse the twelve Bayesian bootstrap draws and two published thresholds, 0.5 or 1.0 percentage points of remaining expected routing improvement. Interleave the five sources in the same fifteen 200-question panels, checking after 80, 120, 160 and 200. Estimate improvement on 300 ungraded historical prompts drawn before fitting, excluding all candidate panels and evaluation groups. Stop using the observed prefix only. Include the same posterior learner at a fixed 200 to isolate the cost of stopping.",
+  "evaluation": "Compare the 13 and 37 rosters with both the same-200 deterministic original and the fixed-200 CPU panel. Report actual question counts, rescued and lost accuracy, and the dominant model share on 2551 withheld and 4985 confirmation questions."
+}

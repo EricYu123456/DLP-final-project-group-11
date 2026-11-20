@@ -1,0 +1,19 @@
+{
+  "dataset_seconds": 0.4786113000009209,
+  "build_bank_and_all_probe_orders_seconds": 0.5712126999860629,
+  "fit_and_first_vector_prediction_seconds": 0.7474687999929301,
+  "total_seconds": 1.797292799979914,
+  "includes": "Prepared dataset through all three seed plans and CPU MPNet readout; cached published text vectors.",
+  "profiles": [
+    {
+      "stage": "kernel",
+      "questions": 200,
+      "mean_ms_per_model": 0.5687769242705634
+    },
+    {
+      "stage": "short-panel",
+      "questions": 120,
+      "mean_ms_per_model": 0.45189999778253526
+    }
+  ]
+}

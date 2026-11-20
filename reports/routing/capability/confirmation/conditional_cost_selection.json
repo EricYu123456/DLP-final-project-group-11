@@ -1,0 +1,21 @@
+{
+  "method": "gated-conditional",
+  "full_method": "conditional",
+  "probes": 120,
+  "teacher": {
+    "macro": 0.5539981108321778,
+    "micro": 0.6587584025306445,
+    "top_share": 0.8179122182680901,
+    "objective": 0.5906642129266412
+  },
+  "development": {
+    "threshold": 0.03503072261810302,
+    "full_decoder_share": 0.7999209173586398,
+    "subpool_gain": -0.0023037173706006993,
+    "macro": 0.55239263120682,
+    "micro": 0.6577698695136418,
+    "top_share": 0.8093119810201661,
+    "objective": 0.5892746646142076
+  },
+  "subrosters": 28
+}

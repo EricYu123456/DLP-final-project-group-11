@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "nominal-moe",
+    "algorithm": "nominal",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 200,
+    "proxies": "qwen math yi phi moe-gated",
+    "nearest": 0.25,
+    "prior": 1.0,
+    "signal": 0.7,
+    "peer": 0.4,
+    "macro": 0.5435704715008962,
+    "micro": 0.6574733096085409,
+    "top_share": 0.8854290233293791,
+    "objective": 0.5834364648385719,
+    "subpool_gain": -0.0008803919039231556,
+    "within_domain_gain": 0.0030968528982587133,
+    "robust_objective": 0.5845446953357397
+  },
+  "short": {
+    "name": "nominal-moe",
+    "algorithm": "nominal",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 120,
+    "proxies": "qwen math yi phi moe-gated",
+    "nearest": 0.25,
+    "prior": 4.0,
+    "signal": 1.4,
+    "peer": 0.4,
+    "macro": 0.5370438191040999,
+    "micro": 0.6533214709371293,
+    "top_share": 0.8328390668248319,
+    "objective": 0.5777409972456602,
+    "subpool_gain": -0.0024395173910786326,
+    "within_domain_gain": 0.009023211679425651,
+    "robust_objective": 0.5810328443898337
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

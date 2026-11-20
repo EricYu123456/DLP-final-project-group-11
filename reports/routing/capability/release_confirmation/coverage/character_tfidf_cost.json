@@ -1,0 +1,22 @@
+{
+  "questions": 4503,
+  "candidates": 112,
+  "batch_size": 16,
+  "cpu_threads": 1,
+  "seconds": {
+    "sklearn": [
+      4.189573600015137,
+      3.9905656999908388,
+      4.036377700045705
+    ],
+    "compiled": [
+      2.549888400011696,
+      2.556567499996163,
+      2.625948300003074
+    ]
+  },
+  "speedup": 1.578826962343753,
+  "original_choices": 4503,
+  "max_score_gap": 0.0,
+  "note": "Raw archived text, warm process, batch size 16. The two paths alternate across three timed passes per variant. No model responses were acquired."
+}

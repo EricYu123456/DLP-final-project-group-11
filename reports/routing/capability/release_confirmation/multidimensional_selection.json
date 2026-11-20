@@ -1,0 +1,50 @@
+{
+  "11": {
+    "best": [
+      0.55,
+      0.55,
+      1,
+      0.65,
+      0.45
+    ],
+    "retained": 27,
+    "within_panel_pair_risk": 0.2181454387086824,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 10.858051700051874,
+    "adaptive": false,
+    "architecture": false
+  },
+  "23": {
+    "best": [
+      0.55,
+      1.15,
+      0,
+      1.6,
+      0.45
+    ],
+    "retained": 32,
+    "within_panel_pair_risk": 0.20839314935774325,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 8.781385399983265,
+    "adaptive": false,
+    "architecture": false
+  },
+  "37": {
+    "best": [
+      0.55,
+      0.0,
+      1,
+      1.6,
+      0.45
+    ],
+    "retained": 24,
+    "within_panel_pair_risk": 0.22163000449182493,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 8.74396239995258,
+    "adaptive": false,
+    "architecture": false
+  }
+}

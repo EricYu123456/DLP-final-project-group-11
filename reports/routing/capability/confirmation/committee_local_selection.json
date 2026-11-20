@@ -1,0 +1,48 @@
+{
+  "best": {
+    "name": "committee",
+    "algorithm": "local",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 12,
+    "focus": 15,
+    "signal": 0.65,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "calibration": 0.5,
+    "macro": 0.5457912107883115,
+    "micro": 0.6572756030051403,
+    "top_share": 0.8075326215895612,
+    "objective": 0.5848107480642015,
+    "subpool_gain": -0.0015039896390549006,
+    "within_domain_gain": 0.007017168708307003,
+    "robust_objective": 0.5875673375988275
+  },
+  "short": {
+    "name": "committee",
+    "algorithm": "local",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 12,
+    "focus": 3,
+    "signal": 0.65,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "calibration": 0.0,
+    "macro": 0.545079520158552,
+    "micro": 0.656781336496639,
+    "top_share": 0.8309608540925267,
+    "objective": 0.5841751558768824,
+    "subpool_gain": -0.002560596833455414,
+    "within_domain_gain": 0.00577904210551124,
+    "robust_objective": 0.5857843785129103
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

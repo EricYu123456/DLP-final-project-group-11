@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "moments-general",
+    "algorithm": "moments",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "proxies": "",
+    "policy": "balanced",
+    "probe_count": 120,
+    "pseudo": 4.0,
+    "sharpness": 95.0,
+    "signal": 0.65,
+    "macro": 0.5297609189755185,
+    "micro": 0.6494661921708185,
+    "top_share": 0.7262752075919335,
+    "objective": 0.5716577645938734,
+    "subpool_gain": -0.011250244174172069,
+    "within_domain_gain": 0.007418410324639621,
+    "robust_objective": 0.5697418476691072
+  },
+  "short": {
+    "name": "moments-general",
+    "algorithm": "moments",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "proxies": "",
+    "policy": "balanced",
+    "probe_count": 120,
+    "pseudo": 4.0,
+    "sharpness": 95.0,
+    "signal": 0.65,
+    "macro": 0.5297609189755185,
+    "micro": 0.6494661921708185,
+    "top_share": 0.7262752075919335,
+    "objective": 0.5716577645938734,
+    "subpool_gain": -0.011250244174172069,
+    "within_domain_gain": 0.007418410324639621,
+    "robust_objective": 0.5697418476691072
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

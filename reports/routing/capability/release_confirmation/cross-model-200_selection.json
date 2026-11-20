@@ -1,0 +1,50 @@
+{
+  "11": {
+    "model_fold_count": 4,
+    "question_fold_count": 3,
+    "mixing": [
+      0.6961819497404327,
+      1.1081185703344492,
+      0.5156613667117922
+    ],
+    "questions": 200,
+    "proxies": [],
+    "seconds": 162.3045144000207,
+    "adaptive": false,
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  },
+  "23": {
+    "model_fold_count": 4,
+    "question_fold_count": 3,
+    "mixing": [
+      0.4915708830608412,
+      0.7960060464495484,
+      0.6549070560962494
+    ],
+    "questions": 200,
+    "proxies": [],
+    "seconds": 160.63665320002474,
+    "adaptive": false,
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  },
+  "37": {
+    "model_fold_count": 4,
+    "question_fold_count": 3,
+    "mixing": [
+      0.5009834119582132,
+      1.2336381941402847,
+      0.6781471635656262
+    ],
+    "questions": 200,
+    "proxies": [],
+    "seconds": 169.88745410001138,
+    "adaptive": false,
+    "architecture": false,
+    "population_calibration": false,
+    "precision_allocation": false
+  }
+}

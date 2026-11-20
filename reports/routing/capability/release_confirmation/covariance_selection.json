@@ -1,0 +1,32 @@
+{
+  "11": {
+    "noise_corr": 0.8,
+    "metadata": 0.7,
+    "noise": 1.4,
+    "ridge": 6.0,
+    "signal": 1.4,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 4.453850399993826
+  },
+  "23": {
+    "noise_corr": 0.15,
+    "metadata": 0.7,
+    "noise": 1.4,
+    "ridge": 6.0,
+    "signal": 1.4,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 4.216371699993033
+  },
+  "37": {
+    "noise_corr": 0.8,
+    "metadata": 0.7,
+    "noise": 0.55,
+    "ridge": 6.0,
+    "signal": 1.4,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 4.298311299993657
+  }
+}

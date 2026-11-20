@@ -1,0 +1,14 @@
+{
+  "candidates": [
+    "ConvexAI__Luminex-34B-v0.1",
+    "microsoft__phi-1_5"
+  ],
+  "stages": [
+    60
+  ],
+  "questions_per_candidate": 60,
+  "response_rows": 120,
+  "stop_reason": "evpi",
+  "routed_to": "ConvexAI/Luminex-34B-v0.1",
+  "seconds_including_cold_processes": 23.081632799992803
+}

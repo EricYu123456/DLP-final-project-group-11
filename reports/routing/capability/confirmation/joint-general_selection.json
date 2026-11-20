@@ -1,0 +1,44 @@
+{
+  "best": {
+    "name": "joint-general",
+    "algorithm": "joint",
+    "readout": "general",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 200,
+    "steps": 140,
+    "real_weight": 0.16,
+    "seconds": 1.6850050666447107,
+    "macro": 0.518683139100968,
+    "micro": 0.6365164096480822,
+    "top_share": 0.7153024911032029,
+    "objective": 0.5599247837924579,
+    "subpool_gain": -0.01143432755239775,
+    "within_domain_gain": 0.015986583951066,
+    "robust_objective": 0.562200911991792
+  },
+  "short": {
+    "name": "joint-general",
+    "algorithm": "joint",
+    "readout": "general",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 120,
+    "steps": 140,
+    "real_weight": 0.16,
+    "seconds": 1.1677687333043043,
+    "macro": 0.5130413654772529,
+    "micro": 0.6336496638987742,
+    "top_share": 0.6958283906682484,
+    "objective": 0.5552542699247853,
+    "subpool_gain": -0.014431435629409503,
+    "within_domain_gain": 0.018185489590410504,
+    "robust_objective": 0.5571312969052858
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "best": {
+    "name": "tabular-general",
+    "algorithm": "tabular",
+    "readout": "general",
+    "pairs": "pairs-general",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 120,
+    "tabular_mix": 1.0,
+    "signal": 0.7,
+    "macro": 0.539660085800574,
+    "micro": 0.6579675761170423,
+    "top_share": 0.9088572558323448,
+    "objective": 0.5810677074113378,
+    "subpool_gain": 0.00044688098552282397,
+    "within_domain_gain": 0.0035900434230477208,
+    "robust_objective": 0.5830861696156231
+  },
+  "short": {
+    "name": "tabular-general",
+    "algorithm": "tabular",
+    "readout": "general",
+    "pairs": "pairs-general",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 120,
+    "tabular_mix": 1.0,
+    "signal": 0.7,
+    "macro": 0.539660085800574,
+    "micro": 0.6579675761170423,
+    "top_share": 0.9088572558323448,
+    "objective": 0.5810677074113378,
+    "subpool_gain": 0.00044688098552282397,
+    "within_domain_gain": 0.0035900434230477208,
+    "robust_objective": 0.5830861696156231
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

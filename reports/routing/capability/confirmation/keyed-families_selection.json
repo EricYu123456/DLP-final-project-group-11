@@ -1,0 +1,50 @@
+{
+  "best": {
+    "name": "keyed-families",
+    "algorithm": "answers",
+    "answer_keys": true,
+    "readout": "families",
+    "proxies": "smol qwen math phi yi zephyr",
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 2.8,
+    "nearest": 0.2,
+    "signal": 0.7,
+    "source_mix": 1.0,
+    "peer_mix": 0.45,
+    "macro": 0.5437311384056904,
+    "micro": 0.6587584025306445,
+    "top_share": 0.893930407275603,
+    "objective": 0.5839906808494244,
+    "subpool_gain": -0.000804480145363079,
+    "within_domain_gain": 0.0008154365248553505,
+    "robust_objective": 0.5839961590391706
+  },
+  "short": {
+    "name": "keyed-families",
+    "algorithm": "answers",
+    "answer_keys": true,
+    "readout": "families",
+    "proxies": "smol qwen math phi yi zephyr",
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 2.8,
+    "nearest": 0.2,
+    "signal": 0.7,
+    "source_mix": 1.0,
+    "peer_mix": 0.45,
+    "macro": 0.5348140450969778,
+    "micro": 0.6566824831949387,
+    "top_share": 0.8716884143930409,
+    "objective": 0.5774679984312641,
+    "subpool_gain": -0.0026776965800818092,
+    "within_domain_gain": 0.0013723979517722147,
+    "robust_objective": 0.5768153491171093
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "nominal-families",
+    "algorithm": "nominal",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 200,
+    "proxies": "smol qwen math phi yi zephyr",
+    "nearest": 0.25,
+    "prior": 4.0,
+    "signal": 0.7,
+    "peer": 0.4,
+    "macro": 0.5466648796852964,
+    "micro": 0.6593515223408462,
+    "top_share": 0.8977856860419138,
+    "objective": 0.5861052046147388,
+    "subpool_gain": -0.0001747095916861119,
+    "within_domain_gain": 0.002366314623566945,
+    "robust_objective": 0.5872010071306792
+  },
+  "short": {
+    "name": "nominal-families",
+    "algorithm": "nominal",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 120,
+    "proxies": "smol qwen math phi yi zephyr",
+    "nearest": 0.25,
+    "prior": 1.0,
+    "signal": 0.7,
+    "peer": 0.4,
+    "macro": 0.5400650988677683,
+    "micro": 0.657868722815342,
+    "top_share": 0.8815737445630685,
+    "objective": 0.5812963672494191,
+    "subpool_gain": -0.0012484854996291151,
+    "within_domain_gain": 0.005743903622437039,
+    "robust_objective": 0.5835440763108231
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

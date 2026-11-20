@@ -1,0 +1,50 @@
+{
+  "best": {
+    "name": "reference-joint-modern",
+    "algorithm": "reference",
+    "readout": "general",
+    "proxies": "qwen math yi phi moe-gated",
+    "policy": "balanced",
+    "probe_count": 200,
+    "nearest": 0.2,
+    "shrink": 35,
+    "signal": 1.65,
+    "peer": 0.7,
+    "conditional_states": true,
+    "calibration": 0.7,
+    "macro": 0.5349747259261457,
+    "micro": 0.6478845393436141,
+    "top_share": 0.6924673784104388,
+    "objective": 0.5744931606222596,
+    "subpool_gain": -0.004155918116595958,
+    "within_domain_gain": 0.011968054147895727,
+    "robust_objective": 0.5783992286379095
+  },
+  "short": {
+    "name": "reference-joint-modern",
+    "algorithm": "reference",
+    "readout": "general",
+    "proxies": "qwen math yi phi moe-gated",
+    "policy": "balanced",
+    "probe_count": 120,
+    "nearest": 0.2,
+    "shrink": 35,
+    "signal": 1.65,
+    "peer": 0.7,
+    "conditional_states": true,
+    "calibration": 0.7,
+    "macro": 0.5330733989182062,
+    "micro": 0.6459074733096085,
+    "top_share": 0.6654804270462634,
+    "objective": 0.572565324955197,
+    "subpool_gain": -0.0082027091694198,
+    "within_domain_gain": 0.012741960254638484,
+    "robust_objective": 0.5748349504978063
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

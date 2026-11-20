@@ -1,0 +1,7 @@
+{
+  "shared_seconds": 13.909005999972578,
+  "training_groups": 5109,
+  "calibration_groups": 1278,
+  "anchors": 150,
+  "student_bytes": 83906575
+}

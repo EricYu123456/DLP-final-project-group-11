@@ -1,0 +1,6 @@
+{
+  "target": "Reduce the inference cost of the fixed 120-question conditional router while reproducing its choices on each new roster.",
+  "data": "Use the same 120 candidate responses and the frozen model embeddings. On the 10,748 historical training questions, learn to predict the teacher's candidate scores from the prompt alone. On the 3,372 development prompts, use only the teacher's predictions to calibrate the early exit for each pool and seed.",
+  "decision": "Fit separate word and character text projections. Exit early only when both agree and both margins pass a threshold. On calibration, try 21 acceptance quantiles and maximize early exits subject to a one-sided, multiplicity-adjusted binomial upper bound of 0.5 percent of all queries having a changed choice. The fallback is always the complete teacher.",
+  "evaluation": "After locking the student protocol, compare 13 and 37 models on 4,985 held-out questions and replay 3,370 older questions. Report full decoder calls, actual agreement, selected-model accuracy, concentration, costs and paired comparisons. This cost experiment was designed after seeing the full teacher and previous gate results on these questions."
+}

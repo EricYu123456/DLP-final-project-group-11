@@ -1,0 +1,42 @@
+{
+  "configs": [
+    {
+      "name": "budget-cascade",
+      "algorithm": "cascade",
+      "readout": "text",
+      "coordinates": "joint-general",
+      "policy": "balanced",
+      "probe_count": 120,
+      "classes": 12,
+      "steps": 470,
+      "shrink": 22,
+      "neighbor": 0.0,
+      "type_mix": 0.5,
+      "signal": 1.7,
+      "teacher": "latent-general",
+      "threshold": 0.18
+    }
+  ],
+  "weights": [
+    1
+  ],
+  "validation": {
+    "probes": 120,
+    "threshold": 0.18,
+    "heavy_query_fraction": 0.36061684460260973,
+    "macro": 0.542760927026512,
+    "micro": 0.6561882166864373,
+    "top_share": 0.782819296164492,
+    "objective": 0.5824604784074858
+  },
+  "teacher_validation": {
+    "threshold": -1.0,
+    "heavy_query_fraction": 1.0,
+    "macro": 0.5407502858551076,
+    "micro": 0.6549031237643337,
+    "top_share": 0.7537564254646106,
+    "objective": 0.5807037791233367
+  },
+  "rule": "Minimize candidate probes, then large-decoder use, within 0.25 points of the 120-probe cascade on both development accuracy metrics and within 2 points of its concentration, using no more heavy queries.",
+  "shared_student_seconds": 4.395441200002097
+}

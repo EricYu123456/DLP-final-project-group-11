@@ -1,0 +1,7 @@
+{
+  "questions": 200,
+  "method": "nominal-ensemble-cautious-full",
+  "panels": 15,
+  "development_models": 13,
+  "development_questions": 3372
+}

@@ -1,0 +1,113 @@
+{
+  "training": [
+    {
+      "roster": "audited_13",
+      "seed": 11,
+      "within_panel_risk": 0.1410403281091036,
+      "seconds": 1.0882276999764144,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.382774099998642
+    },
+    {
+      "roster": "audited_13",
+      "seed": 11,
+      "within_panel_risk": 0.13734822556204215,
+      "seconds": 1.5927467999863438,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.722641100001056
+    },
+    {
+      "roster": "audited_13",
+      "seed": 23,
+      "within_panel_risk": 0.13358860723404517,
+      "seconds": 1.193186999997124,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.552044599957298
+    },
+    {
+      "roster": "audited_13",
+      "seed": 23,
+      "within_panel_risk": 0.12712484448462089,
+      "seconds": 1.817195100011304,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.808392799983267
+    },
+    {
+      "roster": "audited_13",
+      "seed": 37,
+      "within_panel_risk": 0.12037191445645418,
+      "seconds": 1.1855721999891102,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.660811300040223
+    },
+    {
+      "roster": "audited_13",
+      "seed": 37,
+      "within_panel_risk": 0.12223199584387583,
+      "seconds": 1.6896238999906927,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.485349099966697
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 11,
+      "within_panel_risk": 0.13608971609043566,
+      "seconds": 1.012465899984818,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.105444099986926
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 11,
+      "within_panel_risk": 0.12318753248543793,
+      "seconds": 1.6591523000388406,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.052196100004949
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 23,
+      "within_panel_risk": 0.10546584034660646,
+      "seconds": 0.9688507000100799,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 8.620160399994347
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 23,
+      "within_panel_risk": 0.10539442000358544,
+      "seconds": 1.7141135000274517,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 9.076967900036834
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 37,
+      "within_panel_risk": 0.12345478291230857,
+      "seconds": 1.0932205999852158,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 8.637678999977652
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 37,
+      "within_panel_risk": 0.10436629024636739,
+      "seconds": 1.655320700025186,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 8.836270200030413
+    }
+  ],
+  "rule": "Each three-fold fit uses only this roster's measured prefix and public model ancestry."
+}

@@ -1,0 +1,184 @@
+{
+  "seed": 11,
+  "panel_questions": 200,
+  "candidates": 13,
+  "supervision_strength": 1.1748266601815696,
+  "choice_signal": 0.2585615263753043,
+  "choice_signal_options": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "choice_signal_weights": [
+    0.6672209431158268,
+    0.21886092095811047,
+    0.07870520595587648,
+    0.03521292997018627
+  ],
+  "weights": [
+    0.2562382883669317,
+    0.26734702006146877,
+    0.258823990516185,
+    0.2175907010554146
+  ],
+  "options": [
+    0.0,
+    0.45,
+    1.3,
+    3.3
+  ],
+  "solver": {
+    "name": "nominal-large",
+    "algorithm": "nominal",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 200,
+    "proxies": "qwen math yi phi moe-gated bagel-gated",
+    "nearest": 0.25,
+    "prior": 4.0,
+    "signal": 1.4,
+    "peer": 0.4,
+    "macro": 0.5433230055330903,
+    "micro": 0.6569790431000395,
+    "top_share": 0.8030842230130486,
+    "objective": 0.5831026186815225,
+    "subpool_gain": -0.000117610160829,
+    "within_domain_gain": 0.0095689236127705,
+    "robust_objective": 0.5878282754074932
+  },
+  "measurement": [
+    {
+      "name": "ConvexAI__Luminex-34B-v0.1",
+      "seconds": 65.20402599999215,
+      "device": "cuda",
+      "quantized_file": "Luminex-34B-v0.1.i1-IQ3_XXS.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 16,
+      "paired_reliability": 0.4727817549499174
+    },
+    {
+      "name": "TheBloke__tulu-30B-fp16",
+      "seconds": 163.7173507999978,
+      "device": "cuda",
+      "quantized_file": "tulu-30b.Q3_K_S.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 50,
+      "paired_reliability": 0.5508757869874932
+    },
+    {
+      "name": "NousResearch__Nous-Hermes-13b",
+      "seconds": 25.119017699966207,
+      "device": "cuda",
+      "quantized_file": "Nous-Hermes-13B.Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 25,
+      "paired_reliability": 0.5060204244202408
+    },
+    {
+      "name": "AdaptLLM__medicine-chat",
+      "seconds": 13.014052200014703,
+      "device": "cuda",
+      "quantized_file": "medicine-chat.Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 12,
+      "paired_reliability": 0.6271102724001507
+    },
+    {
+      "name": "AdaptLLM__medicine-LLM",
+      "seconds": 58.31562589999521,
+      "device": "cuda",
+      "quantized_file": "medicine-llm.Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 31,
+      "paired_reliability": 0.2317629975974559
+    },
+    {
+      "name": "BioMistral__BioMistral-7B",
+      "seconds": 673.0046821999713,
+      "device": "cpu",
+      "quantized_file": "BioMistral-7B.Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 45,
+      "paired_reliability": 0.581173050660919
+    },
+    {
+      "name": "microsoft__phi-1_5",
+      "seconds": 130.495519899996,
+      "device": "cpu",
+      "quantized_file": "phi-1_5-Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 27,
+      "paired_reliability": 0.3764989995877934
+    },
+    {
+      "name": "lmsys__vicuna-7b-v1.5",
+      "seconds": 16.216816700005438,
+      "device": "cuda",
+      "quantized_file": "vicuna-7b-v1.5.Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 28,
+      "paired_reliability": 0.5541688122944288
+    },
+    {
+      "name": "codellama__CodeLlama-34b-Instruct-hf",
+      "seconds": 88.92252379999263,
+      "device": "cuda",
+      "quantized_file": "codellama-34b-instruct.Q3_K_S.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 52,
+      "paired_reliability": 0.45209528981320046
+    },
+    {
+      "name": "google__gemma-2b-it",
+      "seconds": 186.1412599000032,
+      "device": "cpu",
+      "quantized_file": "gemma-2b-it.Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 43,
+      "paired_reliability": 0.2927765855958286
+    },
+    {
+      "name": "Neko-Institute-of-Science__pygmalion-7b",
+      "seconds": 14.675572599982843,
+      "device": "cuda",
+      "quantized_file": "pygmalion-7b.Q4_K_M.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 50,
+      "paired_reliability": 0.3895845858796824
+    },
+    {
+      "name": "OpenBuddy__openbuddy-codellama2-34b-v11.1-bf16",
+      "seconds": 88.50519060000079,
+      "device": "cuda",
+      "quantized_file": "openbuddy-llama2-34b-v11.1-bf16.Q3_K_S.gguf",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 39,
+      "paired_reliability": 0.4677938329502068
+    },
+    {
+      "name": "TheBloke__CodeLlama-70B-Instruct-AWQ",
+      "seconds": 96.84625639999285,
+      "device": "cuda",
+      "quantized_file": "model.safetensors.index.json",
+      "unique_prompts": 200,
+      "choice_observations": 120,
+      "free_matches": 0,
+      "paired_reliability": 0.49342987889126616
+    }
+  ],
+  "fit_seconds": 4.461823099991307,
+  "rule": "Use independent development outcomes to choose the historical answer decoder. Select the effect of measured answer probabilities by four-fold cross-validation inside the same 200 graded prompts. Unmeasured candidates retain their binary profiles."
+}

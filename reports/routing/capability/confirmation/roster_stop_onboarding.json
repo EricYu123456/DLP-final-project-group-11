@@ -1,0 +1,17 @@
+{
+  "method": "roster-stop",
+  "panel_sizes": [
+    80,
+    80
+  ],
+  "stop_reason": "estimated-gain",
+  "questions_per_model": 80,
+  "models": 13,
+  "grades": 1040,
+  "cold_fit_seconds": 5.540544099989347,
+  "full_seconds": 18.385805800033268,
+  "parameter_max_gap": 0.0,
+  "identical_raw_routes": 48,
+  "queries": 48,
+  "max_score_gap": 1.1102230246251565e-16
+}

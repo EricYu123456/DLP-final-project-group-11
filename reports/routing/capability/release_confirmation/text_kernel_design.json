@@ -1,0 +1,6 @@
+{
+  "objective": "Reduce serving latency and eliminate pretrained neural inference while preserving the 200-question capability embedding.",
+  "data": "Reuse only each seed's 200 question texts, binary candidate outcomes and public model ancestry. The cheap decoder uses words, character n-grams and question format. No additional text bank or candidate outcomes are used.",
+  "selection": "Choose regularization and residual strength within each 200-question panel using three folds. Compare this fixed method with the published default and deterministic controls and the frozen tabular panel. This is a cost experiment designed after the tabular method's holdout results were known.",
+  "evaluation": "Evaluate validation and both prespecified release splits for all three panel seeds. Time actual raw-prompt routing on the same 48 seed-11 reserve questions as the neural deployment. Report the supervised and compute cost separately."
+}

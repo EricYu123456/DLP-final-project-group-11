@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "switch-cpu",
+    "algorithm": "switch",
+    "readout": "text",
+    "policy": "opportunity",
+    "probe_count": 200,
+    "nearest": 0.78,
+    "prior": 14.0,
+    "optimism": 0,
+    "calibration": 0.55,
+    "signal": 0.9,
+    "macro": 0.5499152554871738,
+    "micro": 0.6584618426255437,
+    "top_share": 0.9086595492289442,
+    "objective": 0.5879065609856032,
+    "subpool_gain": -0.002867525566116788,
+    "within_domain_gain": 0.0027445500131241195,
+    "robust_objective": 0.587845073209107
+  },
+  "short": {
+    "name": "switch-cpu",
+    "algorithm": "switch",
+    "readout": "text",
+    "policy": "opportunity",
+    "probe_count": 120,
+    "nearest": 0.15,
+    "prior": 14.0,
+    "optimism": 0,
+    "calibration": 0.55,
+    "signal": 0.9,
+    "macro": 0.5445682212521229,
+    "micro": 0.6564847765915381,
+    "top_share": 0.8888888888888888,
+    "objective": 0.5837390156209182,
+    "subpool_gain": -0.003588481481415226,
+    "within_domain_gain": 0.0016518549749587053,
+    "robust_objective": 0.58277070236769
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

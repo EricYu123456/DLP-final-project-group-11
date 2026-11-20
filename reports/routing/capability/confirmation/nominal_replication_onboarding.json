@@ -1,0 +1,16 @@
+{
+  "method": "nominal-200",
+  "models": 13,
+  "questions_per_model": 200,
+  "distinct_grades": 2600,
+  "panel_sizes": [
+    200
+  ],
+  "cold_fit_seconds": 5.302790999994613,
+  "plan_grade_fit_seconds": 9.635965500026941,
+  "maximum_profile_difference": 3.3306690738754696e-16,
+  "embedding_dimensions": [
+    41
+  ],
+  "stop_reason": null
+}

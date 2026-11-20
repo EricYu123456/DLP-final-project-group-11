@@ -1,0 +1,60 @@
+{
+  "design": "Specialized comparison for the old concentrated roster. Use candidate grades only on the measured panel. Fit P(archived historical peer correct | incoming prompt, helper answers) on 10,748 historical questions with four-fold calibration. Use 200 common prompts to estimate candidate skill conditional on that peer being right or wrong. The historical peer (ID 39) is outside both evaluated rosters. The live version reads its independently generated answer only when the smaller solvers disagree or are unstable. Only development-roster scores choose the readout parameters. Compare on all 4,985 prospective questions and the 3,370 older questions; the published 112-model experiment excludes this arm.",
+  "conditional_comparison": "Before scoring the 4,985 confirmation questions, also compare a 160-dimensional embedding with separate donor weights and five source means in each historical reference state. Two shared regression readouts learn which peers rescue or harm the reference on the same historical data. Compare the modern-solvers and live-reference versions on the same three panels. Each freezes its hyperparameters on the development roster.",
+  "rosters": [
+    {
+      "roster": "audited_13",
+      "seed": 11,
+      "probe_count": 200,
+      "estimated_leader": "ConvexAI__Luminex-34B-v0.1",
+      "closest_historical": "fblgit__UNA-SimpleSmaug-34b-v1beta",
+      "closest_agreement": 0.91,
+      "una_agreement": 0.91
+    },
+    {
+      "roster": "audited_13",
+      "seed": 23,
+      "probe_count": 200,
+      "estimated_leader": "ConvexAI__Luminex-34B-v0.1",
+      "closest_historical": "fblgit__UNA-SimpleSmaug-34b-v1beta",
+      "closest_agreement": 0.97,
+      "una_agreement": 0.97
+    },
+    {
+      "roster": "audited_13",
+      "seed": 37,
+      "probe_count": 200,
+      "estimated_leader": "ConvexAI__Luminex-34B-v0.1",
+      "closest_historical": "fblgit__UNA-SimpleSmaug-34b-v1beta",
+      "closest_agreement": 0.94,
+      "una_agreement": 0.94
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 11,
+      "probe_count": 200,
+      "estimated_leader": "CausalLM__34b-beta",
+      "closest_historical": "SUSTech__SUS-Chat-34B",
+      "closest_agreement": 0.795,
+      "una_agreement": 0.785
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 23,
+      "probe_count": 200,
+      "estimated_leader": "CausalLM__34b-beta",
+      "closest_historical": "SUSTech__SUS-Chat-34B",
+      "closest_agreement": 0.82,
+      "una_agreement": 0.815
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 37,
+      "probe_count": 200,
+      "estimated_leader": "CausalLM__34b-beta",
+      "closest_historical": "SUSTech__SUS-Chat-34B",
+      "closest_agreement": 0.805,
+      "una_agreement": 0.8
+    }
+  ]
+}

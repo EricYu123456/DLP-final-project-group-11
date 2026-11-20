@@ -1,0 +1,42 @@
+{
+  "best": {
+    "name": "general",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 20,
+    "signal": 0.6,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "macro": 0.5459840892006519,
+    "micro": 0.6597469355476473,
+    "top_share": 0.8966982997232108,
+    "objective": 0.5858010854221003,
+    "subpool_gain": 0.000443848705634875,
+    "within_domain_gain": 0.00522577570033648,
+    "robust_objective": 0.588635897625086
+  },
+  "short": {
+    "name": "general",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 20,
+    "signal": 0.6,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "macro": 0.5405845409754803,
+    "micro": 0.6566824831949387,
+    "top_share": 0.8420324238829577,
+    "objective": 0.5812188207522907,
+    "subpool_gain": -0.0022091860158120896,
+    "within_domain_gain": 0.0072630617310312,
+    "robust_objective": 0.5837457586099003
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

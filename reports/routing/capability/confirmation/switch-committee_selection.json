@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "switch-committee",
+    "algorithm": "switch",
+    "readout": "committee",
+    "policy": "balanced",
+    "probe_count": 200,
+    "nearest": 0.15,
+    "prior": 14.0,
+    "optimism": 0,
+    "calibration": 0.55,
+    "signal": 0.9,
+    "macro": 0.5400465232130783,
+    "micro": 0.6559905100830368,
+    "top_share": 0.8296757611704231,
+    "objective": 0.5806269186175638,
+    "subpool_gain": -0.0018596949928883304,
+    "within_domain_gain": 0.004102212465070511,
+    "robust_objective": 0.5817481773536548
+  },
+  "short": {
+    "name": "switch-committee",
+    "algorithm": "switch",
+    "readout": "committee",
+    "policy": "opportunity",
+    "probe_count": 120,
+    "nearest": 0.15,
+    "prior": 4.0,
+    "optimism": 0,
+    "calibration": 0.55,
+    "signal": 0.9,
+    "macro": 0.5349441797985527,
+    "micro": 0.6465994464215105,
+    "top_share": 0.7399169632265717,
+    "objective": 0.5740235231165879,
+    "subpool_gain": -0.007426694454450436,
+    "within_domain_gain": 0.006505566309425658,
+    "robust_objective": 0.5735629590440755
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "objective": "Reduce per-query compute for the validation-selected 120-question local and nominal-response portfolio. Both decoders use exactly the same graded prompts for every candidate.",
+  "cheap_decoder": "Use the raw-text kernel's 13-dimensional capability embedding. Accept its leading model when the gap between the top two scores exceeds a validation-selected threshold. Otherwise call the frozen conditional portfolio.",
+  "selection": "Before opening the 4,985 fresh query outcomes, choose the largest fraction of cheap decisions on the 13-model development roster within 0.25 percentage points of the full portfolio on macro and micro accuracy, with top share at most 2 points higher. Require average loss at most 0.25 points on dominance-matched development subrosters. Use the same global threshold for both final rosters and all seeds.",
+  "evaluation": "Report accuracy, concentration and full-decoder calls, with paired comparisons to the full portfolio, previous 8D, the same-question cold-start reference and both published inference modes."
+}

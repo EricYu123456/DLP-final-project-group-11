@@ -1,0 +1,125 @@
+{
+  "training": [
+    {
+      "roster": "audited_13",
+      "seed": 11,
+      "signal": 0.4232821669677059,
+      "within_panel_risk": 0.1406551092237232,
+      "seconds": 33.24307120003505,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 472.8391075999825
+    },
+    {
+      "roster": "audited_13",
+      "seed": 11,
+      "signal": 0.4126024664139327,
+      "within_panel_risk": 0.13757258363838282,
+      "seconds": 43.50081040000077,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 499.38180000003194
+    },
+    {
+      "roster": "audited_13",
+      "seed": 23,
+      "signal": 0.30212699194853676,
+      "within_panel_risk": 0.13499830699988818,
+      "seconds": 22.51453730004141,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 421.7561407999601
+    },
+    {
+      "roster": "audited_13",
+      "seed": 23,
+      "signal": 0.5868072522944002,
+      "within_panel_risk": 0.12685210035943528,
+      "seconds": 39.854051999980584,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 552.7607190000126
+    },
+    {
+      "roster": "audited_13",
+      "seed": 37,
+      "signal": 0.4501472295177407,
+      "within_panel_risk": 0.1202715857231608,
+      "seconds": 29.659322200051975,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 500.18919810000807
+    },
+    {
+      "roster": "audited_13",
+      "seed": 37,
+      "signal": 0.42037453679429154,
+      "within_panel_risk": 0.12228790151357444,
+      "seconds": 43.05039789999137,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 570.884814500052
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 11,
+      "signal": 0.3210540930976497,
+      "within_panel_risk": 0.13745811025024673,
+      "seconds": 29.09119569999166,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 476.11524930002633
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 11,
+      "signal": 0.5816478861914395,
+      "within_panel_risk": 0.12311361148765748,
+      "seconds": 42.75209339999128,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 583.7140176999965
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 23,
+      "signal": 0.36817049239429656,
+      "within_panel_risk": 0.10579112746436857,
+      "seconds": 30.505823000043165,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 488.1438529000152
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 23,
+      "signal": 0.576062448843289,
+      "within_panel_risk": 0.10583074808562923,
+      "seconds": 41.102226899995,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 551.9471526999841
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 37,
+      "signal": 0.4249031113859072,
+      "within_panel_risk": 0.1235524538233803,
+      "seconds": 29.882920800009742,
+      "questions": 120,
+      "embedding_width": 13,
+      "cached_query_seconds": 443.0553862999659
+    },
+    {
+      "roster": "expanded_37",
+      "seed": 37,
+      "signal": 0.6000729345768523,
+      "within_panel_risk": 0.10413929087931989,
+      "seconds": 39.19238339998992,
+      "questions": 200,
+      "embedding_width": 13,
+      "cached_query_seconds": 540.3140035999822
+    }
+  ],
+  "rule": "Fixed CPU tabular skill estimator. A separate three-fold fit uses only each roster's measured prefix; public model names and ancestry provide the model-similarity prior."
+}

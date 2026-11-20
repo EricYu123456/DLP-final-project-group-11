@@ -1,0 +1,50 @@
+{
+  "best": {
+    "name": "contrast-general",
+    "algorithm": "contrast",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "proxies": "smol qwen math phi",
+    "policy": "balanced",
+    "probe_count": 200,
+    "steps": 400,
+    "prior": 0.0,
+    "nearest": 0.2,
+    "signal": 0.55,
+    "anchors": 3,
+    "macro": 0.5388097052680615,
+    "micro": 0.6579675761170423,
+    "top_share": 0.8758402530644523,
+    "objective": 0.5805149600652048,
+    "subpool_gain": -0.002899889740528397,
+    "within_domain_gain": 0.005007395032418859,
+    "robust_objective": 0.58156871271115
+  },
+  "short": {
+    "name": "contrast-general",
+    "algorithm": "contrast",
+    "readout": "general",
+    "coordinates": "joint-general",
+    "proxies": "smol qwen math phi",
+    "policy": "balanced",
+    "probe_count": 120,
+    "steps": 400,
+    "prior": 0.0,
+    "nearest": 0.2,
+    "signal": 0.55,
+    "anchors": 3,
+    "macro": 0.5333255429354324,
+    "micro": 0.6536180308422301,
+    "top_share": 0.8278964017398182,
+    "objective": 0.5754279137028117,
+    "subpool_gain": -0.003996882495517681,
+    "within_domain_gain": 0.007025025966220866,
+    "robust_objective": 0.5769419854381632
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

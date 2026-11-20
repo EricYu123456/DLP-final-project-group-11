@@ -1,0 +1,7 @@
+{
+  "question": "Can the 41-dimensional nominal model embedding route from words alone, and can a model-independent student reduce full decoder use when onboarding a new candidate pool?",
+  "reference": "Freeze the six-helper nominal-200 shared teacher, its 6387 historical training prompts, and the original fifteen 200-question test panels. Earlier teacher scores on the evaluation splits are known.",
+  "student": "Use the existing 75 historical model embeddings and 75 random convex interpolations as anchors in capability space. Regress the teacher's scores for these anchors and the historical peer head against TF-IDF word and character features. Extend each new model's measured embedding to the anchors using a regularized radial kernel in the active source's capability dimensions. No candidate test labels or additional probe grades are used.",
+  "stopping": "Hold out one fifth of historical question groups for calibration, excluding groups measured by the pool. Select the lowest margin whose one-sided binomial bound, adjusted for 21 thresholds, limits total disagreement with the teacher to 1.5 percent. Report always-CPU and selectively deferred routing, with the full nominal teacher as a paired control.",
+  "evaluation": "Report all fifteen 13- and 37-model panels on 2551 withheld questions and the original 4985. Include a raw-text timing of an exported seed for any promising serving setting."
+}

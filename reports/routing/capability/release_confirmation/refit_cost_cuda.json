@@ -1,0 +1,21 @@
+{
+  "device": "cuda",
+  "seed": 11,
+  "candidates": 112,
+  "queries": 64,
+  "batch": 16,
+  "original_fit_seconds": 35.36017160001211,
+  "fit_seconds": 5.085763299954124,
+  "source_read_and_fit": true,
+  "cache_seconds": 1.2551596999983303,
+  "warm_seconds_per_query": 0.019883462499516707,
+  "same_routes": 64,
+  "maximum_score_gap": 1.0994468820912928e-06,
+  "original_signal": 0.6702921921491343,
+  "signal": 0.6702912146186564,
+  "within_panel_risk": 0.10402092337649087,
+  "seconds": 4.935730600031093,
+  "questions": 200,
+  "embedding_width": 18,
+  "peak_reserved_MiB": 646.0
+}

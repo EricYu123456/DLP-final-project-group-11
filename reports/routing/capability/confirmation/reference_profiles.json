@@ -1,0 +1,139 @@
+{
+  "reference-modern": {
+    "configs": [
+      {
+        "name": "reference-modern",
+        "algorithm": "reference",
+        "readout": "general",
+        "proxies": "qwen math yi phi moe-gated",
+        "policy": "balanced",
+        "probe_count": 200,
+        "nearest": 0.2,
+        "shrink": 35,
+        "signal": 0.8,
+        "peer": 1.0,
+        "macro": 0.5272647657431739,
+        "micro": 0.6485765124555161,
+        "top_share": 0.7759984183471728,
+        "objective": 0.5697238770924937,
+        "subpool_gain": -0.0057647646233723,
+        "within_domain_gain": 0.001774995212191,
+        "robust_objective": 0.567728992386903
+      }
+    ],
+    "weights": [
+      1
+    ]
+  },
+  "reference-live": {
+    "configs": [
+      {
+        "name": "reference-live",
+        "algorithm": "reference",
+        "readout": "general",
+        "proxies": "qwen math yi phi moe-gated una-gated",
+        "policy": "balanced",
+        "probe_count": 200,
+        "nearest": 0.2,
+        "shrink": 35,
+        "signal": 0.8,
+        "peer": 1.0,
+        "macro": 0.5276906302038964,
+        "micro": 0.6489719256623171,
+        "top_share": 0.761071569790431,
+        "objective": 0.5701390836143436,
+        "subpool_gain": -0.0062351065183731,
+        "within_domain_gain": 0.0019898574597734,
+        "robust_objective": 0.5680164590850437
+      }
+    ],
+    "weights": [
+      1
+    ]
+  },
+  "reference-joint-modern": {
+    "configs": [
+      {
+        "name": "reference-joint-modern",
+        "algorithm": "reference",
+        "readout": "general",
+        "proxies": "qwen math yi phi moe-gated",
+        "policy": "balanced",
+        "probe_count": 200,
+        "nearest": 0.2,
+        "shrink": 35,
+        "signal": 1.65,
+        "peer": 0.7,
+        "conditional_states": true,
+        "calibration": 0.7,
+        "macro": 0.5349747259261457,
+        "micro": 0.6478845393436141,
+        "top_share": 0.6924673784104388,
+        "objective": 0.5744931606222596,
+        "subpool_gain": -0.0041559181165959,
+        "within_domain_gain": 0.0119680541478957,
+        "robust_objective": 0.5783992286379095
+      }
+    ],
+    "weights": [
+      1
+    ]
+  },
+  "reference-joint-live": {
+    "configs": [
+      {
+        "name": "reference-joint-live",
+        "algorithm": "reference",
+        "readout": "general",
+        "proxies": "qwen math yi phi moe-gated una-gated",
+        "policy": "balanced",
+        "probe_count": 200,
+        "nearest": 0.2,
+        "shrink": 35,
+        "signal": 1.05,
+        "peer": 0.7,
+        "conditional_states": true,
+        "calibration": 0.7,
+        "macro": 0.5306569221042806,
+        "micro": 0.6506524317912218,
+        "top_share": 0.713918544879399,
+        "objective": 0.5726553504947101,
+        "subpool_gain": -0.0045888737755519,
+        "within_domain_gain": 0.0076121671891494,
+        "robust_objective": 0.5741669972015088
+      }
+    ],
+    "weights": [
+      1
+    ]
+  },
+  "reference-panel": {
+    "configs": [
+      {
+        "name": "reference-live",
+        "algorithm": "reference",
+        "readout": "general",
+        "proxies": "qwen math yi phi moe-gated una-gated",
+        "policy": "balanced",
+        "probe_count": 200,
+        "nearest": 0.2,
+        "shrink": 35,
+        "signal": 0.8,
+        "peer": 1.0,
+        "macro": 0.5276906302038964,
+        "micro": 0.6489719256623171,
+        "top_share": 0.761071569790431,
+        "objective": 0.5701390836143436,
+        "subpool_gain": -0.0062351065183731,
+        "within_domain_gain": 0.0019898574597734,
+        "robust_objective": 0.5680164590850437,
+        "panel_calibration": true
+      }
+    ],
+    "weights": [
+      1
+    ]
+  },
+  "default_method": "reference-live",
+  "selection": "Each estimator is fixed on its development roster at 200 common questions before evaluating the separate historical-peer hypothesis."
+}

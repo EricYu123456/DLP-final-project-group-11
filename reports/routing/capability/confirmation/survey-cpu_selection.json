@@ -1,0 +1,44 @@
+{
+  "best": {
+    "name": "survey-cpu",
+    "algorithm": "survey",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 200,
+    "nearest": 0.75,
+    "ridge": 65.0,
+    "allow": 0.0,
+    "calibrate": 1.0,
+    "macro": 0.5450071604942239,
+    "micro": 0.6593515223408462,
+    "top_share": 0.9358442071965204,
+    "objective": 0.5850276871405418,
+    "subpool_gain": -0.009914710415254458,
+    "within_domain_gain": 0.0043606716204855015,
+    "robust_objective": 0.5822506677431573
+  },
+  "short": {
+    "name": "survey-cpu",
+    "algorithm": "survey",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 120,
+    "nearest": 0.15,
+    "ridge": 65.0,
+    "allow": -0.55,
+    "calibrate": 1.0,
+    "macro": 0.5419679569593072,
+    "micro": 0.6591538157374456,
+    "top_share": 0.9708382759984184,
+    "objective": 0.5829830075316557,
+    "subpool_gain": -0.00977702516156631,
+    "within_domain_gain": 0.004586457606263258,
+    "robust_objective": 0.5803877237540042
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

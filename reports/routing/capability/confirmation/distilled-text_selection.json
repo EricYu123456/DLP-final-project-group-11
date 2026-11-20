@@ -1,0 +1,44 @@
+{
+  "best": {
+    "name": "distilled-text",
+    "algorithm": "distilled",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 200,
+    "steps": 260,
+    "ridge": 1800.0,
+    "nearest": 0.12,
+    "signal": 0.45,
+    "macro": 0.5408292969341589,
+    "micro": 0.6586595492289442,
+    "top_share": 0.894325820482404,
+    "objective": 0.5820698852373338,
+    "subpool_gain": -0.0003901372475320575,
+    "within_domain_gain": 0.001814347584634357,
+    "robust_objective": 0.582781990405885
+  },
+  "short": {
+    "name": "distilled-text",
+    "algorithm": "distilled",
+    "readout": "text",
+    "policy": "balanced",
+    "probe_count": 120,
+    "steps": 820,
+    "ridge": 1800.0,
+    "nearest": 0.12,
+    "signal": 0.45,
+    "macro": 0.532251793828166,
+    "micro": 0.6552985369711348,
+    "top_share": 0.8588374851720048,
+    "objective": 0.5753181539282051,
+    "subpool_gain": -0.006149901004804942,
+    "within_domain_gain": 0.0006707836260749451,
+    "robust_objective": 0.57257859523884
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "best": {
+    "name": "smol",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 20,
+    "signal": 0.6,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "macro": 0.5461965725193383,
+    "micro": 0.6594503756425465,
+    "top_share": 0.8783115856069593,
+    "objective": 0.5858354036124611,
+    "subpool_gain": -0.0017592500086920538,
+    "within_domain_gain": 0.0023299504972304538,
+    "robust_objective": 0.5861207538567303
+  },
+  "short": {
+    "name": "smol",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 20,
+    "signal": 0.6,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "macro": 0.5451136324602229,
+    "micro": 0.6596480822459471,
+    "top_share": 0.8825622775800713,
+    "objective": 0.5852006898852264,
+    "subpool_gain": -0.0029547088641091457,
+    "within_domain_gain": 0.00256260314179571,
+    "robust_objective": 0.5850046370240698
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

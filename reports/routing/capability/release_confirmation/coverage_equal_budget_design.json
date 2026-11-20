@@ -1,0 +1,4 @@
+{
+  "comparison": "Repeat the existing equal-grade baseline on all 15 independent, clean coverage panels. Fit upstream TextMF on exactly the same 22,400 binary cells as the text-kernel estimator. For each panel choose 50, 200, or 800 epochs by three-fold grouped validation within that panel. Keep the official optimizer, initialization seed, batch size, noise level and raw training-record order.",
+  "report": "Use a single RTX 5070 Ti. Compare the fixed estimator to both deterministic and default noisy inference from the tuned original on 1,503 fresh questions and 3,000 official test questions. Report paired intervals over both panels and question groups. No cross-panel selection."
+}

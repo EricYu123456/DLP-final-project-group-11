@@ -1,0 +1,29 @@
+{
+  "11": {
+    "signal": 0.6702921921491343,
+    "within_panel_risk": 0.10402092039568586,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 35.36017160001211,
+    "adaptive": false,
+    "architecture": false
+  },
+  "23": {
+    "signal": 0.5132653581728203,
+    "within_panel_risk": 0.09819693550331614,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 33.45769400004065,
+    "adaptive": false,
+    "architecture": false
+  },
+  "37": {
+    "signal": 0.6343735080241385,
+    "within_panel_risk": 0.10778017442554297,
+    "questions": 200,
+    "proxies": [],
+    "seconds": 33.85613969998667,
+    "adaptive": false,
+    "architecture": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "method": "text-kernel",
+  "seed": 8800,
+  "raw_prompts": 48,
+  "batch_size": 16,
+  "probes": 200,
+  "selected_ids_match": 48,
+  "cold_wall_seconds": 1.952103499963414
+}

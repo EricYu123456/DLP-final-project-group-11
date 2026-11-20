@@ -1,0 +1,15 @@
+{
+  "questions": 48,
+  "raw_embedding_max_gap": 1.7182901501655579e-07,
+  "live_maximum_score_gap": 0.06288140707752532,
+  "stored_embedding": {
+    "maximum_score_gap": 6.953875225645945e-08,
+    "mean_score_gap": 1.5336101860263156e-09,
+    "same_choices": 48
+  },
+  "raw_prompt": {
+    "maximum_score_gap": 1.7426842291445865e-07,
+    "mean_score_gap": 2.8135100436498685e-08,
+    "same_choices": 48
+  }
+}

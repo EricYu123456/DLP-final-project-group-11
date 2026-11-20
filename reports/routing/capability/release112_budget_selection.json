@@ -1,0 +1,170 @@
+{
+  "11_80": {
+    "questions": 80,
+    "router": "budget_11_80.npz",
+    "seconds": 0.548494299990125,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 0.0,
+      "peer_mix": 0.5,
+      "peer_penalty": 4.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 80,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "11_120": {
+    "questions": 120,
+    "router": "budget_11_120.npz",
+    "seconds": 0.7990110999671742,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 0.0,
+      "peer_mix": 0.5,
+      "peer_penalty": 1.0,
+      "source_retention": 0.75,
+      "domain_readout": "panel-template",
+      "probe_count": 120,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "11_160": {
+    "questions": 160,
+    "router": "budget_11_160.npz",
+    "seconds": 0.9142943999613635,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 0.0,
+      "peer_mix": 0.0,
+      "peer_penalty": 1.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 160,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "11_200": {
+    "questions": 200,
+    "router": "router_11.npz",
+    "selection": "existing locked release router"
+  },
+  "23_80": {
+    "questions": 80,
+    "router": "budget_23_80.npz",
+    "seconds": 0.5266842999844812,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 0.0,
+      "peer_mix": 0.0,
+      "peer_penalty": 1.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 80,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "23_120": {
+    "questions": 120,
+    "router": "budget_23_120.npz",
+    "seconds": 0.7952199999708682,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 0.0,
+      "peer_mix": 0.5,
+      "peer_penalty": 1.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 120,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "23_160": {
+    "questions": 160,
+    "router": "budget_23_160.npz",
+    "seconds": 1.0130203000153415,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 0.0,
+      "peer_mix": 0.5,
+      "peer_penalty": 1.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 160,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "23_200": {
+    "questions": 200,
+    "router": "router_23.npz",
+    "selection": "existing locked release router"
+  },
+  "37_80": {
+    "questions": 80,
+    "router": "budget_37_80.npz",
+    "seconds": 0.5573976000305265,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 0.0,
+      "peer_mix": 0.5,
+      "peer_penalty": 1.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 80,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "37_120": {
+    "questions": 120,
+    "router": "budget_37_120.npz",
+    "seconds": 0.7265470999991521,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 3.0,
+      "kernel": "broad",
+      "signal": 1.0,
+      "peer_mix": 0.0,
+      "peer_penalty": 1.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 120,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "37_160": {
+    "questions": 160,
+    "router": "budget_37_160.npz",
+    "seconds": 0.9128667999757454,
+    "config": {
+      "encoder": "mpnet",
+      "ridge": 0.5,
+      "kernel": "rbf",
+      "signal": 1.0,
+      "peer_mix": 0.0,
+      "peer_penalty": 1.0,
+      "source_retention": 1.0,
+      "domain_readout": "panel-template",
+      "probe_count": 160,
+      "fit_selection": "Four-fold contender-pair risk; prefer cheaper encoders within one paired standard error."
+    }
+  },
+  "37_200": {
+    "questions": 200,
+    "router": "router_37.npz",
+    "selection": "existing locked release router"
+  }
+}

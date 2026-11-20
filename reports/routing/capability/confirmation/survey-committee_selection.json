@@ -1,0 +1,44 @@
+{
+  "best": {
+    "name": "survey-committee",
+    "algorithm": "survey",
+    "readout": "committee",
+    "policy": "balanced",
+    "probe_count": 200,
+    "nearest": 0.75,
+    "ridge": 290.0,
+    "allow": -0.55,
+    "calibrate": 0.45,
+    "macro": 0.5455661287459973,
+    "micro": 0.6581652827204428,
+    "top_share": 0.8941281138790035,
+    "objective": 0.5849758326370532,
+    "subpool_gain": -0.002995498697668933,
+    "within_domain_gain": 0.005271095717488879,
+    "robust_objective": 0.5861136311469632
+  },
+  "short": {
+    "name": "survey-committee",
+    "algorithm": "survey",
+    "readout": "committee",
+    "policy": "balanced",
+    "probe_count": 120,
+    "nearest": 0.75,
+    "ridge": 290.0,
+    "allow": -0.55,
+    "calibrate": 0.45,
+    "macro": 0.5407985664388713,
+    "micro": 0.658560695927244,
+    "top_share": 0.9153815737445631,
+    "objective": 0.5820153117598017,
+    "subpool_gain": -0.004100160162463918,
+    "within_domain_gain": 0.0054218270881477145,
+    "robust_objective": 0.5826761452226435
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

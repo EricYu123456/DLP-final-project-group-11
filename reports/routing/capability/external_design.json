@@ -1,0 +1,9 @@
+{
+  "datasets": ["LLMRouterBench", "xRouteBench"],
+  "rosters": "Reuse the project's existing external splits and complete recorded rosters of 20 and 15 models. Evaluate all eligible candidates together.",
+  "primary": "Use the tabular skill embedding selected on the official EmbedLLM validation split, without changing its learner, signals, prior or selection rules. Refit only on one common 200-question panel per seed; the 120-question nested prefix is a cost comparison.",
+  "probes": "Reuse the recorded LLMRouterBench seed probe IDs. On xRouteBench use equal task quotas and interleave one seeded permutation per task. Seeds 11, 23 and 37 are independent trials.",
+  "references": "Train the actual upstream TextMF class for 50 epochs with fixed seed 42, alpha 0.05, Adam 0.0001 with 0.00001 decay and batches of 2048. Report deterministic and published noisy routing with either every available training question or the very same 200 prompts. Compare also to the single model selected on the panel.",
+  "endpoints": "Micro correctness, unweighted task macro correctness, largest routing share and paired query-bootstrap intervals. No external test outcome changes the choice of method or settings.",
+  "text_decoder_extension": "After evaluating the tabular method, apply the new official-release CPU text decoder unchanged to both external rosters on the same 120- and 200-question prefixes. Compare descriptively with the already fitted controls."
+}

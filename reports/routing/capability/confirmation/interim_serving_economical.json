@@ -1,0 +1,12 @@
+{
+  "method": "economical",
+  "prompt_id": 1924,
+  "candidates": 13,
+  "unique_probe_ids": 200,
+  "response_rows": 2600,
+  "selected": "AdaptLLM/medicine-LLM",
+  "offline_selected": "AdaptLLM/medicine-LLM",
+  "max_absolute_score_difference": 5.84609643222711e-07,
+  "wall_seconds_plan_excluded": 4.437019400007557,
+  "cold_cli_seconds": 8.93765669997083
+}

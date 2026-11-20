@@ -1,0 +1,48 @@
+{
+  "best": {
+    "name": "smol",
+    "algorithm": "local",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 200,
+    "prior": 12,
+    "focus": 3,
+    "signal": 0.65,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "calibration": 0.0,
+    "macro": 0.5461947461510629,
+    "micro": 0.6571767497034401,
+    "top_share": 0.8577500988533018,
+    "objective": 0.5850384473943949,
+    "subpool_gain": -0.0022023738405448053,
+    "within_domain_gain": 0.002751143166812968,
+    "robust_objective": 0.585312832057529
+  },
+  "short": {
+    "name": "smol",
+    "algorithm": "local",
+    "n_regions": 5,
+    "policy": "balanced",
+    "probe_count": 120,
+    "prior": 12,
+    "focus": 3,
+    "signal": 0.65,
+    "local_scale": 0.5,
+    "global_discount": 0.0,
+    "calibration": 0.0,
+    "macro": 0.5427104930309437,
+    "micro": 0.6574733096085409,
+    "top_share": 0.8656583629893237,
+    "objective": 0.5828774788331027,
+    "subpool_gain": -0.0030298648621646857,
+    "within_domain_gain": 0.002529744658949835,
+    "robust_objective": 0.5826274187314953
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

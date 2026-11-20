@@ -1,0 +1,46 @@
+{
+  "best": {
+    "name": "switch-families",
+    "algorithm": "switch",
+    "readout": "families",
+    "policy": "opportunity",
+    "probe_count": 200,
+    "nearest": 0.15,
+    "prior": 14.0,
+    "optimism": 0,
+    "calibration": 0.55,
+    "signal": 0.9,
+    "macro": 0.5454295658498859,
+    "micro": 0.6587584025306445,
+    "top_share": 0.8752471332542507,
+    "objective": 0.5850946586881515,
+    "subpool_gain": -0.001092270756224134,
+    "within_domain_gain": 0.0036794532736601744,
+    "robust_objective": 0.5863882499468694
+  },
+  "short": {
+    "name": "switch-families",
+    "algorithm": "switch",
+    "readout": "families",
+    "policy": "opportunity",
+    "probe_count": 120,
+    "nearest": 0.15,
+    "prior": 14.0,
+    "optimism": 0,
+    "calibration": 0.55,
+    "signal": 0.9,
+    "macro": 0.5451005510632132,
+    "micro": 0.6574733096085409,
+    "top_share": 0.8534005535784895,
+    "objective": 0.5844310165540779,
+    "subpool_gain": -0.0027589918560184,
+    "within_domain_gain": 0.005392679823382867,
+    "robust_objective": 0.5857478605377602
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

@@ -1,0 +1,446 @@
+{
+  "primary": {
+    "validation": {
+      "components": [
+        "local",
+        "nominal"
+      ],
+      "weights": [
+        1,
+        2
+      ],
+      "questions": 120,
+      "allowance": 0.0,
+      "specialization": 0.0,
+      "macro": 0.5539981108321778,
+      "micro": 0.6587584025306445,
+      "top_share": 0.8179122182680901,
+      "objective": 0.5906642129266412,
+      "dominant_pool_gain": 0.0008313894647929351,
+      "dominant_pool_switch_share": 0.22948087894707112,
+      "dominant_top_quartile": 0.8987742190589165,
+      "within_source_gain": 0.02111472635833188,
+      "selection_score": 0.600274048720684
+    },
+    "configs": [
+      {
+        "name": "families",
+        "algorithm": "local",
+        "n_regions": 10,
+        "policy": "balanced",
+        "probe_count": 120,
+        "prior": 12,
+        "focus": 3,
+        "signal": 0.65,
+        "local_scale": 0.5,
+        "global_discount": 0.0,
+        "calibration": 0.0,
+        "macro": 0.5448455782136253,
+        "micro": 0.6572756030051403,
+        "top_share": 0.7945828390668247,
+        "objective": 0.5841960868906556,
+        "subpool_gain": -0.0012861513269742,
+        "within_domain_gain": 0.0056928415478517,
+        "robust_objective": 0.5863994320010943
+      },
+      {
+        "name": "nominal-large",
+        "algorithm": "nominal",
+        "readout": "text",
+        "policy": "balanced",
+        "probe_count": 120,
+        "proxies": "qwen math yi phi moe-gated bagel-gated",
+        "nearest": 0.25,
+        "prior": 1.0,
+        "signal": 1.4,
+        "peer": 0.4,
+        "macro": 0.5457732040778912,
+        "micro": 0.6518386714116251,
+        "top_share": 0.7695729537366548,
+        "objective": 0.5828961176446981,
+        "subpool_gain": -0.0028720169558994,
+        "within_domain_gain": 0.0152105202701719,
+        "robust_objective": 0.5890653693018343
+      }
+    ],
+    "weights": [
+      1,
+      2
+    ],
+    "allowance": 0.0,
+    "specialization": 0.0
+  },
+  "conditional": {
+    "validation": {
+      "components": [
+        "local",
+        "nominal"
+      ],
+      "weights": [
+        1,
+        2
+      ],
+      "questions": 120,
+      "allowance": 0.0,
+      "specialization": 0.0,
+      "macro": 0.5539981108321778,
+      "micro": 0.6587584025306445,
+      "top_share": 0.8179122182680901,
+      "objective": 0.5906642129266412,
+      "dominant_pool_gain": 0.0008313894647929351,
+      "dominant_pool_switch_share": 0.22948087894707112,
+      "dominant_top_quartile": 0.8987742190589165,
+      "within_source_gain": 0.02111472635833188,
+      "selection_score": 0.600274048720684
+    },
+    "configs": [
+      {
+        "name": "families",
+        "algorithm": "local",
+        "n_regions": 10,
+        "policy": "balanced",
+        "probe_count": 120,
+        "prior": 12,
+        "focus": 3,
+        "signal": 0.65,
+        "local_scale": 0.5,
+        "global_discount": 0.0,
+        "calibration": 0.0,
+        "macro": 0.5448455782136253,
+        "micro": 0.6572756030051403,
+        "top_share": 0.7945828390668247,
+        "objective": 0.5841960868906556,
+        "subpool_gain": -0.0012861513269742,
+        "within_domain_gain": 0.0056928415478517,
+        "robust_objective": 0.5863994320010943
+      },
+      {
+        "name": "nominal-large",
+        "algorithm": "nominal",
+        "readout": "text",
+        "policy": "balanced",
+        "probe_count": 120,
+        "proxies": "qwen math yi phi moe-gated bagel-gated",
+        "nearest": 0.25,
+        "prior": 1.0,
+        "signal": 1.4,
+        "peer": 0.4,
+        "macro": 0.5457732040778912,
+        "micro": 0.6518386714116251,
+        "top_share": 0.7695729537366548,
+        "objective": 0.5828961176446981,
+        "subpool_gain": -0.0028720169558994,
+        "within_domain_gain": 0.0152105202701719,
+        "robust_objective": 0.5890653693018343
+      }
+    ],
+    "weights": [
+      1,
+      2
+    ],
+    "allowance": 0.0,
+    "specialization": 0.0
+  },
+  "economical": {
+    "validation": {
+      "components": [
+        "cpu"
+      ],
+      "weights": [
+        1
+      ],
+      "questions": 200,
+      "allowance": 0.0,
+      "specialization": 0.0,
+      "macro": 0.5497933458457553,
+      "micro": 0.6569790431000395,
+      "top_share": 0.838177145116647,
+      "objective": 0.5873083398847547,
+      "dominant_pool_gain": -0.0016424107510460192,
+      "dominant_pool_switch_share": 0.16605236400610068,
+      "dominant_top_quartile": 0.9095739422696718,
+      "within_source_gain": 0.012649767616030285,
+      "selection_score": 0.5900688718797025
+    },
+    "configs": [
+      {
+        "name": "text",
+        "n_regions": 10,
+        "policy": "balanced",
+        "probe_count": 200,
+        "prior": 20,
+        "signal": 1.3,
+        "local_scale": 0.5,
+        "global_discount": 0.0,
+        "macro": 0.5497933458457553,
+        "micro": 0.6569790431000395,
+        "top_share": 0.838177145116647,
+        "objective": 0.5873083398847547,
+        "subpool_gain": -0.000880539796843,
+        "within_domain_gain": 0.0049966735923732,
+        "robust_objective": 0.5893664067825198,
+        "algorithm": "regional"
+      }
+    ],
+    "weights": [
+      1
+    ],
+    "allowance": 0.0,
+    "specialization": 0.0
+  },
+  "adaptive": {
+    "configs": [
+      {
+        "name": "text",
+        "n_regions": 10,
+        "policy": "stop-evpi",
+        "probe_count": 200,
+        "prior": 20,
+        "signal": 1.3,
+        "local_scale": 0.5,
+        "global_discount": 0.0,
+        "macro": 0.5497933458457553,
+        "micro": 0.6569790431000395,
+        "top_share": 0.838177145116647,
+        "objective": 0.5873083398847547,
+        "subpool_gain": -0.000880539796843,
+        "within_domain_gain": 0.0049966735923732,
+        "robust_objective": 0.5893664067825198,
+        "algorithm": "regional",
+        "tolerance": 0.0003
+      }
+    ],
+    "weights": [
+      1
+    ],
+    "allowance": 0.0,
+    "specialization": 0.0,
+    "validation": {
+      "tolerance": 0.0003,
+      "counts": [
+        200,
+        200,
+        200
+      ],
+      "mean_questions": 200.0,
+      "macro": 0.5497933458457553,
+      "micro": 0.6569790431000395,
+      "top_share": 0.838177145116647,
+      "objective": 0.5873083398847547
+    },
+    "original_tolerance": 0.0003,
+    "validation_curve": [
+      {
+        "tolerance": 0.0,
+        "counts": [
+          200,
+          200,
+          200
+        ],
+        "mean_questions": 200.0,
+        "macro": 0.5497933458457553,
+        "micro": 0.6569790431000395,
+        "top_share": 0.838177145116647,
+        "objective": 0.5873083398847547
+      },
+      {
+        "tolerance": 0.0003,
+        "counts": [
+          200,
+          200,
+          200
+        ],
+        "mean_questions": 200.0,
+        "macro": 0.5497933458457553,
+        "micro": 0.6569790431000395,
+        "top_share": 0.838177145116647,
+        "objective": 0.5873083398847547
+      },
+      {
+        "tolerance": 0.001,
+        "counts": [
+          200,
+          200,
+          200
+        ],
+        "mean_questions": 200.0,
+        "macro": 0.5497933458457553,
+        "micro": 0.6569790431000395,
+        "top_share": 0.838177145116647,
+        "objective": 0.5873083398847547
+      },
+      {
+        "tolerance": 0.002,
+        "counts": [
+          200,
+          200,
+          200
+        ],
+        "mean_questions": 200.0,
+        "macro": 0.5497933458457553,
+        "micro": 0.6569790431000395,
+        "top_share": 0.838177145116647,
+        "objective": 0.5873083398847547
+      },
+      {
+        "tolerance": 0.004,
+        "counts": [
+          200,
+          90,
+          150
+        ],
+        "mean_questions": 146.66666666666666,
+        "macro": 0.5463086179298268,
+        "micro": 0.6565836298932385,
+        "top_share": 0.8525108738631869,
+        "objective": 0.5849048721170209
+      },
+      {
+        "tolerance": 0.008,
+        "counts": [
+          120,
+          60,
+          60
+        ],
+        "mean_questions": 80.0,
+        "macro": 0.5372942972346845,
+        "micro": 0.6531237643337288,
+        "top_share": 0.8161328588374852,
+        "objective": 0.5778346107193499
+      }
+    ]
+  },
+  "cascade": {
+    "configs": [
+      {
+        "name": "budget-cascade",
+        "algorithm": "cascade",
+        "readout": "text",
+        "coordinates": "joint-general",
+        "policy": "balanced",
+        "probe_count": 120,
+        "classes": 12,
+        "steps": 470,
+        "shrink": 22,
+        "neighbor": 0.0,
+        "type_mix": 0.5,
+        "signal": 1.7,
+        "teacher": "latent-general",
+        "threshold": 0.13
+      }
+    ],
+    "weights": [
+      1
+    ],
+    "validation": {
+      "threshold": 0.13,
+      "heavy_query_fraction": 0.45759193357058126,
+      "macro": 0.5409850644287971,
+      "micro": 0.6553973902728352,
+      "top_share": 0.7709568999604587,
+      "objective": 0.5810293784742104
+    },
+    "teacher_validation": {
+      "threshold": -1.0,
+      "heavy_query_fraction": 1.0,
+      "macro": 0.5407502858551076,
+      "micro": 0.6549031237643337,
+      "top_share": 0.7537564254646106,
+      "objective": 0.5807037791233367
+    },
+    "rule": "Minimize large-decoder use within 0.25 points of its development macro and micro accuracy and 2 points of its concentration. All choices use the same 120-item embeddings.",
+    "shared_student_seconds": 4.395441200002097
+  },
+  "cascade-cpu": {
+    "configs": [
+      {
+        "name": "budget-cascade",
+        "algorithm": "cascade",
+        "readout": "text",
+        "coordinates": "joint-general",
+        "policy": "balanced",
+        "probe_count": 120,
+        "classes": 12,
+        "steps": 470,
+        "shrink": 22,
+        "neighbor": 0.0,
+        "type_mix": 0.5,
+        "signal": 1.7,
+        "teacher": "latent-general",
+        "threshold": 1.0
+      }
+    ],
+    "weights": [
+      1
+    ],
+    "validation": {
+      "threshold": 1.0,
+      "heavy_query_fraction": 0.0,
+      "macro": 0.5397623975910447,
+      "micro": 0.6543100039541321,
+      "top_share": 0.8350138394622381,
+      "objective": 0.5798540598181253
+    }
+  },
+  "cascade-budget": {
+    "configs": [
+      {
+        "name": "budget-cascade",
+        "algorithm": "cascade",
+        "readout": "text",
+        "coordinates": "joint-general",
+        "policy": "balanced",
+        "probe_count": 120,
+        "classes": 12,
+        "steps": 470,
+        "shrink": 22,
+        "neighbor": 0.0,
+        "type_mix": 0.5,
+        "signal": 1.7,
+        "teacher": "latent-general",
+        "threshold": 0.18
+      }
+    ],
+    "weights": [
+      1
+    ],
+    "validation": {
+      "probes": 120,
+      "threshold": 0.18,
+      "heavy_query_fraction": 0.36061684460260973,
+      "macro": 0.542760927026512,
+      "micro": 0.6561882166864373,
+      "top_share": 0.782819296164492,
+      "objective": 0.5824604784074858
+    },
+    "teacher_validation": {
+      "threshold": -1.0,
+      "heavy_query_fraction": 1.0,
+      "macro": 0.5407502858551076,
+      "micro": 0.6549031237643337,
+      "top_share": 0.7537564254646106,
+      "objective": 0.5807037791233367
+    },
+    "rule": "Minimize candidate probes, then large-decoder use, within 0.25 points of the 120-probe cascade on both development accuracy metrics and within 2 points of its concentration, using no more heavy queries.",
+    "shared_student_seconds": 4.395441200002097
+  },
+  "default_method": "conditional",
+  "default_rule": "Prefer the cascade with lower onboarding or decoder cost, then the original cascade, when development macro and micro are each within 0.25 points of the conditional policy and concentration is within 2 points.",
+  "strong_cold_policy": {
+    "strength": 1.0,
+    "policy": "representative",
+    "budget": 200,
+    "macro": 0.5445299841283974,
+    "micro": 0.6548042704626335,
+    "top_share": 0.8947212336892053,
+    "objective": 0.58312598434538
+  },
+  "dominant_development_pools": 28,
+  "targets": [
+    0.5445299841283974,
+    0.6553973902728352
+  ],
+  "rule": "Primary selection prioritizes gains in both accuracy metrics over the two stronger controls and top share below 92%, followed by gains in dominant validation subrosters. The conditional rule prioritizes beating the published default by at least 0.5 points on both metrics. It next seeks accuracy within 0.5 points of the stronger controls, a 75th-percentile subroster concentration at most 90%, and average subroster loss at most 0.3 points. Query routing uses measured scores and requires a shared panel for all components.",
+  "primary_reference_models": 75,
+  "ablation_reference_models": 62
+}

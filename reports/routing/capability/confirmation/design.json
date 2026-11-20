@@ -1,0 +1,22 @@
+{
+  "seed": 20261120,
+  "training_questions": 10748,
+  "confirmation_questions": 4985,
+  "development_questions": 3372,
+  "count_by_benchmark": {
+    "LogiQA": 130,
+    "MMLU": 3079,
+    "MathQA": 664,
+    "MedMCQA": 930,
+    "TruthfulQA": 182
+  },
+  "candidate_probe_cap": 200,
+  "primary_roster": "audited_13",
+  "secondary_roster": "expanded_37",
+  "endpoints": [
+    "macro_accuracy",
+    "micro_accuracy",
+    "top_model_share"
+  ],
+  "source": "Question groups from the earlier historical training bank, excluding previous probes and official release validation/test groups. All supervised shared models and controls in this confirmation study are retrained without these groups."
+}

@@ -1,0 +1,44 @@
+{
+  "best": {
+    "name": "gp-committee",
+    "algorithm": "coregionalized",
+    "readout": "committee",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 200,
+    "metadata": 0.0,
+    "signal": 0.65,
+    "residual": 0.5,
+    "macro": 0.5320248337114484,
+    "micro": 0.6524317912218268,
+    "top_share": 0.7798536971134836,
+    "objective": 0.5741672688400808,
+    "subpool_gain": -0.009528142410885052,
+    "within_domain_gain": 0.00395752067294419,
+    "robust_objective": 0.5713819579711105
+  },
+  "short": {
+    "name": "gp-committee",
+    "algorithm": "coregionalized",
+    "readout": "committee",
+    "axes": null,
+    "policy": "balanced",
+    "probe_count": 120,
+    "metadata": 0.54,
+    "signal": 0.65,
+    "residual": 0.0,
+    "macro": 0.5214360903274752,
+    "micro": 0.6486753657572163,
+    "top_share": 0.7097667062079873,
+    "objective": 0.5659698367278846,
+    "subpool_gain": -0.01162064905212327,
+    "within_domain_gain": 0.005754744725918692,
+    "robust_objective": 0.5630368845647823
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

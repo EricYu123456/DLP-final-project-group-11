@@ -1,0 +1,36 @@
+{
+  "default": {
+    "tier": "8g-10m",
+    "seed": 11,
+    "prompt_id": 1949,
+    "benchmark": "MMLU",
+    "probes": 200,
+    "dimensions": 67,
+    "max_profile_error": 5.204170427930421e-17,
+    "selected": "google__gemma-2b-it",
+    "model_id": 65,
+    "previous_model": "ConvexAI__Luminex-34B-v0.1",
+    "selected_correct": 1,
+    "previous_correct": 0
+  },
+  "economical": {
+    "tier": "cpu-short",
+    "seed": 11,
+    "prompt_id": 22416,
+    "benchmark": "LogiQA",
+    "probes": 120,
+    "dimensions": 67,
+    "max_profile_error": 3.3306690738754696e-16,
+    "selected": "ConvexAI__Luminex-34B-v0.1",
+    "model_id": 1,
+    "previous_model": "NousResearch__Nous-Hermes-13b",
+    "selected_correct": 1,
+    "previous_correct": 0
+  },
+  "public_112": {
+    "prompt_id": 6,
+    "expected_model_id": 39,
+    "model_id": 39,
+    "selected": "fblgit__UNA-SimpleSmaug-34b-v1beta"
+  }
+}

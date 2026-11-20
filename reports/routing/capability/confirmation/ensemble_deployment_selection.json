@@ -1,0 +1,16 @@
+{
+  "references": 62,
+  "development_models": 13,
+  "development_questions": 3372,
+  "panels": 15,
+  "selected_method": "conditional",
+  "validation": {
+    "method": "conditional",
+    "probes": 120,
+    "members": 0,
+    "macro": 0.530449939021243,
+    "micro": 0.6526690391459075,
+    "top_share": 0.84640173981811,
+    "objective": 0.5732266240648756
+  }
+}

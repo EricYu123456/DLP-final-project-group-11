@@ -1,0 +1,42 @@
+{
+  "training": 6387,
+  "reference_models": 75,
+  "panel_quotas": [
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "seeds": [
+    9200,
+    9201,
+    9202,
+    9203,
+    9204,
+    9205,
+    9206,
+    9207,
+    9208,
+    9209,
+    9210,
+    9211,
+    9212,
+    9213,
+    9214
+  ],
+  "stages": {
+    "novel": 419,
+    "active": 1600,
+    "coverage": 532,
+    "confirmation": 4985
+  },
+  "novel_sources": [
+    0,
+    351,
+    23,
+    45,
+    0
+  ],
+  "refit_withheld_groups": 3519
+}

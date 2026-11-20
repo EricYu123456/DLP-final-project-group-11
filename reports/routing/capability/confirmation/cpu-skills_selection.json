@@ -1,0 +1,50 @@
+{
+  "best": {
+    "name": "cpu-skills",
+    "algorithm": "skills",
+    "readout": "text",
+    "axes": null,
+    "policy": "skill-stratified",
+    "probe_count": 120,
+    "strength": 0.8,
+    "observed": 0.55,
+    "rank_shrink": 0.25,
+    "signal": 0.55,
+    "residual_scale": 0.5,
+    "global_discount": 0.2,
+    "macro": 0.5465370170275574,
+    "micro": 0.6592526690391459,
+    "top_share": 0.882463424278371,
+    "objective": 0.5859874952316133,
+    "subpool_gain": -0.00013973632783139122,
+    "within_domain_gain": 0.00291714787202236,
+    "robust_objective": 0.5873762010037088
+  },
+  "short": {
+    "name": "cpu-skills",
+    "algorithm": "skills",
+    "readout": "text",
+    "axes": null,
+    "policy": "skill-stratified",
+    "probe_count": 120,
+    "strength": 0.8,
+    "observed": 0.55,
+    "rank_shrink": 0.25,
+    "signal": 0.55,
+    "residual_scale": 0.5,
+    "global_discount": 0.2,
+    "macro": 0.5465370170275574,
+    "micro": 0.6592526690391459,
+    "top_share": 0.882463424278371,
+    "objective": 0.5859874952316133,
+    "subpool_gain": -0.00013973632783139122,
+    "within_domain_gain": 0.00291714787202236,
+    "robust_objective": 0.5873762010037088
+  },
+  "native": {
+    "macro": 0.5381817874850989,
+    "micro": 0.6553973902728352,
+    "top_share": 0.8733689205219455,
+    "objective": 0.5792072484608066
+  }
+}

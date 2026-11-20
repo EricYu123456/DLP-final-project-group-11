@@ -1,0 +1,9 @@
+{
+  "prompt_id": 6289,
+  "elapsed_seconds": 83.09194140002364,
+  "expected": "ConvexAI/Luminex-34B-v0.1",
+  "matches_saved": true,
+  "selected": "ConvexAI/Luminex-34B-v0.1",
+  "probes": 120,
+  "method": "conditional"
+}

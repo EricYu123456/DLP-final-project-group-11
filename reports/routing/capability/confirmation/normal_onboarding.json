@@ -1,0 +1,17 @@
+{
+  "method": "conditional",
+  "models": 13,
+  "questions_per_model": 120,
+  "distinct_grades": 1560,
+  "panel_sizes": [
+    120
+  ],
+  "cold_fit_seconds": 10.055159299983643,
+  "plan_grade_fit_seconds": 15.394114600028843,
+  "maximum_profile_difference": 0.0,
+  "embedding_dimensions": [
+    77,
+    41
+  ],
+  "stop_reason": null
+}
